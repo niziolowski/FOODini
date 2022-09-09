@@ -1,0 +1,38 @@
+/* § RESET STYLES */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: montserrat;
+}
+
+:root {
+  font-size: 18px;
+
+  /* Shadow preset */
+  --shadow: 0px 0.5px 0.6px rgba(0, 0, 0, 0.1),
+    0px 1.6px 1.8px -0.8px rgba(0, 0, 0, 0.1),
+    0px 4.1px 4.6px -1.7px rgba(0, 0, 0, 0.1),
+    0px 9.9px 11.1px -2.5px rgba(0, 0, 0, 0.1);
+
+  background-color: var(--bg-color);
+}
+
+/* $ COLOR THEMES */
+.color-theme-custom {
+  /* UI dynamic colors */
+  --bg-color: #f2f2f2;
+  --accent-color: #93b17c;
+  --font-color: #707070;
+  --font-negative-color: #ffffff;
+
+  /* UI static colors */
+  --indicator-orange-color: orange;
+  --indicator-red-color: orangered;
+  --grey-color: #cccccc;
+
+  /* Tags */
+  --tag-1-color: #ffe047;
+  --tag-2-color: #7ab4ff;
+  --tag-3-color: #dd6b6b;
+}
