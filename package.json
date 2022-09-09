@@ -1,0 +1,25 @@
+{
+  "name": "foodini",
+  "version": "1.0.0",
+  "description": "My first project. App for planning meals, preventing food waste and shopping list automation.",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niziolowski/FOODini.git"
+  },
+  "author": "Niziolowski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/niziolowski/FOODini/issues"
+  },
+  "homepage": "https://github.com/niziolowski/FOODini#readme",
+  "dependencies": {
+    "parcel": "^2.7.0"
+  }
+}
