@@ -57,14 +57,14 @@ h2 {
 }
 
 /* $ MAIN VIEW */
-.main-view__header {
+.main-view__nav {
   display: flex;
   height: 100px;
   padding: 20px;
   justify-content: space-between;
 }
 
-.main-view__header__title {
+.main-view__nav__title {
   align-self: center;
   text-align: center;
   height: 40px;
@@ -73,7 +73,7 @@ h2 {
 
 /* $ RESPONSIVE LAYOUT BREAKPOINTS */
 @media screen and (min-width: 1024px) {
-  .main-view__header__title {
+  .main-view__nav__title {
     position: absolute;
     left: 50%;
     translate: -50%;
@@ -81,13 +81,13 @@ h2 {
 }
 
 /* Header groups to help align the buttons and title */
-.main-view__header-col {
+.main-view__nav-col {
   display: flex;
   justify-content: space-between;
 }
 
 /* A trick to keep the calendar navigation centered between the title and the right column */
-.main-view__header-col:nth-child(3) {
+.main-view__nav-col:nth-child(3) {
   flex: 1;
   max-width: 25%;
   min-width: fit-content;
@@ -96,17 +96,17 @@ h2 {
 }
 
 /* Calendar navigation */
-.main-view__header__nav {
+.main-view__nav__controlls {
   display: flex;
   align-items: center;
 }
 
-.main-view__header__nav button {
+.main-view__nav__controlls button {
   width: 35px;
   height: 35px;
 }
 
-.main-view__header__nav button:nth-child(2) {
+.main-view__nav__controlls button:nth-child(2) {
   width: 50px;
   height: 50px;
 }
