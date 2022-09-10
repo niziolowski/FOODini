@@ -7,7 +7,49 @@
     <title>FOODini</title>
 
     <link rel="stylesheet" href="./src/style.css" />
+
+    <!-- Import Feather icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
     <script defer type="module" src="./src/js/controller.js"></script>
   </head>
-  <body></body>
+  <body>
+    <main class="main-view">
+      <header class="main-view__header">
+        <div class="main-view__header-col">
+          <button class="btn-icon">
+            <i data-feather="sidebar"></i>
+          </button>
+          <button class="btn-icon">
+            <i data-feather="settings"></i>
+          </button>
+        </div>
+        <div class="main-view__header__title">
+          <h1>plan posiłków</h1>
+          <h2>bieżący tydzień</h2>
+        </div>
+        <div class="main-view__header-col">
+          <nav class="main-view__header__nav">
+            <button class="btn-icon">
+              <i data-feather="chevron-left"></i>
+            </button>
+            <button class="btn-icon">
+              <i data-feather="home"></i>
+            </button>
+            <button class="btn-icon">
+              <i data-feather="chevron-right"></i>
+            </button>
+          </nav>
+          <button class="btn-icon">
+            <i data-feather="shopping-bag"></i>
+          </button>
+        </div>
+      </header>
+    </main>
+
+    <!-- Feather icon function -->
+    <script>
+      feather.replace();
+    </script>
+  </body>
 </html>

@@ -4,10 +4,15 @@
   padding: 0;
   box-sizing: border-box;
   font-family: montserrat;
+
+  /* Just for testing */
+  --border: 1px solid #ccc;
+  --transition: 0.2s ease-in-out;
+  --btn-transition: 0.1s ease-in-out;
 }
 
 :root {
-  font-size: 18px;
+  font-size: 20px;
 
   /* Shadow preset */
   --shadow: 0px 0.5px 0.6px rgba(0, 0, 0, 0.1),
@@ -16,6 +21,20 @@
     0px 9.9px 11.1px -2.5px rgba(0, 0, 0, 0.1);
 
   background-color: var(--bg-color);
+}
+
+h1 {
+  font-weight: 300;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  font-size: 2rem;
+}
+
+h2 {
+  font-weight: 300;
+  text-transform: uppercase;
+  color: var(--font-color);
+  font-size: 1rem;
 }
 
 /* $ COLOR THEMES */
@@ -35,4 +54,98 @@
   --tag-1-color: #ffe047;
   --tag-2-color: #7ab4ff;
   --tag-3-color: #dd6b6b;
+}
+
+/* $ MAIN VIEW */
+.main-view__header {
+  display: flex;
+  height: 100px;
+  padding: 20px;
+  justify-content: space-between;
+}
+
+.main-view__header__title {
+  align-self: center;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+}
+
+/* $ RESPONSIVE LAYOUT BREAKPOINTS */
+@media screen and (min-width: 1024px) {
+  .main-view__header__title {
+    position: absolute;
+    left: 50%;
+    translate: -50%;
+  }
+}
+
+/* Header groups to help align the buttons and title */
+.main-view__header-col {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* A trick to keep the calendar navigation centered between the title and the right column */
+.main-view__header-col:nth-child(3) {
+  flex: 1;
+  max-width: 25%;
+  min-width: fit-content;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Calendar navigation */
+.main-view__header__nav {
+  display: flex;
+  align-items: center;
+}
+
+.main-view__header__nav button {
+  width: 35px;
+  height: 35px;
+}
+
+.main-view__header__nav button:nth-child(2) {
+  width: 50px;
+  height: 50px;
+}
+
+/* § UNIVERSAL STYLES */
+
+/* Btn icons */
+.btn-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  color: var(--accent-color);
+  transition: var(--btn-transition);
+}
+
+.btn-icon:hover {
+  background-color: #f9f9f9;
+  box-shadow: var(--shadow);
+}
+
+.btn-icon:active {
+  border: var(--border);
+  background-color: #eee;
+  box-shadow: inset rgba(0, 0, 0, 0.1) 0 0 5px;
+}
+
+.btn-icon svg {
+  transition: var(--btn-transition);
+}
+
+.btn-icon:hover svg {
+  scale: 1.1;
+}
+
+.btn-icon:active svg {
+  scale: 1;
 }
