@@ -70,11 +70,12 @@ h2 {
   /* margin-left: 350px; */
 }
 
-/* Navigation */
+/* § NAVIGATION */
 .main-view__nav {
   display: flex;
   height: 100px;
   padding: 20px;
+  padding-right: 144px;
   justify-content: space-between;
 }
 
@@ -116,7 +117,7 @@ h2 {
   height: 50px;
 }
 
-/* Plan */
+/* § PLAN */
 .main-view__plan {
   position: relative;
   flex: 1 0 auto;
@@ -166,9 +167,50 @@ h2 {
   padding: 5px;
 }
 
+/* § SHOPPING LIST */
+
+.shopping-list {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(101%);
+  width: 350px;
+  height: 100vh;
+  border: 1px solid var(--grey-color);
+  backdrop-filter: blur(10px);
+  transition: var(--transition);
+}
+
+.shopping-list-header {
+  margin: 20px 20px 0 0;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.shopping-list__btn-toggle {
+  position: absolute;
+  left: 0;
+  transform: translate(-100%);
+  transition: var(--transition);
+}
+
 /* § UNIVERSAL STYLES */
 
-/* Btn icons */
+/* Btn */
+.btn {
+  padding: 0 15px;
+  height: 40px;
+  border: none;
+  background-color: var(--accent-color);
+  color: var(--font-negative-color);
+  font-size: 0.8rem;
+  font-weight: 400;
+  border-radius: 5px;
+}
+
+/* Btn icon */
 .btn-icon {
   display: flex;
   justify-content: center;
