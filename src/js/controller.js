@@ -1,7 +1,8 @@
 import settingsView from "./views/settingsView.js";
 import shoppingListView from "./views/shoppingListView.js";
 import navView from "./views/navView.js";
-import view from "./views/view.js";
+import sidebarView from "./views/sidebarView.js";
+import mainView from "./views/mainView.js";
 import * as model from "./model.js";
 // § NAV
 
@@ -14,6 +15,12 @@ function controlNav(e) {
   // Settings button
   if (btn.classList.contains("main-view__nav__btn-settings"))
     settingsView.show();
+
+  // Sidebar button
+  if (btn.classList.contains("main-view__nav__btn-sidebar")) {
+    sidebarView.toggle();
+    mainView.shift();
+  }
 }
 
 // § SETTIGNS

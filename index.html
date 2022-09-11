@@ -14,10 +14,12 @@
     <script defer type="module" src="./src/js/controller.js"></script>
   </head>
   <body>
+    
+
     <main class="main-view">
       <nav class="main-view__nav">
         <div class="main-view__nav-col">
-          <button class="btn-icon">
+          <button class="main-view__nav__btn-sidebar btn-icon">
             <i data-feather="sidebar"></i>
           </button>
           <button class="main-view__nav__btn-settings btn-icon">
@@ -75,7 +77,11 @@
         </div>
       </section>
     </main>
-
+    <aside class="sidebar">
+      <header>
+        sidebar
+      </header>
+    </aside>
     <aside class="shopping-list">
       <div class="shopping-list-header">
         <button class="btn shopping-list__btn-toggle">Lista zakupów</button>
@@ -137,10 +143,10 @@
             </div>
           </div>
         </div>
-<header class="settings-header">
-  <h1>USTAWIENIA</h1>
-  <button class="settings-header__btn-close btn-icon"><i data-feather="x"></i></button>
-</header>
+        <header class="settings-header">
+          <h1>USTAWIENIA</h1>
+          <button class="settings-header__btn-close btn-icon"><i data-feather="x"></i></button>
+        </header>
       </div>
     </div>
 
