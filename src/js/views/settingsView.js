@@ -1,6 +1,7 @@
 class settingsView {
   _parentElement = document.querySelector(".settings");
   _root = document.querySelector(":root");
+
   addHandlerClick(handler) {
     this._parentElement.addEventListener("click", handler.bind(this));
   }

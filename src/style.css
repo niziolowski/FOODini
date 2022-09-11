@@ -214,6 +214,7 @@ h2 {
 /* § SETTINGS */
 
 .settings {
+  min-width: 720px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -230,9 +231,21 @@ h2 {
   height: 90%;
   display: grid;
   grid-template-columns: 140px 1fr;
+  grid-template-rows: min-content;
   padding: 20px;
   justify-items: stretch;
   background-color: var(--bg-color);
+}
+/* Header */
+.settings-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.settings-header h1 {
+  display: flex;
+  justify-content: center;
+  flex: 1;
 }
 
 /* § THEME EDITOR */

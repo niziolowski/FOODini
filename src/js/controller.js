@@ -24,6 +24,9 @@ function controlSettings(e) {
   const btn = e.target.closest("button");
   const input = e.target.closest("input");
 
+  // Close btn
+  if (btn.classList.contains("settings-header__btn-close")) settingsView.hide();
+
   // HANDLE COLOR THEMES
   if (input) {
     // Create a one time event handler
@@ -55,5 +58,3 @@ function init() {
 init();
 
 // testing
-
-settingsView.show();
