@@ -69,3 +69,5 @@ function init() {
 init();
 
 // testing
+sidebarView.show();
+mainView.shift();

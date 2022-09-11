@@ -14,7 +14,6 @@
     <script defer type="module" src="./src/js/controller.js"></script>
   </head>
   <body>
-    
 
     <main class="main-view">
       <nav class="main-view__nav">
@@ -77,10 +76,36 @@
         </div>
       </section>
     </main>
+
     <aside class="sidebar">
-      <header>
-        sidebar
+      <header class="sidebar__tabs">
+        <button class="sidebar__tabs__tab active">
+          Spiżarnia
+        </button>
+        <button class="sidebar__tabs__tab">
+          Baza przepisów
+        </button>
       </header>
+      <section class="sidebar-options">
+        <div class="row">
+          <button class="btn-icon small">
+            <i data-feather="plus"></i>
+          </button>
+          <input type="search" placeholder="Szukaj">
+          <button class="btn-icon small">
+            <i data-feather="maximize-2"></i>
+          </button>
+        </div>
+        <div class="row">
+          <span>Filtr</span>
+          <select>
+            <option>brak</option>
+          </select>
+          <button class="btn-icon small">
+            <i data-feather="star"></i>
+          </button>
+        </div>
+      </section>
     </aside>
     <aside class="shopping-list">
       <div class="shopping-list-header">

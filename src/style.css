@@ -349,6 +349,73 @@ h2 {
   translate: 0;
 }
 
+/* Tabs */
+.sidebar__tabs {
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid var(--grey-color);
+  height: 55px;
+}
+
+.sidebar__tabs__tab {
+  flex: 1;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--font-color);
+  background-color: var(--bg-color);
+}
+
+.sidebar__tabs__tab:nth-child(2) {
+  /* divider */
+  border-left: 1px solid var(--grey-color);
+}
+
+.sidebar__tabs__tab.active {
+  font-weight: 400;
+  color: var(--accent-color);
+  border-bottom: 5px solid var(--accent-color);
+}
+
+/* Results options */
+.sidebar-options {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  padding: 10px;
+  border-bottom: 1px solid var(--grey-color);
+}
+
+.sidebar-options .row {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.sidebar-options span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  color: var(--accent-color);
+  font-size: 0.8rem;
+}
+
+.sidebar-options input {
+  padding: 0 10px;
+  flex: 1;
+  height: 30px;
+  border-radius: 15px;
+  border: 1px solid var(--grey-color);
+}
+.sidebar-options select {
+  padding: 0 10px;
+  flex: 1;
+  height: 30px;
+  border-radius: 15px;
+  border: 1px solid var(--grey-color);
+}
+
 /* § UNIVERSAL STYLES */
 
 /* Btn */
@@ -398,6 +465,15 @@ h2 {
 
 .btn-icon:active svg {
   scale: 1;
+}
+
+.btn-icon.small {
+  width: 35px;
+  height: 35px;
+}
+
+.btn-icon.small svg {
+  max-height: 20px;
 }
 
 .overlay {
