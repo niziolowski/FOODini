@@ -1,5 +1,5 @@
 class shoppingListView {
-  _parentEl = document.querySelector(".shopping-list");
+  _parentElement = document.querySelector(".shopping-list");
   _btnToggle = document.querySelector(".shopping-list__btn-toggle");
   _status = "inactive";
 
@@ -9,7 +9,10 @@ class shoppingListView {
 
   _addHandlerBtnToggle() {
     ["click", "mouseenter", "mouseleave"].forEach((event) =>
-      this._parentEl.addEventListener(event, this._handleBtnToggle.bind(this))
+      this._parentElement.addEventListener(
+        event,
+        this._handleBtnToggle.bind(this)
+      )
     );
   }
 
@@ -18,13 +21,13 @@ class shoppingListView {
       // Peek effect
       case "mouseenter":
         if (this._status === "inactive") {
-          this._parentEl.style.transform = "translate(80%)"; // Peek list
+          this._parentElement.style.transform = "translate(80%)"; // Peek list
         }
         break;
 
       case "mouseleave":
         if (this._status === "inactive") {
-          this._parentEl.style.transform = "translate(101%)"; // Hide
+          this._parentElement.style.transform = "translate(101%)"; // Hide
         }
         break;
 
@@ -49,12 +52,12 @@ class shoppingListView {
 
   show() {
     this._btnToggle.style.transform = "translate(-10%)";
-    this._parentEl.style.transform = "translate(0%)";
+    this._parentElement.style.transform = "translate(0%)";
     this._status = "active";
   }
   hide() {
     this._btnToggle.style.transform = "translate(-100%)";
-    this._parentEl.style.transform = "translate(101%)";
+    this._parentElement.style.transform = "translate(101%)";
     this._status = "inactive";
   }
 }

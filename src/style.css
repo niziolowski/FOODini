@@ -11,6 +11,18 @@
   --btn-transition: 0.1s ease-in-out;
 }
 
+/* Reset color input styles */
+input[type="color"] {
+  -webkit-appearance: none;
+  border: none;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+}
+
 :root {
   font-size: 20px;
 
@@ -26,6 +38,7 @@
 body {
   min-width: 700px;
   height: 100vh;
+  overflow: hidden;
 }
 
 h1 {
@@ -43,6 +56,7 @@ h2 {
 }
 
 /* $ COLOR THEMES */
+
 .color-theme-custom {
   /* UI dynamic colors */
   --bg-color: #f2f2f2;
@@ -67,10 +81,10 @@ h2 {
   height: 100%;
   display: flex;
   flex-direction: column;
-  /* margin-left: 350px; */
 }
 
 /* § NAVIGATION */
+
 .main-view__nav {
   display: flex;
   height: 100px;
@@ -118,6 +132,7 @@ h2 {
 }
 
 /* § PLAN */
+
 .main-view__plan {
   position: relative;
   flex: 1 0 auto;
@@ -196,6 +211,108 @@ h2 {
   transition: var(--transition);
 }
 
+/* § SETTINGS */
+
+.settings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent;
+}
+
+.settings-content {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  padding: 20px;
+  justify-items: stretch;
+  background-color: var(--bg-color);
+}
+
+/* § THEME EDITOR */
+
+.theme-editor {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 140px;
+  height: 100%;
+  grid-row: 1/5;
+  grid-column: 1/2;
+  background-color: #fff;
+  box-shadow: var(--shadow);
+  border-radius: 15px;
+  transform-origin: top right;
+  transform: rotate(-2deg);
+  border: 1px solid #eee;
+}
+
+.theme-editor__bolt {
+  position: absolute;
+  right: 0;
+  display: flex;
+  justify-content: flex;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+  margin: 10px;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 1px 4px;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(242, 242, 242, 1) 100%
+  );
+}
+
+.theme-editor__bolt:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: #ddd;
+  transform: rotate(-20deg);
+}
+
+.theme-editor__title {
+  width: 100%;
+  font-size: 1.5rem;
+  font-weight: 100;
+  padding: 20px;
+  color: var(--accent-color);
+}
+
+.theme-editor__swatch {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+}
+
+.theme-editor__swatch__preview {
+  flex: 1;
+  width: 100%;
+  background-color: var(--bg-color);
+  border: none;
+}
+
+.theme-editor__swatch__label {
+  color: var(--font-color);
+  font-size: 0.7rem;
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  justify-content: space-between;
+}
+
 /* § UNIVERSAL STYLES */
 
 /* Btn */
@@ -245,6 +362,18 @@ h2 {
 
 .btn-icon:active svg {
   scale: 1;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.hidden {
+  display: none;
 }
 
 /* $ RESPONSIVE LAYOUT BREAKPOINTS */
