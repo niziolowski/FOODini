@@ -1,9 +1,10 @@
 import settingsView from "./views/settingsView.js";
 import shoppingListView from "./views/shoppingListView.js";
 import navView from "./views/navView.js";
+
+import * as model from "./model.js";
 import sidebarView from "./views/sidebarView.js";
 import mainView from "./views/mainView.js";
-import * as model from "./model.js";
 // § NAV
 
 function controlNav(e) {
@@ -32,7 +33,10 @@ function controlSettings(e) {
   const input = e.target.closest("input");
 
   // Close btn
-  if (btn.classList.contains("settings-header__btn-close")) settingsView.hide();
+  if (btn) {
+    if (btn.classList.contains("settings-header__btn-close"))
+      settingsView.hide();
+  }
 
   // HANDLE COLOR THEMES
   if (input) {
