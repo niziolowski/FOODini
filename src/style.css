@@ -197,7 +197,7 @@ h2 {
   transform: translate(101%);
   width: 350px;
   height: 100vh;
-  border: 1px solid var(--grey-color);
+  border-left: 1px solid var(--grey-color);
   backdrop-filter: blur(10px);
   transition: var(--transition);
 }
@@ -401,13 +401,28 @@ h2 {
   font-size: 0.8rem;
 }
 
-.sidebar-options input {
-  padding: 0 10px;
+.sidebar-options__search-bar {
+  position: relative;
   flex: 1;
   height: 30px;
+}
+
+.sidebar-options__search-bar input {
+  padding: 0 10px 0 28px;
+  width: 100%;
+  height: 100%;
   border-radius: 15px;
   border: 1px solid var(--grey-color);
 }
+
+.sidebar-options__search-bar svg {
+  position: absolute;
+  height: 18px;
+  top: 6px;
+  left: 4px;
+  color: var(--accent-color);
+}
+
 .sidebar-options select {
   padding: 0 10px;
   flex: 1;
