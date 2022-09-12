@@ -2,7 +2,7 @@
 export const state = {
   colorTheme: [
     { property: "--bg-color", value: "#f5f5f5" },
-    { property: "--accent-color", value: "#91ad67" },
+    { property: "--accent-color", value: "#516e94" },
     { property: "--font-color", value: "#333333" },
     { property: "--tag1-color", value: "#ffe047" },
     { property: "--tag2-color", value: "#7ab4ff" },
