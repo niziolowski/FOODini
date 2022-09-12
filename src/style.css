@@ -431,6 +431,69 @@ h2 {
   border: 1px solid var(--grey-color);
 }
 
+/* § SIDEBAR CONTENT */
+
+/* Storage */
+.list-item-storage {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  padding: 10px;
+  column-gap: 10px;
+  color: var(--font-color);
+  border-bottom: 1px solid var(--grey-color);
+  font-size: 0.7rem;
+}
+
+.list-item-storage__btn-bookmark svg {
+  color: var(--grey-color);
+}
+
+.list-item-storage__title {
+  flex: 1;
+  font-size: 0.8rem;
+}
+
+.list-item-storage__amount {
+}
+
+.list-item-storage__unit {
+  margin-right: 5px;
+}
+
+.list-item-storage__expiry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 3px;
+  width: 50px;
+}
+
+.expiry-days-left {
+}
+
+.expiry-indicator {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+  background-color: var(--grey-color);
+}
+
+.expiry-indicator__bar {
+  height: 100%;
+}
+
+.list-item-storage__tag {
+  position: absolute;
+  right: 0;
+  width: 5px;
+  height: 100%;
+  background-color: var(--tag-1-color);
+}
+
 /* § UNIVERSAL STYLES */
 
 /* Btn */
