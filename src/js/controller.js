@@ -5,6 +5,7 @@ import navView from "./views/navView.js";
 import * as model from "./model.js";
 import sidebarView from "./views/sidebarView.js";
 import mainView from "./views/mainView.js";
+import addProductView from "./views/addProductView.js";
 // § NAV
 
 function controlNav(e) {
@@ -55,6 +56,34 @@ function controlSettings(e) {
   }
 }
 
+// § SIDEBAR
+
+function controlSidebar(e) {
+  // Get button
+  const btn = e.target.closest("button");
+
+  // Handle btn click
+  if (btn) {
+    if (btn.classList.contains("btn-add-product")) addProductView.show();
+  }
+}
+
+// § ADD PRODUCT
+
+function controlAddProduct(e) {
+  // Handle overlay click
+  if (e.target.classList.contains("overlay")) addProductView.hide();
+
+  // Get button
+  const btn = e.target.closest("button");
+
+  // Handle btn click
+  if (btn) {
+    if (btn.classList.contains("add-product-content__header__btn-close"))
+      addProductView.hide();
+  }
+}
+
 function init() {
   // 1. Load
 
@@ -64,6 +93,8 @@ function init() {
   shoppingListView.init();
   navView.addHandlerClick(controlNav);
   settingsView.addHandlerClick(controlSettings);
+  sidebarView.addHandlerClick(controlSidebar);
+  addProductView.addHandlerClick(controlAddProduct);
 }
 
 init();

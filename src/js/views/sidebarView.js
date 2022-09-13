@@ -1,6 +1,11 @@
 class sidebarView {
   _parentElement = document.querySelector(".sidebar");
   _status = "inactive";
+
+  addHandlerClick(handler) {
+    this._parentElement.addEventListener("click", handler.bind(this));
+  }
+
   show() {
     this._status = "active";
     this._parentElement.classList.add("active");
