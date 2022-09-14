@@ -89,7 +89,7 @@
       </header>
       <section class="sidebar-options">
         <div class="row">
-          <button class="btn-add-product btn-icon small">
+          <button class="sidebar-options__btn-add-product btn-icon small">
             <i data-feather="plus"></i>
           </button>
           <div class="sidebar-options__search-bar">
@@ -272,35 +272,46 @@
             </button>
           </header>
           <form class="add-product-content__form">
-
-              <label>Produkt</label>
-              <input type="text">
-
-              <label>Ilość</label>
-              <input class="add-product-content__form__amount" type="number">
-
-              <label>Jedn.</label>
-              <select>
-                <option>szt.</option>
-                <option>kg</option>
-                <option>ml</option>
-                <option>g</option>
-              </select>
-
-              <label>Grupa</label>
-              <select>
-                <option>świeze</option>
-                <option>suche</option>
-                <option>mrozone</option>
-              </select>
-
-              <label>Data zakupu</label>
-              <input type="date">
-              
-              <label>Wazność</label>
-              <input type="number" placeholder="ilość dni">
-
+            <div class="row-1">
+              <div class="col">
+                <label>Produkt</label>
+                <input class="add-product-content__form__product" type="text">
+              </div>
+              <div class="col">
+                <label>Grupa</label>
+                <select class="add-product-content__form__group">
+                  <option>świeze</option>
+                  <option>suche</option>
+                  <option>mrozone</option>
+                </select>
+              </div>
+            </div>
+            <div class="row-2">
+              <div class="col">
+                <label>Ilość</label>
+                <input class="add-product-content__form__amount" type="number">
+              </div>
+              <div class="col">
+                <label>Jedn.</label>
+                <select class="add-product-content__form__amount">
+                  <option>szt.</option>
+                  <option>kg</option>
+                  <option>ml</option>
+                  <option>g</option>
+                </select>
+              </div>
+            
+              <div class="col">
+                <label>Wazność</label>
+                <input class="add-product-content__form__expiry" type="number" placeholder="ilość dni">
+              </div>
+              <div class="col">
+                <label>Data zakupu</label>
+                <input class="add-product-content__form__date" type="date"> 
+              </div>
+            </div>
           </form>
+          <button class="btn btn-outline">Dodaj</button>
       </div>
     </div>
     <!-- Feather icon function -->

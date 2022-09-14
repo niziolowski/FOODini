@@ -64,7 +64,8 @@ function controlSidebar(e) {
 
   // Handle btn click
   if (btn) {
-    if (btn.classList.contains("btn-add-product")) addProductView.show();
+    if (btn.classList.contains("sidebar-options__btn-add-product"))
+      addProductView.show();
   }
 }
 
@@ -100,5 +101,6 @@ function init() {
 init();
 
 // testing
-sidebarView.show();
-mainView.shift();
+addProductView.show();
+// sidebarView.show();
+// mainView.shift();
