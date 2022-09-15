@@ -659,6 +659,7 @@ h2 {
 }
 
 .add-product-content__form .col {
+  position: relative;
   display: flex;
   flex-direction: column;
   row-gap: 10px;
@@ -672,6 +673,34 @@ h2 {
   border: 1px solid var(--grey-color);
   background-color: var(--bg-color);
   padding: 0 10px;
+}
+
+/* § Suggestions / autocomplete */
+
+.add-product-content__form ul {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  list-style: none;
+  border-left: var(--border);
+  border-right: var(--border);
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.add-product-content__form li {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 10px;
+  border-bottom: var(--border);
+}
+
+.add-product-content__form li:hover {
+  background-color: var(--bg-color);
 }
 
 /* § UNIVERSAL STYLES */

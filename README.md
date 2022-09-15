@@ -14,4 +14,6 @@ DEMO: a link will be here later
 
 ## Things i learned but didn't plan to
 
-- CSS BEM naming system (css gets messy very quickly)
+- CSS: BEM naming system (css gets messy very quickly)
+- CSS: styling complex things is more difficult than i thought
+- JS: To remove eventListener with .bind() method on it, the listener has to be assigned to a variable (EXAMPLE: handleClick = this.handleClick.bind(this) )

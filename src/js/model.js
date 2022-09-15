@@ -8,6 +8,24 @@ export const state = {
     { property: "--tag2-color", value: "#7ab4ff" },
     { property: "--tag3-color", value: "#dd6b6b" },
   ],
+  products: new Set([
+    {
+      name: "Jajka",
+      amount: 5,
+    },
+    {
+      name: "Jajka",
+      amount: 5,
+    },
+    {
+      name: "Jabłka",
+      amount: 10,
+    },
+    {
+      name: "Mąka",
+      amount: 1,
+    },
+  ]),
 };
 
 // Function takes a DOM object, reads dataset.color and value, then changes state accordingly
