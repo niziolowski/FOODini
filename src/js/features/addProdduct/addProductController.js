@@ -14,8 +14,20 @@ function handleClick(e) {
   }
 }
 
+function handleAutoComplete(e) {
+  // Test
+  function handleInput(e) {
+    // On "Escape" key exit autocomplete
+    if (e.type === "keydown" && e.key === "Escape") {
+      addProductView.clearAutoComplete();
+    }
+  }
+  addProductView.addHandlerSuggestions(handleInput);
+}
+
 function init() {
   addProductView.addHandlerClick(handleClick);
+  addProductView.addHandlerAutoComplete(handleAutoComplete);
 
   console.log("IMPORT SUCCESSFUL: addProductController");
 }
