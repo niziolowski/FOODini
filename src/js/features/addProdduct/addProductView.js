@@ -2,10 +2,22 @@ import { formatDate } from "../../helpers.js";
 
 class addProductView {
   _parentElement = document.querySelector(".add-product");
+  _form = document.querySelector(".add-product-content__form");
   _productInput = document.querySelector(".add-product-content__form__product");
   _suggestions = document.querySelector(
     ".add-product-content__form .suggestions"
   );
+
+  addHandlerUpload(handler) {
+    this._form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const dataArr = [...new FormData(this)];
+      const data = Object.fromEntries(dataArr);
+
+      handler(data);
+    });
+  }
 
   addHandlerACevents(handler) {
     // assign listener to a variable for removal
@@ -31,13 +43,14 @@ class addProductView {
       unit.value = unit.children[0].textContent;
       expiry.value = "";
     }
-
-    // Fill the form
-    product.value = data.title;
-    group.value = data.group;
-    amount.value = data.amount;
-    unit.value = data.unit;
-    expiry.value = data.expiry;
+    if (data) {
+      // Fill the form
+      product.value = data.name;
+      group.value = data.group;
+      amount.value = data.amount;
+      unit.value = data.unit;
+      expiry.value = data.expiry;
+    }
   }
 
   clearAC() {
@@ -64,7 +77,7 @@ class addProductView {
     ${suggestions
       .map(
         (suggestion) =>
-          `<li data-product-id="${suggestion.id}">${suggestion.title}</li>`
+          `<li data-product-id="${suggestion.id}">${suggestion.name}</li>`
       )
       .join("")}
     `;

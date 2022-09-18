@@ -12,7 +12,7 @@ export const state = {
     {
       id: 1,
       createdAt: 1660643417457,
-      title: "Jajka",
+      name: "Jajka",
       amount: 10,
       unit: "szt.",
       expiry: 14,
@@ -23,7 +23,7 @@ export const state = {
     {
       id: 2,
       createdAt: 1660643655319,
-      title: "Mięso",
+      name: "Mięso",
       amount: 1,
       unit: "kg",
       expiry: 3,
@@ -34,7 +34,7 @@ export const state = {
     {
       id: 3,
       createdAt: 1660645683669,
-      title: "Mąka",
+      name: "Mąka",
       amount: 2,
       unit: "kg",
       expiry: 100,

@@ -271,11 +271,11 @@
               <i data-feather="x"></i>
             </button>
           </header>
-          <form class="add-product-content__form">
+          <form id="add-product" class="add-product-content__form">
             <div class="row-1">
               <div class="col">
                 <label>Produkt</label>
-                <input class="add-product-content__form__product" type="text">
+                <input name="name" class="add-product-content__form__product" type="text">
 
                 <!-- Autocomplete / suggestions go here -->
                 <ul class="suggestions">
@@ -284,7 +284,7 @@
               </div>
               <div class="col">
                 <label>Grupa</label>
-                <select class="add-product-content__form__group">
+                <select name="group" class="add-product-content__form__group">
                   <option>świeże</option>
                   <option>suche</option>
                   <option>mrożone</option>
@@ -294,11 +294,11 @@
             <div class="row-2">
               <div class="col">
                 <label>Ilość</label>
-                <input class="add-product-content__form__amount" type="number">
+                <input name="amount" class="add-product-content__form__amount" type="number">
               </div>
               <div class="col">
                 <label>Jedn.</label>
-                <select class="add-product-content__form__unit">
+                <select name="unit" class="add-product-content__form__unit">
                   <option>szt.</option>
                   <option>kg</option>
                   <option>ml</option>
@@ -308,15 +308,15 @@
             
               <div class="col">
                 <label>Wazność</label>
-                <input class="add-product-content__form__expiry" type="number" placeholder="ilość dni">
+                <input name="expiry" class="add-product-content__form__expiry" type="number" placeholder="ilość dni">
               </div>
               <div class="col">
                 <label>Data zakupu</label>
-                <input class="add-product-content__form__date" type="date"> 
+                <input name="date" class="add-product-content__form__date" type="date"> 
               </div>
             </div>
           </form>
-          <button class="btn btn-outline">Dodaj</button>
+          <button type="submit" form="add-product" class="btn btn-outline">Dodaj</button>
       </div>
     </div>
     <!-- Feather icon function -->
