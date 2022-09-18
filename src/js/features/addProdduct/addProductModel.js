@@ -1,6 +1,6 @@
 export function getSuggestions(input, state) {
   // Get input value
-  const value = e.target.value.toLowerCase();
+  const value = input.value.toLowerCase();
   // Create suggestions list
   const suggestions = [];
   // Compare products to input, add to suggestions if matches
@@ -8,4 +8,6 @@ export function getSuggestions(input, state) {
     const productName = product.title.toLowerCase();
     if (productName.startsWith(value)) suggestions.push(product);
   });
+
+  return suggestions;
 }
