@@ -68,6 +68,7 @@ h2 {
   --indicator-orange-color: orange;
   --indicator-red-color: orangered;
   --grey-color: #cccccc;
+  --hover-color: #dddddd;
 
   /* Tags */
   --tag-1-color: #ffe047;
@@ -241,6 +242,7 @@ h2 {
   padding: 20px;
   justify-items: stretch;
   background-color: var(--bg-color);
+  background-color: #eeeeee;
 }
 /* Header */
 .settings-header {
@@ -353,17 +355,27 @@ h2 {
 .sidebar__tabs {
   width: 100%;
   display: flex;
-  border-bottom: 1px solid var(--grey-color);
+  /* border-bottom: 1px solid var(--grey-color); */
   height: 55px;
 }
 
 .sidebar__tabs__tab {
+  position: relative;
   flex: 1;
-  border: none;
   font-size: 0.8rem;
   font-weight: 300;
   color: var(--font-color);
-  background-color: var(--bg-color);
+  transition: var(--btn-transition);
+  box-shadow: inset rgba(0, 0, 0, 0.1) 0 -5px 15px;
+  border: var(--border);
+}
+
+.sidebar__tabs__tab:hover {
+  background-color: #f9f9f9;
+}
+.sidebar__tabs__tab:active {
+  background-color: var(--hover-color);
+  box-shadow: inset rgba(0, 0, 0, 0.1) 0 0 5px;
 }
 
 .sidebar__tabs__tab:nth-child(2) {
@@ -374,7 +386,10 @@ h2 {
 .sidebar__tabs__tab.active {
   font-weight: 400;
   color: var(--accent-color);
-  border-bottom: 5px solid var(--accent-color);
+  /* border-bottom: 5px solid var(--accent-color); */
+  background-color: var(--bg-color);
+  box-shadow: none;
+  border: none;
 }
 
 /* Results options */
