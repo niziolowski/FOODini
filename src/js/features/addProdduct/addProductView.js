@@ -23,6 +23,16 @@ class addProductView {
     let unit = document.querySelector(".add-product-content__form__unit");
     let expiry = document.querySelector(".add-product-content__form__expiry");
 
+    // Clear the form
+    if (!data) {
+      product.value = "";
+      group.value = group.children[0].textContent;
+      amount.value = "";
+      unit.value = unit.children[0].textContent;
+      expiry.value = "";
+    }
+
+    // Fill the form
     product.value = data.title;
     group.value = data.group;
     amount.value = data.amount;
@@ -79,6 +89,9 @@ class addProductView {
 
   hide() {
     this._parentElement.classList.add("hidden");
+
+    // Clear the form
+    this.updateForm();
   }
 }
 export default new addProductView();
