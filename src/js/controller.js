@@ -10,19 +10,11 @@ import settingsView from "./features/settings/settingsView.js";
 import * as model from "./model.js";
 settingsView.updateColorTheme(model.state.colorTheme);
 
-<<<<<<< HEAD
-// // Open sidebar in full-page view
-=======
 // Open sidebar in full-page view
->>>>>>> dev
+
 // import sidebarView from "./features/sidebar/sidebarView.js";
 // import mainView from "./features/main/mainView.js";
 
 // mainView.shift();
 // sidebarView.show();
 // sidebarView.toggleFullPage(model.state);
-<<<<<<< HEAD
-// //
-=======
-//
->>>>>>> dev
