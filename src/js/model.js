@@ -42,6 +42,17 @@ export const state = {
       group: "suche",
       daysLeft: 73,
     },
+    {
+      id: 4,
+      createdAt: 1660645683669,
+      name: "Halibut",
+      amount: 300,
+      unit: "g",
+      expiry: 100,
+      bookmark: false,
+      group: "mrożone",
+      daysLeft: 73,
+    },
   ],
   tags: {
     storage: ["świeże", "suche", "mrożone"],
@@ -58,6 +69,30 @@ export const state = {
       imageUrl:
         "https://cdn.galleries.smcloud.net/t/photos/gf-bc5p-Ttbo-1SJC_jajecznica-podstawowy-przepis-na-klasyczna-potrawe-z-rozmaconych-jajek.jpg",
       description: "Normalnie, jajka rozbić na patelnii i smażyć aż się zetno.",
+      ingredients: [{ foodini_storage_id: 1, quantity: 4, unit: "szt." }],
+    },
+    {
+      id: 2,
+      createdAt: 1661700093430,
+      title: "Makaron z sosem pomidorowym i parmezanem",
+      group: "obiad",
+      difficulty: 2,
+      bookmark: true,
+      imageUrl:
+        "https://cdn.galleries.smcloud.net/t/photos/gf-Yz2K-uho6-f6NT_spaghetti-bolognese-przepis-na-wloskie-danie-dla-4-osob.jpg",
+      description: "Jeszcze nie wiadomo",
+      ingredients: [{ foodini_storage_id: 1, quantity: 4, unit: "szt." }],
+    },
+    {
+      id: 2,
+      createdAt: 1661700093430,
+      title: "Makaron z sosem pomidorowym i parmezanem",
+      group: "obiad",
+      difficulty: 2,
+      bookmark: true,
+      imageUrl:
+        "https://cdn.galleries.smcloud.net/t/photos/gf-Yz2K-uho6-f6NT_spaghetti-bolognese-przepis-na-wloskie-danie-dla-4-osob.jpg",
+      description: "Jeszcze nie wiadomo",
       ingredients: [{ foodini_storage_id: 1, quantity: 4, unit: "szt." }],
     },
   ],

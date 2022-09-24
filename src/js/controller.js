@@ -12,6 +12,9 @@ settingsView.updateColorTheme(model.state.colorTheme);
 
 // Open sidebar in full-page view
 import sidebarView from "./features/sidebar/sidebarView.js";
-// sidebarView.show();
-// sidebarView.toggleFullPage();
+import mainView from "./features/main/mainView.js";
+
+mainView.shift();
+sidebarView.show();
+sidebarView.toggleFullPage(model.state);
 //

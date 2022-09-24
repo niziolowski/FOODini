@@ -394,7 +394,7 @@ h2 {
   border: none;
 }
 
-/* Results options */
+/* Sidebar results options */
 .sidebar-options {
   display: flex;
   flex-direction: column;
@@ -526,7 +526,7 @@ h2 {
 
 /* image */
 .list-item-recipe__image img {
-  min-width: 100px;
+  /* min-width: 100px; */
   height: 100px;
 }
 
@@ -557,6 +557,7 @@ h2 {
 
 /* Middle column */
 .list-item-recipe .col:nth-child(2) {
+  flex: 1;
   padding: 10px;
   font-size: 0.7rem;
   justify-content: space-between;
@@ -656,6 +657,55 @@ h2 {
   width: 1px;
   height: 30px;
   background-color: var(--grey-color);
+}
+
+/* Sidebar full-page options */
+
+.sidebar.full-page .sidebar-options {
+  /* display: flex;
+  flex-direction: column; */
+  /* row-gap: 5px; */
+  /* padding: 10px; */
+  display: none;
+  border-bottom: 1px solid var(--grey-color);
+  background-color: grey;
+}
+
+.sidebar.full-page .sidebar-content {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  flex: 1 0 auto;
+}
+
+.sidebar.full-page .sidebar-content__grid {
+  width: fit-content;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(350px, 400px));
+  gap: 40px;
+  padding: 40px;
+  overflow-x: scroll;
+}
+
+.sidebar-content__grid .col {
+}
+
+.sidebar-content__grid .col-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--font-color);
+  padding: 10px 0;
+}
+
+.sidebar-content__grid__storage-list {
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
 }
 
 /* § ADD PRODUCT */
@@ -819,6 +869,10 @@ h2 {
 
 .btn-icon.small svg {
   max-height: 20px;
+}
+
+.btn-icon.fill svg {
+  color: var(--accent-color);
 }
 
 .btn-outline {

@@ -37,6 +37,7 @@ export function handleClick(e) {
 }
 
 export function init() {
+  sidebarView.init(model.state);
   sidebarView.addHandlerClick(handleClick);
   console.log("IMPORT SUCCESSFUL: sidebarController");
 }

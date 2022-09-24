@@ -6,9 +6,13 @@ class sidebarView {
   _status = {
     active: false,
     fullPage: false,
-    activeTab: "storage",
+    activeTab: "recipes",
     view: "columns",
   };
+
+  init(state) {
+    this.render(state);
+  }
 
   addHandlerClick(handler) {
     this._parentElement.addEventListener("click", handler.bind(this));
@@ -186,7 +190,9 @@ class sidebarView {
 
   // Generate Markup for options in side view
   generateMarkupOptions() {
-    return `
+    // Options for side view
+    if (!this._status.fullPage) {
+      return `
         <div class="row">
           <button class="sidebar__btn-add-product btn-icon small">
             <i data-feather="plus"></i>
@@ -208,52 +214,70 @@ class sidebarView {
           </button>
         </div>
     `;
+    }
+
+    // Options for full-page view
+    if (this._status.fullPage) {
+      return "";
+    }
   }
 
   // Generate Markup for storage in side view
   generateMarkupStorage(state) {
     return `
         ${state.storage
-          .map((ing) => {
-            return `
-            <li class="list-item-storage">
-              <button class="list-item-storage__btn-bookmark btn-icon small">
-                <i data-feather="star"></i>
-              </button>
-              <a class="list-item-storage__title">${ing.name}</a>
-              <div class="list-item-storage__amount">${ing.amount}</div>
-              <div class="list-item-storage__unit">${ing.unit}</div>
-              <div class="list-item-storage__expiry">
-                <div class="expiry-days-left">${ing.daysLeft}</div>
-                <div class="expiry-indicator">
-                  <div class="expiry-indicator__bar" style="width: 30%; background: var(--accent-color)"></div>
-                </div>
-              </div>
-              <button class="btn-icon small">
-                <i data-feather="shopping-bag"></i>
-              </button>
-              <div class="list-item-storage__tag"></div>
-
-            </li>
-          `;
-          })
+          .map((ing) => this.generateMarkupIngredient(ing))
           .join("")}
       `;
+  }
+
+  // Generate Markup for an ingredient in column mode
+  generateMarkupIngredient(ing) {
+    // calculate indicator width
+    const indicatorWidth = (100 * ing.daysLeft) / ing.expiry;
+    return `
+    <li class="list-item-storage">
+      <button class="list-item-storage__btn-bookmark btn-icon small ${
+        ing.bookmark ? "fill" : ""
+      }">
+        <i data-feather="star"></i>
+      </button>
+      <a class="list-item-storage__title">${ing.name}</a>
+      <div class="list-item-storage__amount">${ing.amount}</div>
+      <div class="list-item-storage__unit">${ing.unit}</div>
+      <div class="list-item-storage__expiry">
+        <div class="expiry-days-left">${ing.daysLeft}</div>
+        <div class="expiry-indicator">
+          <div class="expiry-indicator__bar" style="width: ${indicatorWidth}%; background: var(--accent-color)"></div>
+        </div>
+      </div>
+      <button class="btn-icon small">
+        <i data-feather="shopping-bag"></i>
+      </button>
+      <div class="list-item-storage__tag"></div>
+
+    </li>
+  `;
   }
 
   // Generate Markup for recipes in side view
   generateMarkupRecipes(state) {
     return `
         ${state.recipes
-          .map((recipe) => {
-            return `
+          .map((recipe) => this.generateMarkupRecipe(recipe))
+          .join("")}
+      `;
+  }
+
+  generateMarkupRecipe(recipe) {
+    return `
           <li class="list-item-recipe">
             <div class="list-item-recipe__image">
-              <img src="https://images.immediate.co.uk/production/volatile/sites/30/2013/05/Puttanesca-fd5810c.jpg" alt="recipe-photo">
-              <div class="list-item-recipe__tag">śniadanie</div>
+              <img src="${recipe.imageUrl}" alt="recipe-photo">
+              <div class="list-item-recipe__tag">${recipe.group}</div>
             </div>
             <div class="col">
-              <a class="list-item-recipe__title">Makaron z sosem pomidorowym i parmezanem</a>
+              <a class="list-item-recipe__title">${recipe.title}</a>
               <div class="list-item-recipe__info">
                 <div class="info-difficulty">
                   <p>Trudność</p>
@@ -283,14 +307,56 @@ class sidebarView {
             </div>
           </li>
           `;
-          })
-          .join("")}
-      `;
   }
 
   // Generate Markup for storage in full-page column view
   generateMarkupFullPageStorageColumns(state) {
-    return "storage columns";
+    // Group ingredients by tag name
+    const tag1Ingredients = state.storage.filter(
+      (ing) => ing.group === "świeże"
+    );
+    const tag2Ingredients = state.storage.filter(
+      (ing) => ing.group === "suche"
+    );
+    const tag3Ingredients = state.storage.filter(
+      (ing) => ing.group === "mrożone"
+    );
+
+    return `
+      <div class="sidebar-content__grid">
+        <section class="col">
+          <header class="col-header">
+            <div class="title">ŚWIEŻE</div>
+            <button class="btn-icon small"><i data-feather="plus"></i></button>
+          </header>
+          <ul class="sidebar-content__grid__storage-list">
+            ${tag1Ingredients
+              .map((ing) => this.generateMarkupIngredient(ing))
+              .join("")}
+          </ul>
+        </section>
+        <section class="col">
+          <header class="col-header">
+            <div class="title">SUCHE</div>
+            <button class="btn-icon small"><i data-feather="plus"></i></button>
+          </header>
+          <ul class="sidebar-content__grid__storage-list">
+          ${tag2Ingredients
+            .map((ing) => this.generateMarkupIngredient(ing))
+            .join("")}
+          </ul>
+        </section>
+        <section class="col"><header class="col-header">
+          <div class="title">MROŻONE</div>
+          <button class="btn-icon small"><i data-feather="plus"></i></button>
+        </header>
+        <ul class="sidebar-content__grid__storage-list">
+        ${tag3Ingredients
+          .map((ing) => this.generateMarkupIngredient(ing))
+          .join("")}        
+        </ul></section>
+      </div>
+    `;
   }
   // Generate Markup for storage in full-page table view
   generateMarkupFullPageStorageTable(state) {
@@ -298,7 +364,52 @@ class sidebarView {
   }
   // Generate Markup for recipes in full-page column view
   generateMarkupFullPageRecipesColumns(state) {
-    return "recipes columns";
+    // Group recipes by tag name
+    const tag1Recipes = state.recipes.filter(
+      (recipe) => recipe.group === "śniadanie"
+    );
+    const tag2Recipes = state.recipes.filter(
+      (recipe) => recipe.group === "obiad"
+    );
+    const tag3Recipes = state.recipes.filter(
+      (recipe) => recipe.group === "przekąska"
+    );
+
+    return `
+      <div class="sidebar-content__grid">
+        <section class="col">
+          <header class="col-header">
+            <div class="title">ŚNIADANIE</div>
+            <button class="btn-icon small"><i data-feather="plus"></i></button>
+          </header>
+          <ul class="sidebar-content__grid__storage-list">
+            ${tag1Recipes
+              .map((recipe) => this.generateMarkupRecipe(recipe))
+              .join("")}
+          </ul>
+        </section>
+        <section class="col">
+          <header class="col-header">
+            <div class="title">OBIAD</div>
+            <button class="btn-icon small"><i data-feather="plus"></i></button>
+          </header>
+          <ul class="sidebar-content__grid__storage-list">
+          ${tag2Recipes
+            .map((recipe) => this.generateMarkupRecipe(recipe))
+            .join("")}
+          </ul>
+        </section>
+        <section class="col"><header class="col-header">
+          <div class="title">PRZEKĄSKA</div>
+          <button class="btn-icon small"><i data-feather="plus"></i></button>
+        </header>
+        <ul class="sidebar-content__grid__storage-list">
+        ${tag3Recipes
+          .map((recipe) => this.generateMarkupRecipe(recipe))
+          .join("")}        
+        </ul></section>
+      </div>
+    `;
   }
 }
 export default new sidebarView();
