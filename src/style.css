@@ -9,6 +9,8 @@
   --border: 1px solid #ccc;
   --transition: 0.2s ease-in-out;
   --btn-transition: 0.05s ease-out;
+
+  /* transition: var(--transition); */
 }
 
 /* Reset color input styles */
@@ -352,14 +354,14 @@ h2 {
 }
 
 /* Tabs */
-.sidebar__tabs {
+.sidebar-header {
   width: 100%;
   display: flex;
   /* border-bottom: 1px solid var(--grey-color); */
   height: 55px;
 }
 
-.sidebar__tabs__tab {
+.sidebar-header__tab {
   position: relative;
   flex: 1;
   font-size: 0.8rem;
@@ -370,20 +372,20 @@ h2 {
   border: var(--border);
 }
 
-.sidebar__tabs__tab:hover {
+.sidebar-header__tab:hover {
   background-color: #f9f9f9;
 }
-.sidebar__tabs__tab:active {
+.sidebar-header__tab:active {
   background-color: var(--hover-color);
   box-shadow: inset rgba(0, 0, 0, 0.1) 0 0 5px;
 }
 
-.sidebar__tabs__tab:nth-child(2) {
+.sidebar-header__tab:nth-child(2) {
   /* divider */
   border-left: 1px solid var(--grey-color);
 }
 
-.sidebar__tabs__tab.active {
+.sidebar-header__tab.active {
   font-weight: 400;
   color: var(--accent-color);
   /* border-bottom: 5px solid var(--accent-color); */
@@ -416,13 +418,13 @@ h2 {
   font-size: 0.8rem;
 }
 
-.sidebar-options__search-bar {
+.sidebar__search-bar {
   position: relative;
   flex: 1;
   height: 30px;
 }
 
-.sidebar-options__search-bar input {
+.sidebar__search-bar input {
   padding: 0 10px 0 28px;
   width: 100%;
   height: 100%;
@@ -430,7 +432,7 @@ h2 {
   border: 1px solid var(--grey-color);
 }
 
-.sidebar-options__search-bar svg {
+.sidebar__search-bar svg {
   position: absolute;
   height: 18px;
   top: 6px;
@@ -471,9 +473,6 @@ h2 {
   font-size: 0.8rem;
 }
 
-.list-item-storage__amount {
-}
-
 .list-item-storage__unit {
   margin-right: 5px;
 }
@@ -484,9 +483,6 @@ h2 {
   align-items: center;
   row-gap: 3px;
   width: 50px;
-}
-
-.expiry-days-left {
 }
 
 .expiry-indicator {
@@ -566,8 +562,6 @@ h2 {
   justify-content: space-between;
   color: var(--font-color);
 }
-.list-item-recipe__title {
-}
 
 .list-item-recipe__info {
   font-size: 0.6rem;
@@ -614,6 +608,54 @@ h2 {
   width: 50%;
   height: 100%;
   background-color: var(--tag-3-color);
+}
+
+/* § Sidebar expanded */
+
+.sidebar.full-page {
+  width: 100%;
+}
+
+.sidebar.full-page .sidebar-header {
+  display: flex;
+  height: 100px;
+  padding: 20px;
+  padding-right: 144px;
+  justify-content: space-between;
+}
+
+.sidebar.full-page .sidebar-header__col {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar.full-page .sidebar-header__tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  line-height: 40px;
+}
+
+.sidebar.full-page .sidebar-header__tabs__tab {
+  padding: 10px 20px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 300;
+  background-color: transparent;
+  color: var(--font-color);
+  transition: var(--transition);
+}
+
+.sidebar.full-page .sidebar-header__tabs__tab.active {
+  font-size: 2rem;
+  color: var(--accent-color);
+}
+
+.sidebar.full-page .sidebar-header__tabs__divider {
+  width: 1px;
+  height: 30px;
+  background-color: var(--grey-color);
 }
 
 /* § ADD PRODUCT */

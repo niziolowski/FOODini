@@ -9,3 +9,9 @@ import shoppingListController from "./features/shoppingList/shoppingListControll
 import settingsView from "./features/settings/settingsView.js";
 import * as model from "./model.js";
 settingsView.updateColorTheme(model.state.colorTheme);
+
+// Open sidebar in full-page view
+import sidebarView from "./features/sidebar/sidebarView.js";
+// sidebarView.show();
+// sidebarView.toggleFullPage();
+//

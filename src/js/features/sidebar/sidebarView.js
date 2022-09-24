@@ -1,28 +1,77 @@
 class sidebarView {
   _parentElement = document.querySelector(".sidebar");
+  _header = document.querySelector(".sidebar-header");
+  _options = document.querySelector(".sidebar-options");
   _content = document.querySelector(".sidebar-content");
-  _status = "inactive";
+  _status = {
+    active: false,
+    fullPage: false,
+    activeTab: "storage",
+    view: "columns",
+  };
 
   addHandlerClick(handler) {
     this._parentElement.addEventListener("click", handler.bind(this));
   }
 
   show() {
-    this._status = "active";
+    this._status.active = true;
     this._parentElement.classList.add("active");
   }
 
   hide() {
-    this._status = "inactive";
+    this._status.active = false;
     this._parentElement.classList.remove("active");
   }
 
+  maximize(state) {
+    this._status.fullPage = true;
+    this._parentElement.classList.add("full-page");
+    this._header.innerHTML = this.generateMarkupHeader();
+    this._options.innerHTML = this.generateMarkupOptions();
+
+    if (this._status.activeTab === "storage")
+      this._content.innerHTML =
+        this.generateMarkupFullPageStorageColumns(state);
+    if (this._status.activeTab === "recipes")
+      this._content.innerHTML =
+        this.generateMarkupFullPageRecipesColumns(state);
+  }
+
+  minimize(state) {
+    this._status.fullPage = false;
+    this._parentElement.classList.remove("full-page");
+    this._header.innerHTML = this.generateMarkupHeader();
+    this._options.innerHTML = this.generateMarkupOptions();
+
+    if (this._status.activeTab === "storage")
+      this._content.innerHTML = this.generateMarkupStorage(state);
+    if (this._status.activeTab === "recipes")
+      this._content.innerHTML = this.generateMarkupRecipes(state);
+  }
+
+  toggleFullPage(state) {
+    switch (this._status.fullPage) {
+      case false:
+        this.maximize(state);
+        break;
+      case true:
+        this.minimize(state);
+        break;
+
+      default:
+        break;
+    }
+    // replace icons with svg
+    feather.replace();
+  }
+
   toggle() {
-    switch (this._status) {
-      case "inactive":
+    switch (this._status.active) {
+      case false:
         this.show();
         break;
-      case "active":
+      case true:
         this.hide();
         break;
 
@@ -31,96 +80,225 @@ class sidebarView {
     }
   }
 
-  renderTab(btn, state) {
+  handleTabs(btn, state) {
+    // Skip if clicked tab is already active
     if (btn.classList.contains("active")) return;
-    const tab = btn.dataset.tab;
 
-    // set all tabs inactive
+    // Set all tab elements inactive
     [...btn.parentElement.children].forEach((el) => {
       el.classList.remove("active");
     });
 
+    // Set clicked tab element as active
     btn.classList.add("active");
 
-    if (tab === "storage") {
-      this._content.innerHTML = `
+    // Get tab data
+    const tab = btn.dataset.tab;
 
-      ${state.storage
-        .map((ing) => {
-          return `
-          <li class="list-item-storage">
-            <button class="list-item-storage__btn-bookmark btn-icon small">
-              <i data-feather="star"></i>
-            </button>
-            <a class="list-item-storage__title">${ing.name}</a>
-            <div class="list-item-storage__amount">${ing.amount}</div>
-            <div class="list-item-storage__unit">${ing.unit}</div>
-            <div class="list-item-storage__expiry">
-              <div class="expiry-days-left">${ing.daysLeft}</div>
-              <div class="expiry-indicator">
-                <div class="expiry-indicator__bar" style="width: 30%; background: var(--accent-color)"></div>
-              </div>
-            </div>
-            <button class="btn-icon small">
-              <i data-feather="shopping-bag"></i>
-            </button>
-            <div class="list-item-storage__tag"></div>
+    // Update status active tab
+    this._status.activeTab = tab;
 
-          </li>
-        `;
-        })
-        .join("")}
-      
-      `;
+    // Render sidebar content
+    this.render(state);
+  }
+
+  // Render sidebar content depending on view type
+  render(state) {
+    // Render side view
+    if (!this._status.fullPage) {
+      if (this._status.activeTab === "storage") {
+        this._content.innerHTML = this.generateMarkupStorage(state);
+      }
+      if (this._status.activeTab === "recipes") {
+        this._content.innerHTML = this.generateMarkupRecipes(state);
+      }
     }
 
-    if (tab === "recipes") {
-      this._content.innerHTML = `
-      ${state.recipes
-        .map((recipe) => {
-          return `
-        <li class="list-item-recipe">
-          <div class="list-item-recipe__image">
-            <img src="https://images.immediate.co.uk/production/volatile/sites/30/2013/05/Puttanesca-fd5810c.jpg" alt="recipe-photo">
-            <div class="list-item-recipe__tag">śniadanie</div>
-          </div>
-          <div class="col">
-            <a class="list-item-recipe__title">Makaron z sosem pomidorowym i parmezanem</a>
-            <div class="list-item-recipe__info">
-              <div class="info-difficulty">
-                <p>Trudność</p>
-                <div class="info-difficulty__indicator">
-                  <i data-feather="star"></i>
-                  <i data-feather="star"></i>
-                  <i data-feather="star"></i>
-                  <i data-feather="star"></i>
-                  <i data-feather="star"></i>
-                </div>
-              </div>
-              <div class="info-ingredients">
-                <p>Składniki</p>
-                <div class="info-ingredients__indicator">
-                <div class="info-ingredients__indicator__bar"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <button class="list-item-recipe__btn-bookmark btn-icon small">
-              <i data-feather="star"></i>
-            </button>
-            <button class="btn-icon small">
-              <i data-feather="shopping-bag"></i>
-            </button>
-          </div>
-        </li>
-        `;
-        })
-        .join("")}
-      `;
+    // Render full-page view
+    if (this._status.fullPage) {
+      if (this._status.activeTab === "storage") {
+        if (this._status.view === "columns")
+          this._content.innerHTML =
+            this.generateMarkupFullPageStorageColumns(state);
+
+        if (this._status.view === "table")
+          this._content.innerHTML =
+            this.generateMarkupFullPageStorageColumns(state);
+      }
+      if (this._status.activeTab === "recipes")
+        this._content.innerHTML =
+          this.generateMarkupFullPageRecipesColumns(state);
     }
+
     // replace icon with svg
     feather.replace();
+  }
+
+  // Generate markup for both views
+  generateMarkupHeader() {
+    const tab = this._status.activeTab;
+    // Tabs for side view
+    if (!this._status.fullPage) {
+      return `
+          <button class="sidebar-header__tab btn-tab ${
+            tab === "storage" ? "active" : ""
+          }" data-tab="storage">
+            Spiżarnia
+          </button>
+          <button class="sidebar-header__tab btn-tab ${
+            tab === "recipes" ? "active" : ""
+          }" data-tab="recipes">
+            Baza przepisów
+          </button>
+      `;
+    }
+
+    // Tabs for full-page view
+    if (this._status.fullPage) {
+      return `
+      <div class="sidebar-header__col">
+        <button class="sidebar-header__btn-sidebar btn-icon">
+          <i data-feather="sidebar"></i>
+        </button>
+        <button class="sidebar-header__btn-view btn-icon">
+          <i data-feather="table"></i>
+        </button>
+      </div>
+      <div class="sidebar-header__tabs">
+        <button class="sidebar-header__tabs__tab btn-tab ${
+          tab === "storage" ? "active" : ""
+        }" data-tab="storage">
+          SPIŻARNIA
+        </button>
+        <span class="sidebar-header__tabs__divider"></span>
+        <button class="sidebar-header__tabs__tab btn-tab ${
+          tab === "recipes" ? "active" : ""
+        }" data-tab="recipes">
+          BAZA PRZEPISÓW
+        </button>
+      </div>
+      <button class="sidebar__btn-full-page btn-icon">
+        <i data-feather="x"></i>
+      </button>
+    `;
+    }
+  }
+
+  // Generate Markup for options in side view
+  generateMarkupOptions() {
+    return `
+        <div class="row">
+          <button class="sidebar__btn-add-product btn-icon small">
+            <i data-feather="plus"></i>
+          </button>
+          <div class="sidebar__search-bar">
+            <input type="search" placeholder="Szukaj">
+            <i data-feather="search"></i></div>
+          <button class="sidebar__btn-full-page btn-icon small">
+            <i data-feather="maximize-2"></i>
+          </button>
+        </div>
+        <div class="row">
+          <span>Filtr</span>
+          <select>
+            <option>brak</option>
+          </select>
+          <button class="btn-icon small">
+            <i data-feather="star"></i>
+          </button>
+        </div>
+    `;
+  }
+
+  // Generate Markup for storage in side view
+  generateMarkupStorage(state) {
+    return `
+        ${state.storage
+          .map((ing) => {
+            return `
+            <li class="list-item-storage">
+              <button class="list-item-storage__btn-bookmark btn-icon small">
+                <i data-feather="star"></i>
+              </button>
+              <a class="list-item-storage__title">${ing.name}</a>
+              <div class="list-item-storage__amount">${ing.amount}</div>
+              <div class="list-item-storage__unit">${ing.unit}</div>
+              <div class="list-item-storage__expiry">
+                <div class="expiry-days-left">${ing.daysLeft}</div>
+                <div class="expiry-indicator">
+                  <div class="expiry-indicator__bar" style="width: 30%; background: var(--accent-color)"></div>
+                </div>
+              </div>
+              <button class="btn-icon small">
+                <i data-feather="shopping-bag"></i>
+              </button>
+              <div class="list-item-storage__tag"></div>
+
+            </li>
+          `;
+          })
+          .join("")}
+      `;
+  }
+
+  // Generate Markup for recipes in side view
+  generateMarkupRecipes(state) {
+    return `
+        ${state.recipes
+          .map((recipe) => {
+            return `
+          <li class="list-item-recipe">
+            <div class="list-item-recipe__image">
+              <img src="https://images.immediate.co.uk/production/volatile/sites/30/2013/05/Puttanesca-fd5810c.jpg" alt="recipe-photo">
+              <div class="list-item-recipe__tag">śniadanie</div>
+            </div>
+            <div class="col">
+              <a class="list-item-recipe__title">Makaron z sosem pomidorowym i parmezanem</a>
+              <div class="list-item-recipe__info">
+                <div class="info-difficulty">
+                  <p>Trudność</p>
+                  <div class="info-difficulty__indicator">
+                    <i data-feather="star"></i>
+                    <i data-feather="star"></i>
+                    <i data-feather="star"></i>
+                    <i data-feather="star"></i>
+                    <i data-feather="star"></i>
+                  </div>
+                </div>
+                <div class="info-ingredients">
+                  <p>Składniki</p>
+                  <div class="info-ingredients__indicator">
+                  <div class="info-ingredients__indicator__bar"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <button class="list-item-recipe__btn-bookmark btn-icon small">
+                <i data-feather="star"></i>
+              </button>
+              <button class="btn-icon small">
+                <i data-feather="shopping-bag"></i>
+              </button>
+            </div>
+          </li>
+          `;
+          })
+          .join("")}
+      `;
+  }
+
+  // Generate Markup for storage in full-page column view
+  generateMarkupFullPageStorageColumns(state) {
+    return "storage columns";
+  }
+  // Generate Markup for storage in full-page table view
+  generateMarkupFullPageStorageTable(state) {
+    return "storage table";
+  }
+  // Generate Markup for recipes in full-page column view
+  generateMarkupFullPageRecipesColumns(state) {
+    return "recipes columns";
   }
 }
 export default new sidebarView();
