@@ -1,3 +1,5 @@
+import icons from "../../../img/icons.svg";
+
 class sidebarView {
   _parentElement = document.querySelector(".sidebar");
   _header = document.querySelector(".sidebar-header");
@@ -209,7 +211,7 @@ class sidebarView {
           <select>
             <option>brak</option>
           </select>
-          <button class="btn-icon small">
+          <button class="btn-icon small fill">
             <i data-feather="star"></i>
           </button>
         </div>
@@ -226,21 +228,25 @@ class sidebarView {
   generateMarkupStorage(state) {
     return `
         ${state.storage
-          .map((ing) => this.generateMarkupIngredient(ing))
+          .map((ing) => this.generateMarkupIngredient(ing, state))
           .join("")}
       `;
   }
 
   // Generate Markup for an ingredient in column mode
-  generateMarkupIngredient(ing) {
+  generateMarkupIngredient(ing, state) {
     // calculate indicator width
     const indicatorWidth = (100 * ing.daysLeft) / ing.expiry;
+
+    // get tag index
+    const tag = state.tags.storage.indexOf(ing.group) + 1;
+
     return `
     <li class="list-item-storage">
-      <button class="list-item-storage__btn-bookmark btn-icon small ${
-        ing.bookmark ? "fill" : ""
+      <button class="list-item-storage__btn-bookmark btn-icon small fill ${
+        ing.bookmark ? "active" : ""
       }">
-        <i data-feather="star"></i>
+      <i data-feather="star"></i>
       </button>
       <a class="list-item-storage__title">${ing.name}</a>
       <div class="list-item-storage__amount">${ing.amount}</div>
@@ -254,7 +260,7 @@ class sidebarView {
       <button class="btn-icon small">
         <i data-feather="shopping-bag"></i>
       </button>
-      <div class="list-item-storage__tag"></div>
+      <div class="list-item-storage__tag" style="background-color: var(--tag-${tag}-color)"></div>
 
     </li>
   `;
@@ -264,29 +270,40 @@ class sidebarView {
   generateMarkupRecipes(state) {
     return `
         ${state.recipes
-          .map((recipe) => this.generateMarkupRecipe(recipe))
+          .map((recipe) => this.generateMarkupRecipe(recipe, state))
           .join("")}
       `;
   }
 
-  generateMarkupRecipe(recipe) {
+  generateMarkupRecipe(recipe, state) {
+    // get tag index
+    const tag = state.tags.recipes.indexOf(recipe.group) + 1;
+
+    // generate difficulty indicator
+    let difficulty = "";
+
+    for (let i = 0; i < 5; i++) {
+      difficulty += `
+      <svg class="${i < recipe.difficulty ? "fill" : ""}">
+        <use href="${icons}#star"></use>
+      </svg>
+      `;
+    }
+
     return `
           <li class="list-item-recipe">
             <div class="list-item-recipe__image">
               <img src="${recipe.imageUrl}" alt="recipe-photo">
-              <div class="list-item-recipe__tag">${recipe.group}</div>
+              <div class="list-item-recipe__tag" style="background-color: var(--tag-${tag}-color)">${recipe.group}</div>
             </div>
             <div class="col">
+            
               <a class="list-item-recipe__title">${recipe.title}</a>
               <div class="list-item-recipe__info">
                 <div class="info-difficulty">
                   <p>Trudność</p>
                   <div class="info-difficulty__indicator">
-                    <i data-feather="star"></i>
-                    <i data-feather="star"></i>
-                    <i data-feather="star"></i>
-                    <i data-feather="star"></i>
-                    <i data-feather="star"></i>
+                    ${difficulty}                    
                   </div>
                 </div>
                 <div class="info-ingredients">
@@ -298,8 +315,8 @@ class sidebarView {
               </div>
             </div>
             <div class="col">
-              <button class="list-item-recipe__btn-bookmark btn-icon small">
-                <i data-feather="star"></i>
+              <button class="list-item-recipe__btn-bookmark btn-icon small fill">
+              <i data-feather="star"></i>
               </button>
               <button class="btn-icon small">
                 <i data-feather="shopping-bag"></i>
@@ -331,7 +348,7 @@ class sidebarView {
           </header>
           <ul class="sidebar-content__grid__storage-list">
             ${tag1Ingredients
-              .map((ing) => this.generateMarkupIngredient(ing))
+              .map((ing) => this.generateMarkupIngredient(ing, state))
               .join("")}
           </ul>
         </section>
@@ -342,7 +359,7 @@ class sidebarView {
           </header>
           <ul class="sidebar-content__grid__storage-list">
           ${tag2Ingredients
-            .map((ing) => this.generateMarkupIngredient(ing))
+            .map((ing) => this.generateMarkupIngredient(ing, state))
             .join("")}
           </ul>
         </section>
@@ -352,7 +369,7 @@ class sidebarView {
         </header>
         <ul class="sidebar-content__grid__storage-list">
         ${tag3Ingredients
-          .map((ing) => this.generateMarkupIngredient(ing))
+          .map((ing) => this.generateMarkupIngredient(ing, state))
           .join("")}        
         </ul></section>
       </div>
@@ -380,11 +397,13 @@ class sidebarView {
         <section class="col">
           <header class="col-header">
             <div class="title">ŚNIADANIE</div>
-            <button class="btn-icon small"><i data-feather="plus"></i></button>
+            <button class="btn-icon small">
+              <i data-feather="plus"></i>
+            </button>
           </header>
           <ul class="sidebar-content__grid__storage-list">
             ${tag1Recipes
-              .map((recipe) => this.generateMarkupRecipe(recipe))
+              .map((recipe) => this.generateMarkupRecipe(recipe, state))
               .join("")}
           </ul>
         </section>
@@ -395,7 +414,7 @@ class sidebarView {
           </header>
           <ul class="sidebar-content__grid__storage-list">
           ${tag2Recipes
-            .map((recipe) => this.generateMarkupRecipe(recipe))
+            .map((recipe) => this.generateMarkupRecipe(recipe, state))
             .join("")}
           </ul>
         </section>
@@ -405,7 +424,7 @@ class sidebarView {
         </header>
         <ul class="sidebar-content__grid__storage-list">
         ${tag3Recipes
-          .map((recipe) => this.generateMarkupRecipe(recipe))
+          .map((recipe) => this.generateMarkupRecipe(recipe, state))
           .join("")}        
         </ul></section>
       </div>
