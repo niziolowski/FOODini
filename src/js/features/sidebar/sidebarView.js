@@ -6,7 +6,7 @@ class sidebarView {
   _status = {
     active: false,
     fullPage: false,
-    activeTab: "recipes",
+    activeTab: "storage",
     view: "columns",
   };
 
