@@ -65,7 +65,7 @@ export const state = {
       title: "Jajecznica",
       group: "śniadanie",
       difficulty: 1,
-      bookmark: false,
+      bookmark: true,
       imageUrl:
         "https://cdn.galleries.smcloud.net/t/photos/gf-bc5p-Ttbo-1SJC_jajecznica-podstawowy-przepis-na-klasyczna-potrawe-z-rozmaconych-jajek.jpg",
       description: "Normalnie, jajka rozbić na patelnii i smażyć aż się zetno.",
@@ -80,7 +80,14 @@ export const state = {
       bookmark: true,
       imageUrl:
         "https://cdn.galleries.smcloud.net/t/photos/gf-Yz2K-uho6-f6NT_spaghetti-bolognese-przepis-na-wloskie-danie-dla-4-osob.jpg",
-      description: "Jeszcze nie wiadomo",
+      description: `Makaron gotujemy al dente. Obieramy cebulę i kroimy w kosteczkę, ząbki czosnku drobno siekamy. Parmezan ścieramy na drobniutkich oczkach. 
+
+      Rozgrzewamy oliwę na głębokiej patelni i podsmażamy do zeszklenia cebulę i czosnek. Na patelnię dodajemy pomidory z puszki (z całą zalewą), łyżeczkę koncentratu i przyprawy.
+      
+      Ugotowany makaron wrzucamy na patelnię z sosem, mieszamy i gotujemy około 1-2 minut.
+      Dodajemy pokrojoną na mniejsze kawałki bazylię, 1 łyżkę startego parmezanu i mieszamy.
+      
+      Podajemy na talerzach posypane resztą parmezanu i przyozdobione świeżymi listkami bazylii.`,
       ingredients: [{ foodini_storage_id: 1, quantity: 4, unit: "szt." }],
     },
     {

@@ -4,6 +4,7 @@ import navController from "./features/nav/navController.js";
 import settingsController from "./features/settings/settingsController.js";
 import addProductController from "./features/addProdduct/addProductController.js";
 import shoppingListController from "./features/shoppingList/shoppingListController.js";
+import recipeController from "./features/recipe/recipeController.js";
 
 // TESTING (load color theme)
 import settingsView from "./features/settings/settingsView.js";

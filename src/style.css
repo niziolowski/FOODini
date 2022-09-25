@@ -858,6 +858,8 @@ h2 {
   box-shadow: var(--shadow);
   color: var(--font-color);
   background-color: white;
+  max-height: 100%;
+  overflow-y: scroll;
 }
 
 .recipe-preview__image {
@@ -911,6 +913,7 @@ h2 {
   padding: 10px 20px;
   font-size: 0.8rem;
   font-weight: 300;
+  color: var(--font-color);
 }
 
 .recipe-summary__ingredients__title,
@@ -971,6 +974,8 @@ h2 {
 }
 
 .recipe-preview__btn-close {
+  position: absolute;
+  right: 0;
   flex: 0 0 auto;
 }
 

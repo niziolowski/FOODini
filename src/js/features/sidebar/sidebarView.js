@@ -293,10 +293,10 @@ class sidebarView {
 
     return `
           <li class="list-item-recipe">
-            <div class="list-item-recipe__image">
+            <a class="list-item-recipe__image" href="#${recipe.title}">
               <img src="${recipe.imageUrl}" alt="recipe-photo">
               <div class="list-item-recipe__tag" style="background-color: var(--tag-${tag}-color)">${recipe.group}</div>
-            </div>
+            </a>
             <div class="col">
             
               <a href="#${recipe.title}" class="list-item-recipe__title">${recipe.title}</a>
