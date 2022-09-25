@@ -15,6 +15,8 @@
     <script defer type="module" src="./src/js/controller.js"></script>
   </head>
   <body>
+
+    <!-- MAIN VIEW -->
     <main class="main-view">
       <nav class="main-view__nav">
         <div class="main-view__nav-col">
@@ -109,274 +111,7 @@
           </button>
         </div>
       </section>
-      <ul class="sidebar-content">
-        <!-- Storage full-page -->
-        <!-- <div class="sidebar-content__grid">
-          <section class="col">
-            <header class="col-header">
-              <div class="title">ŚWIEŻE</div>
-              <button class="btn-icon small"><i data-feather="plus"></i></button>
-            </header>
-            <ul class="sidebar-content__grid__storage-list">
-              <li class="list-item-storage">
-                <button class="list-item-storage__btn-bookmark btn-icon small">
-                  <i data-feather="star"></i>
-                </button>
-                <a class="list-item-storage__title">Jajka</a>
-                <div class="list-item-storage__amount">10</div>
-                <div class="list-item-storage__unit">szt.</div>
-                <div class="list-item-storage__expiry">
-                  <div class="expiry-days-left">13</div>
-                  <div class="expiry-indicator">
-                    <div class="expiry-indicator__bar" style="width: 30%; background: var(--accent-color)"></div>
-                  </div>
-                </div>
-                <button class="btn-icon small">
-                  <i data-feather="shopping-bag"></i>
-                </button>
-                <div class="list-item-storage__tag"></div>
-              </li>
-              <li class="list-item-storage">
-                <button class="list-item-storage__btn-bookmark btn-icon small">
-                  <i data-feather="star"></i>
-                </button>
-                <a class="list-item-storage__title">Jajka</a>
-                <div class="list-item-storage__amount">10</div>
-                <div class="list-item-storage__unit">szt.</div>
-                <div class="list-item-storage__expiry">
-                  <div class="expiry-days-left">13</div>
-                  <div class="expiry-indicator">
-                    <div class="expiry-indicator__bar" style="width: 30%; background: var(--accent-color)"></div>
-                  </div>
-                </div>
-                <button class="btn-icon small">
-                  <i data-feather="shopping-bag"></i>
-                </button>
-                <div class="list-item-storage__tag"></div>
-              </li>
-              <li class="list-item-storage">
-                <button class="list-item-storage__btn-bookmark btn-icon small">
-                  <i data-feather="star"></i>
-                </button>
-                <a class="list-item-storage__title">Jajka</a>
-                <div class="list-item-storage__amount">10</div>
-                <div class="list-item-storage__unit">szt.</div>
-                <div class="list-item-storage__expiry">
-                  <div class="expiry-days-left">13</div>
-                  <div class="expiry-indicator">
-                    <div class="expiry-indicator__bar" style="width: 30%; background: var(--accent-color)"></div>
-                  </div>
-                </div>
-                <button class="btn-icon small">
-                  <i data-feather="shopping-bag"></i>
-                </button>
-                <div class="list-item-storage__tag"></div>
-              </li>
-            </ul>
-          </section>
-          <section class="col">
-            <header class="col-header">
-              <div class="title">SUCHE</div>
-              <button class="btn-icon small"><i data-feather="plus"></i></button>
-            </header>
-            <ul class="sidebar-content__grid__storage-list">
-              <li class="list-item-storage">
-                <button class="list-item-storage__btn-bookmark btn-icon small">
-                  <i data-feather="star"></i>
-                </button>
-                <a class="list-item-storage__title">Jajka</a>
-                <div class="list-item-storage__amount">10</div>
-                <div class="list-item-storage__unit">szt.</div>
-                <div class="list-item-storage__expiry">
-                  <div class="expiry-days-left">13</div>
-                  <div class="expiry-indicator">
-                    <div class="expiry-indicator__bar" style="width: 30%; background: var(--accent-color)"></div>
-                  </div>
-                </div>
-                <button class="btn-icon small">
-                  <i data-feather="shopping-bag"></i>
-                </button>
-                <div class="list-item-storage__tag"></div>
-              </li>
-              <li class="list-item-storage">
-                <button class="list-item-storage__btn-bookmark btn-icon small">
-                  <i data-feather="star"></i>
-                </button>
-                <a class="list-item-storage__title">Jajka</a>
-                <div class="list-item-storage__amount">10</div>
-                <div class="list-item-storage__unit">szt.</div>
-                <div class="list-item-storage__expiry">
-                  <div class="expiry-days-left">13</div>
-                  <div class="expiry-indicator">
-                    <div class="expiry-indicator__bar" style="width: 30%; background: var(--accent-color)"></div>
-                  </div>
-                </div>
-                <button class="btn-icon small">
-                  <i data-feather="shopping-bag"></i>
-                </button>
-                <div class="list-item-storage__tag"></div>
-              </li>
-              <li class="list-item-storage">
-                <button class="list-item-storage__btn-bookmark btn-icon small">
-                  <i data-feather="star"></i>
-                </button>
-                <a class="list-item-storage__title">Jajka</a>
-                <div class="list-item-storage__amount">10</div>
-                <div class="list-item-storage__unit">szt.</div>
-                <div class="list-item-storage__expiry">
-                  <div class="expiry-days-left">13</div>
-                  <div class="expiry-indicator">
-                    <div class="expiry-indicator__bar" style="width: 30%; background: var(--accent-color)"></div>
-                  </div>
-                </div>
-                <button class="btn-icon small">
-                  <i data-feather="shopping-bag"></i>
-                </button>
-                <div class="list-item-storage__tag"></div>
-              </li>
-            </ul>
-          </section>
-          <section class="col"><header class="col-header">
-            <div class="title">MROŻONE</div>
-            <button class="btn-icon small"><i data-feather="plus"></i></button>
-          </header>
-          <ul class="sidebar-content__grid__storage-list">
-            <li class="list-item-storage">
-              <button class="list-item-storage__btn-bookmark btn-icon small">
-                <i data-feather="star"></i>
-              </button>
-              <a class="list-item-storage__title">Jajka</a>
-              <div class="list-item-storage__amount">10</div>
-              <div class="list-item-storage__unit">szt.</div>
-              <div class="list-item-storage__expiry">
-                <div class="expiry-days-left">13</div>
-                <div class="expiry-indicator">
-                  <div class="expiry-indicator__bar" style="width: 30%; background: var(--accent-color)"></div>
-                </div>
-              </div>
-              <button class="btn-icon small">
-                <i data-feather="shopping-bag"></i>
-              </button>
-              <div class="list-item-storage__tag"></div>
-            </li>
-            <li class="list-item-storage">
-              <button class="list-item-storage__btn-bookmark btn-icon small">
-                <i data-feather="star"></i>
-              </button>
-              <a class="list-item-storage__title">Jajka</a>
-              <div class="list-item-storage__amount">10</div>
-              <div class="list-item-storage__unit">szt.</div>
-              <div class="list-item-storage__expiry">
-                <div class="expiry-days-left">13</div>
-                <div class="expiry-indicator">
-                  <div class="expiry-indicator__bar" style="width: 30%; background: var(--accent-color)"></div>
-                </div>
-              </div>
-              <button class="btn-icon small">
-                <i data-feather="shopping-bag"></i>
-              </button>
-              <div class="list-item-storage__tag"></div>
-            </li>
-            <li class="list-item-storage">
-              <button class="list-item-storage__btn-bookmark btn-icon small">
-                <i data-feather="star"></i>
-              </button>
-              <a class="list-item-storage__title">Jajka</a>
-              <div class="list-item-storage__amount">10</div>
-              <div class="list-item-storage__unit">szt.</div>
-              <div class="list-item-storage__expiry">
-                <div class="expiry-days-left">13</div>
-                <div class="expiry-indicator">
-                  <div class="expiry-indicator__bar" style="width: 30%; background: var(--accent-color)"></div>
-                </div>
-              </div>
-              <button class="btn-icon small">
-                <i data-feather="shopping-bag"></i>
-              </button>
-              <div class="list-item-storage__tag"></div>
-            </li>
-          </ul></section>
-        </div> -->
-
-        <!-- STORAGE
-        <li class="list-item-storage">
-          <button class="list-item-storage__btn-bookmark btn-icon small">
-            <i data-feather="star"></i>
-          </button>
-          <a class="list-item-storage__title">Mąka</a>
-          <div class="list-item-storage__amount">1</div>
-          <div class="list-item-storage__unit">kg</div>
-          <div class="list-item-storage__expiry">
-            <div class="expiry-days-left">28 dni</div>
-            <div class="expiry-indicator">
-              <div class="expiry-indicator__bar" style="width: 30%; background: var(--accent-color)"></div>
-            </div>
-          </div>
-          <button class="btn-icon small">
-            <i data-feather="shopping-bag"></i>
-          </button>
-          <div class="list-item-storage__tag"></div>
-
-        </li>
-        <li class="list-item-storage">
-          <button class="list-item-storage__btn-bookmark btn-icon small">
-            <i data-feather="star"></i>
-          </button>
-          <a class="list-item-storage__title">Jajka</a>
-          <div class="list-item-storage__amount">10</div>
-          <div class="list-item-storage__unit">szt</div>
-          <div class="list-item-storage__expiry">
-            <div class="expiry-days-left">5 dni</div>
-            <div class="expiry-indicator">
-              <div class="expiry-indicator__bar" style="width: 80%; background: var(--accent-color)"></div>
-            </div>
-          </div>
-          <button class="btn-icon small">
-            <i data-feather="shopping-bag"></i>
-          </button>
-          <div class="list-item-storage__tag"></div>
-
-        </li> -->
-
-        <!-- RECIPES -->
-
-        <!-- <li class="list-item-recipe">
-          <div class="list-item-recipe__image">
-            <img src="https://images.immediate.co.uk/production/volatile/sites/30/2013/05/Puttanesca-fd5810c.jpg" alt="recipe-photo">
-            <div class="list-item-recipe__tag">śniadanie</div>
-          </div>
-          <div class="col">
-            <a class="list-item-recipe__title">Makaron z sosem pomidorowym i parmezanem</a>
-            <div class="list-item-recipe__info">
-              <div class="info-difficulty">
-                <p>Trudność</p>
-                <div class="info-difficulty__indicator">
-                  <i data-feather="star"></i>
-                  <i data-feather="star"></i>
-                  <i data-feather="star"></i>
-                  <i data-feather="star"></i>
-                  <i data-feather="star"></i>
-                </div>
-              </div>
-              <div class="info-ingredients">
-                <p>Składniki</p>
-                <div class="info-ingredients__indicator">
-                 <div class="info-ingredients__indicator__bar"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <button class="list-item-recipe__btn-bookmark btn-icon small">
-              <i data-feather="star"></i>
-            </button>
-            <button class="btn-icon small">
-              <i data-feather="shopping-bag"></i>
-            </button>
-          </div>
-
-        </li> -->
-      </ul>
+      <ul class="sidebar-content"></ul>
     </aside>
 
     <!-- SHOPPING LIST -->
@@ -449,6 +184,7 @@
       </div>
     </div>
 
+    <!-- ADD PRODUCT -->
     <div class="add-product hidden">
       <div class="overlay"></div>
       <div class="add-product-content">
@@ -504,6 +240,132 @@
             </div>
           </form>
           <button type="submit" form="add-product" class="btn btn-outline">Dodaj</button>
+      </div>
+    </div>
+
+    <!-- RECIPE PREVIEW -->
+    <div class="recipe-preview hidden">
+      <div class="overlay"></div>
+      <div class="recipe-preview-content">
+          <div class="recipe-preview__grid">
+            <section class="recipe-preview__summary">
+              <div class="recipe-preview__image">
+                <img src="https://cdn.galleries.smcloud.net/t/photos/gf-bc5p-Ttbo-1SJC_jajecznica-podstawowy-przepis-na-klasyczna-potrawe-z-rozmaconych-jajek.jpg" alt="recipe-photo" />
+              </div>
+              <button class="recipe-preview__btn-bookmark btn-icon small fill">
+                <i data-feather="star"></i>
+              </button>
+              <div class="recipe-preview__summary__info">
+                <div class="recipe-preview__summary__info__tag">śniadanie</div>
+                <div class="recipe-preview__summary__info__difficulty">
+                  <div class="info-difficulty">
+                    <p>Trudność</p>
+                    <div class="info-difficulty__indicator">
+                      <svg class="fill">
+                        <use href="./src/img/icons.svg#star"></use>
+                      </svg> 
+                      <svg class="fill">
+                        <use href="./src/img/icons.svg#star"></use>
+                      </svg>
+                      <svg>
+                        <use href="./src/img/icons.svg#star"></use>
+                      </svg>   
+                      <svg>
+                        <use href="./src/img/icons.svg#star"></use>
+                      </svg> 
+                      <svg>
+                        <use href="./src/img/icons.svg#star"></use>
+                      </svg> 
+                    </div>
+                  </div>
+                </div>
+                <div class="recipe-preview__summary__info__ingredients">
+                  <div class="info-ingredients">
+                    <p>Składniki</p>
+                    <div class="info-ingredients__indicator">
+                    <div class="info-ingredients__indicator__bar"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="recipe-summary__ingredients">
+                <div class="recipe-summary__ingredients__title">
+                  <p>Składniki</p>
+                  <div class="recipe-summary__ingredients__servings">
+                    <button class="btn-icon tiny negative">
+                      <i data-feather="minus"></i>
+                    </button>
+                    <div class="recipe-summary__ingredients__servings__number">1</div>
+                    <button class="btn-icon tiny negative">
+                      <i data-feather="plus"></i>
+                    </button>
+                  </div>
+                </div>
+                <ul class="recipe-summary__ingredient-list">
+                  <li class="recipe-summary__list-item">
+                    <div class="recipe-summary__list-item__indicator">
+                      <i data-feather="check"></i>
+                    </div>
+                    <p class="recipe-summary__list-item__name">Jajko</p>
+                    <p class="recipe-summary__list-item__amount">5</p>
+                    <p class="recipe-summary__list-item__unit">szt.</p>
+                  </li>
+                  <li class="recipe-summary__list-item">
+                    <div class="recipe-summary__list-item__indicator">
+                      <i data-feather="check"></i>
+                    </div>
+                    <p class="recipe-summary__list-item__name">Jajko</p>
+                    <p class="recipe-summary__list-item__amount">5</p>
+                    <p class="recipe-summary__list-item__unit">szt.</p>
+                  </li>
+                  <li class="recipe-summary__list-item">
+                    <div class="recipe-summary__list-item__indicator">
+                      <i data-feather="x"></i>
+                    </div>
+                    <p class="recipe-summary__list-item__name">Masło</p>
+                    <p class="recipe-summary__list-item__amount">10</p>
+                    <p class="recipe-summary__list-item__unit">g</p>
+                  </li>
+
+                </ul>
+                
+              </div>
+              <div class="recipe-summary__spices">
+                <div class="recipe-summary__ingredients__title">
+                  <p>Przyprawy</p>
+                </div>
+                <ul class="recipe-summary__spices-list">
+                  <li class="recipe-summary__list-item">
+                    <p class="recipe-summary__list-item__name">・ Sól</p>
+                  </li>
+                  <li class="recipe-summary__list-item">
+                    <p class="recipe-summary__list-item__name">・Pieprz</p>
+                  </li>
+                  
+
+                </ul>
+
+              </div>
+            </section>
+            <section class="recipe-preview__description">
+              <header class="recipe-preview__header">
+                <h1 class="recipe-preview__title">Makaron z sosem pomidorowym i parmezanem</h1>
+                <button class="recipe-preview__btn-close btn-icon">
+                  <i data-feather="x"></i>
+                </button>
+              </header>
+              <p class="recipe-preview__instructions">
+                Makaron gotujemy al dente. Obieramy cebulę i kroimy w kosteczkę, ząbki czosnku drobno siekamy. Parmezan ścieramy na drobniutkich oczkach. 
+
+Rozgrzewamy oliwę na głębokiej patelni i podsmażamy do zeszklenia cebulę i czosnek. Na patelnię dodajemy pomidory z puszki (z całą zalewą), łyżeczkę koncentratu i przyprawy.
+
+Ugotowany makaron wrzucamy na patelnię z sosem, mieszamy i gotujemy około 1-2 minut.
+Dodajemy pokrojoną na mniejsze kawałki bazylię, 1 łyżkę startego parmezanu i mieszamy.
+
+Podajemy na talerzach posypane resztą parmezanu i przyozdobione świeżymi listkami bazylii.
+              </p>
+            </section>
+          </div>
       </div>
     </div>
     <!-- Feather icon function -->

@@ -282,6 +282,7 @@ class sidebarView {
     // generate difficulty indicator
     let difficulty = "";
 
+    // fill the stars accordingly
     for (let i = 0; i < 5; i++) {
       difficulty += `
       <svg class="${i < recipe.difficulty ? "fill" : ""}">
@@ -298,7 +299,7 @@ class sidebarView {
             </div>
             <div class="col">
             
-              <a class="list-item-recipe__title">${recipe.title}</a>
+              <a href="#${recipe.title}" class="list-item-recipe__title">${recipe.title}</a>
               <div class="list-item-recipe__info">
                 <div class="info-difficulty">
                   <p>Trudność</p>
