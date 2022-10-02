@@ -40,7 +40,7 @@ input[type="color"]::-webkit-color-swatch {
 body {
   min-width: 700px;
   height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 h1 {
@@ -340,7 +340,7 @@ h2 {
 .sidebar {
   position: absolute;
   width: 400px;
-  height: 100vw;
+  height: 100%;
   top: 0;
   left: 0;
   translate: -100%;
@@ -826,18 +826,19 @@ h2 {
   position: absolute;
   display: flex;
   justify-content: center;
-  align-items: center;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
+  overflow-y: scroll;
   min-width: 720px;
 }
 
 .recipe-preview-content {
   position: relative;
   width: 90%;
-  height: 90%;
+  top: 40px;
+  height: fit-content;
   z-index: 1;
   background-color: var(--bg-color);
   padding: 20px;
@@ -1095,7 +1096,7 @@ h2 {
 }
 
 .overlay {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
