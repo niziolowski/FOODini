@@ -56,6 +56,9 @@ function performAC(e) {
 
   // fill the form with productData
   addProductView.updateForm(productData);
+
+  // exit autocomplete
+  addProductView.clearAC();
 }
 
 async function handleUpload(data) {

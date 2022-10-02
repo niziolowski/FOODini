@@ -163,7 +163,7 @@ class sidebarView {
     if (this._status.fullPage) {
       return `
       <div class="sidebar-header__col">
-        <button class="sidebar-header__btn-sidebar btn-icon">
+        <button class="sidebar__btn-full-page btn-icon">
           <i data-feather="sidebar"></i>
         </button>
         <button class="sidebar-header__btn-view btn-icon">
@@ -183,7 +183,7 @@ class sidebarView {
           BAZA PRZEPISÓW
         </button>
       </div>
-      <button class="sidebar__btn-full-page btn-icon">
+      <button class="sidebar-header__btn-sidebar btn-icon">
         <i data-feather="x"></i>
       </button>
     `;
