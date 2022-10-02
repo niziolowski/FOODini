@@ -41,5 +41,3 @@ export function init() {
   sidebarView.addHandlerClick(handleClick);
   console.log("IMPORT SUCCESSFUL: sidebarController");
 }
-
-init();

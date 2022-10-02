@@ -16,6 +16,19 @@ export function formatDate(date) {
   return [year, month, day].join("-");
 }
 
+/**
+ *
+ * @param {Date} date1
+ * @param {Date} date2
+ * @returns The difference between two dates (number of days)
+ */
+export function calcDaysLeft(date1, date2) {
+  const a = date1 / 1000 / 3600 / 24;
+  const b = date2 / 1000 / 3600 / 24;
+
+  return Math.ceil(Math.abs(a - b));
+}
+
 const timeout = function (s) {
   return new Promise(function (_, reject) {
     setTimeout(function () {
