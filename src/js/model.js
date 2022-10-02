@@ -18,23 +18,38 @@ export const state = {
   recipes: [],
 };
 
+import { Ingredient } from "./features/Ingredient.js";
+
 export async function loadStorage() {
   try {
     const data = await AJAX(API_URL_STORAGE);
     data.forEach((ing) => {
       const ingredient = {
+        id: ing.id,
+        name: ing.name,
         amount: ing.amount,
+        unit: ing.unit,
+        group: ing.group,
         bookmark: ing.bookmark,
         createdAt: ing.created_at,
         expiry: ing.expiry,
-        group: ing.group,
-        id: `i-${ing.app_id}`,
-        name: ing.name,
-        unit: ing.unit,
         daysLeft:
           ing.expiry - calcDaysLeft(ing.created_at, new Date().getTime()),
       };
-      state.storage.push(ingredient);
+
+      // state.storage.push(ingredient);
+      state.storage.push(
+        new Ingredient(
+          ing.id,
+          ing.name,
+          ing.amount,
+          ing.unit,
+          ing.group,
+          ing.bookmark,
+          ing.created_at,
+          ing.expiry
+        )
+      );
     });
   } catch (error) {
     throw error;
@@ -46,12 +61,12 @@ export async function loadRecipes() {
     const data = await AJAX(API_URL_RECIPES);
     data.forEach((rec) => {
       const recipe = {
+        id: rec.id,
         bookmark: rec.bookmark,
         createdAt: rec.created_at,
         description: rec.description,
         difficulty: rec.difficulty,
         group: rec.group,
-        id: `r-${rec.app_id}`,
         imageUrl: rec.image_url,
         ingredients: rec.ingredient,
         title: rec.name,

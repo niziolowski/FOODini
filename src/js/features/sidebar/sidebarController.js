@@ -33,6 +33,20 @@ export function handleClick(e) {
       mainView.shift();
       sidebarView.toggleFullPage(model.state);
     }
+
+    // STORAGE
+    // Bookmark BTN
+    if (btn.classList.contains("list-item-storage__btn-bookmark")) {
+      // get item ID
+      const id = +btn.closest("li").dataset.id.split("-")[1];
+      console.log(id);
+
+      // get ingredient
+      const ingredient = model.state.storage.find((ing) => ing.id === id);
+      ingredient.toggleBookmark();
+      sidebarView.render(model.state);
+      ingredient.upload();
+    }
   }
 }
 

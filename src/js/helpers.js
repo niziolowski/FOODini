@@ -52,6 +52,7 @@ export const AJAX = async function (url, uploadData = undefined) {
     const data = await res.json();
 
     if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+
     return data;
   } catch (err) {
     // propagate the error to model.js

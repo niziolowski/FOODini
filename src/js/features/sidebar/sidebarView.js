@@ -242,7 +242,7 @@ class sidebarView {
     const tag = state.tags.storage.indexOf(ing.group) + 1;
 
     return `
-    <li class="list-item-storage">
+    <li class="list-item-storage" data-id="i-${ing.id}">
       <button class="list-item-storage__btn-bookmark btn-icon small fill ${
         ing.bookmark ? "active" : ""
       }">
@@ -292,7 +292,7 @@ class sidebarView {
     }
 
     return `
-          <li class="list-item-recipe">
+          <li class="list-item-recipe" data-id="${recipe.id}">
             <a class="list-item-recipe__image" href="#${recipe.title}">
               <img src="${recipe.imageUrl}" alt="recipe-photo">
               <div class="list-item-recipe__tag" style="background-color: var(--tag-${tag}-color)">${recipe.group}</div>
