@@ -1,4 +1,5 @@
 import recipeView from "./recipeView.js";
+import sidebarView from "../sidebar/sidebarView.js";
 import * as recipeModel from "./recipeModel.js";
 import * as model from "../../model.js";
 
@@ -25,6 +26,23 @@ function controlClick(e) {
 
   if (btn) {
     if (btn.classList.contains("recipe-preview__btn-close")) recipeView.hide();
+
+    // Bookmark BTN
+    if (btn.classList.contains("recipe-preview__btn-bookmark")) {
+      // get item ID
+      const id = +btn
+        .closest(".recipe-preview__summary")
+        .dataset.id.split("-")[1];
+
+      // get ingredient
+      const recipe = model.state.recipes.find((rec) => rec.id === id);
+      recipe.toggleBookmark();
+      recipe.upload();
+
+      // update views
+      sidebarView.render(model.state);
+      recipeView.render(recipe, model.state);
+    }
   }
 
   //   clear hash after closing modal

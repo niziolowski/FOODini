@@ -2,6 +2,7 @@ import addProductView from "./addProductView.js";
 import * as addProductModel from "./addProductModel.js";
 import * as model from "../../model.js";
 import sidebarView from "../sidebar/sidebarView.js";
+import { Ingredient } from "../Ingredient.js";
 
 function handleClick(e) {
   // Handle overlay click
@@ -49,6 +50,7 @@ function handleACinput(e) {
 
 function performAC(e) {
   const productID = +e.target.dataset.productId;
+
   // Get clicked product object from storage database
   const productData = model.state.storage.find(
     (product) => product.id === productID
@@ -63,20 +65,32 @@ function performAC(e) {
 
 async function handleUpload(data) {
   try {
-    const ingredient = addProductModel.createIngredientObject(
-      data,
-      model.state
-    );
+    // Upload new product to API
+    const ingredient = await addProductModel.upload(data);
+    console.log(ingredient);
 
     // Add new product to storage
-    model.state.storage.push(ingredient);
-
-    // Upload new product to API
-    addProductModel.upload(ingredient);
+    model.state.storage.push(
+      new Ingredient(
+        ingredient.id,
+        ingredient.name,
+        ingredient.amount,
+        ingredient.unit,
+        ingredient.group,
+        ingredient.bookmark,
+        ingredient.created_at,
+        ingredient.expiry
+      )
+    );
 
     // Recalculate recipe ingredients;
 
+    // Update Sidebar View
+    sidebarView.render(model.state);
+
     // Update views
+
+    // Display message
   } catch (error) {
     console.error(error);
   }

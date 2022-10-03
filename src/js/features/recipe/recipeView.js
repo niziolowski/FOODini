@@ -24,6 +24,8 @@ class recipeView {
       recipe,
       state
     );
+    // Add id to summary element for reference
+    this._recipeSummary.dataset.id = `r-${recipe.id}`;
 
     // Render recipe Title
     this._recipeTitle.textContent = `${recipe.title}`;
@@ -50,9 +52,13 @@ class recipeView {
         `;
     }
 
+    // define colors for ingredients indicator
+    const color =
+      recipe.indicator < 20 ? "var(--warning-color)" : "var(--accent-color)";
+
     return `
     <div class="recipe-preview__image">
-        <img src="${recipe.imageUrl}" alt="recipe-photo" />
+        <img src="${recipe.imageURL}" alt="recipe-photo" />
     </div>
     <button class="recipe-preview__btn-bookmark btn-icon small fill ${
       recipe.bookmark ? "active" : ""
@@ -73,7 +79,9 @@ class recipeView {
         <div class="info-ingredients">
         <p>Składniki</p>
         <div class="info-ingredients__indicator">
-        <div class="info-ingredients__indicator__bar"></div>
+        <div class="info-ingredients__indicator__bar" style="width: ${
+          recipe.indicator
+        }%; background-color: ${color}"></div>
         </div>
         </div>
     </div>
@@ -92,30 +100,29 @@ class recipeView {
         </div>
     </div>
     <ul class="recipe-summary__ingredient-list">
-        <li class="recipe-summary__list-item">
-        <div class="recipe-summary__list-item__indicator">
-            <i data-feather="check"></i>
-        </div>
-        <p class="recipe-summary__list-item__name">Jajko</p>
-        <p class="recipe-summary__list-item__amount">5</p>
-        <p class="recipe-summary__list-item__unit">szt.</p>
+        ${recipe.ingredients
+          .map((ing) => {
+            return `
+          <li class="recipe-summary__list-item">
+          <div class="recipe-summary__list-item__indicator">
+              <i data-feather="${
+                // Check if current ingredient is on the missing list and choose icon accordingly
+                recipe.missingIngredients.find(
+                  (item) => item.name === ing.name
+                ) === undefined
+                  ? "check"
+                  : "x"
+              }"></i>
+          </div>
+          <p class="recipe-summary__list-item__name">${ing.name}</p>
+          <p class="recipe-summary__list-item__amount">${ing.amount}</p>
+          <p class="recipe-summary__list-item__unit">${ing.unit}</p>
         </li>
-        <li class="recipe-summary__list-item">
-        <div class="recipe-summary__list-item__indicator">
-            <i data-feather="check"></i>
-        </div>
-        <p class="recipe-summary__list-item__name">Jajko</p>
-        <p class="recipe-summary__list-item__amount">5</p>
-        <p class="recipe-summary__list-item__unit">szt.</p>
-        </li>
-        <li class="recipe-summary__list-item">
-        <div class="recipe-summary__list-item__indicator">
-            <i data-feather="x"></i>
-        </div>
-        <p class="recipe-summary__list-item__name">Masło</p>
-        <p class="recipe-summary__list-item__amount">10</p>
-        <p class="recipe-summary__list-item__unit">g</p>
-        </li>
+        
+          `;
+          })
+          .join("")}
+        
     </ul>
     </div>
     <div class="recipe-summary__spices">
