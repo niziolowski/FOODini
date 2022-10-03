@@ -125,6 +125,38 @@
           <i data-feather="x"></i>
         </button>
       </div>
+      <ul class="shopping-list-content">
+        <li class="shopping-list-item">
+          <input class="shopping-list-item__checkbox" type="checkbox">
+          <input type="text" class="shopping-list-item__name" contenteditable="true" value="Makaron">
+          <input type="number" class="shopping-list-item__amount" contenteditable="true" value="2">
+          <select class="shopping-list-item__unit">
+            <option>szt.</option>
+            <option>kg</option>
+            <option>g</option>
+            <option>ml</option>
+          </select>
+          <button class="shopping-list-item__btn-delete btn-icon small">
+            <i data-feather="trash"></i>
+          </button>
+        </li>
+        <li class="shopping-list-item">
+          <input class="shopping-list-item__checkbox" type="checkbox">
+          <input class="shopping-list-item__name" contenteditable="true" value="Jajka">
+          <input type="number" class="shopping-list-item__amount" contenteditable="true" value="10">
+          <select class="shopping-list-item__unit">
+            <option>szt.</option>
+            <option>kg</option>
+            <option>g</option>
+            <option>ml</option>
+          </select>
+          <button class="shopping-list-item__btn-delete btn-icon small">
+            <i data-feather="trash"></i>
+          </button>
+        </li>         
+        <button class="shopping-list__btn-add"><i data-feather="plus"></i>Dodaj</button>
+        <button class="shopping-list__btn-submit btn btn-outline">Przenieś zakupy do spiżarni</button>
+      </ul>
     </aside>
 
     <!-- SETTINGS -->
