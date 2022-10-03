@@ -39,13 +39,25 @@ export function handleClick(e) {
     if (btn.classList.contains("list-item-storage__btn-bookmark")) {
       // get item ID
       const id = +btn.closest("li").dataset.id.split("-")[1];
-      console.log(id);
 
       // get ingredient
       const ingredient = model.state.storage.find((ing) => ing.id === id);
       ingredient.toggleBookmark();
       sidebarView.render(model.state);
       ingredient.upload();
+    }
+
+    // RECIPES
+    // Bookmark BTN
+    if (btn.classList.contains("list-item-recipe__btn-bookmark")) {
+      // get item ID
+      const id = +btn.closest("li").dataset.id.split("-")[1];
+
+      // get ingredient
+      const recipe = model.state.recipes.find((rec) => rec.id === id);
+      recipe.toggleBookmark();
+      sidebarView.render(model.state);
+      recipe.upload();
     }
   }
 }

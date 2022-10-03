@@ -18,8 +18,8 @@ settingsView.updateColorTheme(model.state.colorTheme);
 async function init() {
   try {
     // Load state from API (for now only storage and recipes)
-    await model.loadState();
-
+    // await model.loadState();
+    // model.loadRecipes();
     // Init sidebar
     sidebarController.init();
   } catch (error) {

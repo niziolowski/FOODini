@@ -252,7 +252,7 @@ class sidebarView {
       <div class="list-item-storage__amount">${ing.amount}</div>
       <div class="list-item-storage__unit">${ing.unit}</div>
       <div class="list-item-storage__expiry">
-        <div class="expiry-days-left">${ing.daysLeft}</div>
+        <div class="expiry-days-left">${ing.daysLeft} dni</div>
         <div class="expiry-indicator">
           <div class="expiry-indicator__bar" style="width: ${indicatorWidth}%; background: var(--accent-color)"></div>
         </div>
@@ -282,7 +282,7 @@ class sidebarView {
     // generate difficulty indicator
     let difficulty = "";
 
-    // fill the stars accordingly
+    // fill the indicator with stars accordingly
     for (let i = 0; i < 5; i++) {
       difficulty += `
       <svg class="${i < recipe.difficulty ? "fill" : ""}">
@@ -291,15 +291,23 @@ class sidebarView {
       `;
     }
 
+    // define colors for ingredients indicator
+    const color =
+      recipe.indicator < 20 ? "var(--warning-color)" : "var(--accent-color)";
+
     return `
-          <li class="list-item-recipe" data-id="${recipe.id}">
+          <li class="list-item-recipe" data-id="r-${recipe.id}">
             <a class="list-item-recipe__image" href="#${recipe.title}">
-              <img src="${recipe.imageUrl}" alt="recipe-photo">
-              <div class="list-item-recipe__tag" style="background-color: var(--tag-${tag}-color)">${recipe.group}</div>
+              <img src="${recipe.imageURL}" alt="recipe-photo">
+              <div class="list-item-recipe__tag" style="background-color: var(--tag-${tag}-color)">${
+      recipe.group
+    }</div>
             </a>
             <div class="col">
             
-              <a href="#${recipe.title}" class="list-item-recipe__title">${recipe.title}</a>
+              <a href="#${recipe.title}" class="list-item-recipe__title">${
+      recipe.title
+    }</a>
               <div class="list-item-recipe__info">
                 <div class="info-difficulty">
                   <p>Trudność</p>
@@ -310,13 +318,17 @@ class sidebarView {
                 <div class="info-ingredients">
                   <p>Składniki</p>
                   <div class="info-ingredients__indicator">
-                  <div class="info-ingredients__indicator__bar"></div>
+                  <div class="info-ingredients__indicator__bar" style="width: ${
+                    recipe.indicator
+                  }%; background-color: ${color}"></div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col">
-              <button class="list-item-recipe__btn-bookmark btn-icon small fill">
+              <button class="list-item-recipe__btn-bookmark btn-icon small fill ${
+                recipe.bookmark ? "active" : ""
+              }">
               <i data-feather="star"></i>
               </button>
               <button class="btn-icon small">
