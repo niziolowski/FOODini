@@ -1,5 +1,7 @@
 import settingsView from "./settingsView.js";
 import * as settingsModel from "./settingsModel.js";
+import * as model from "../../model.js";
+import catalogView from "../catalog/catalogView.js";
 
 function handleClick(e) {
   // Handle overlay click
@@ -8,10 +10,14 @@ function handleClick(e) {
   const btn = e.target.closest("button");
   const input = e.target.closest("input");
 
-  // Close btn
   if (btn) {
+    // Close btn
     if (btn.classList.contains("settings-header__btn-close"))
       settingsView.hide();
+
+    // Catalog btn
+    if (btn.classList.contains("settings__btn-catalog"))
+      catalogView.show(model.state.catalog);
   }
 
   // HANDLE COLOR THEMES
@@ -33,7 +39,7 @@ function handleClick(e) {
 
 function init() {
   settingsView.addHandlerClick(handleClick);
-
+  // settingsView.show();
   console.log("IMPORT SUCCESSFUL: settingsController");
 }
 

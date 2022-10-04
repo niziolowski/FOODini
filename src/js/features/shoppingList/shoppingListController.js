@@ -25,8 +25,6 @@ function handleClick(e) {
 function init() {
   console.log("IMPORT SUCCESFUL: shoppingListController");
   shoppingListView.addHandlerClick(handleClick);
-
-  shoppingListView.show(); //* For testing only
 }
 
 init();

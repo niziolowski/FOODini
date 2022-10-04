@@ -1,5 +1,8 @@
 import { AJAX, calcDaysLeft } from "./helpers.js";
-import { API_URL_STORAGE, API_URL_RECIPES } from "./config.js";
+import { API_URL_STORAGE, API_URL_RECIPES, API_URL_CATALOG } from "./config.js";
+import { Ingredient } from "./features/Ingredient.js";
+import { Recipe } from "./features/Recipe.js";
+import { Product } from "./features/Product.js";
 // § STATE
 
 export const state = {
@@ -17,9 +20,139 @@ export const state = {
   },
   recipes: [],
   storage: [],
+  catalog: [],
 };
 
 // TEST DATA
+const catalog = [
+  {
+    id: 2,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 2,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 2,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 2,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 2,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 2,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 2,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 2,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 2,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 2,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 3,
+    name: "Halibut",
+    amount: 300,
+    unit: "g",
+    group: "mrożone",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 4,
+    name: "Boczek",
+    amount: 400,
+    unit: "g",
+    group: "świeże",
+    bookmark: false,
+    expiry: 14,
+  },
+  {
+    id: 5,
+    name: "Jogurt naturalny",
+    amount: 1,
+    unit: "szt.",
+    group: "świeże",
+    bookmark: false,
+    expiry: 30,
+  },
+  {
+    id: 1,
+    name: "Jajka",
+    amount: 10,
+    unit: "szt.",
+    group: "świeże",
+    bookmark: true,
+    expiry: 20,
+  },
+];
+
 const storage = [
   {
     id: 1,
@@ -96,57 +229,76 @@ const recipes = [
   },
 ];
 
-storage.forEach((ing) =>
-  state.storage.push(
-    new Ingredient(
-      ing.id,
-      ing.name,
-      ing.amount,
-      ing.unit,
-      ing.group,
-      ing.bookmark,
-      ing.created_at,
-      ing.expiry
-    )
-  )
-);
+// catalog.forEach((ing) =>
+//   state.catalog.push(
+//     new Product(
+//       ing.id,
+//       ing.name,
+//       ing.amount,
+//       ing.unit,
+//       ing.group,
+//       ing.bookmark,
+//       ing.expiry
+//     )
+//   )
+// );
 
-recipes.forEach((rec) =>
-  state.recipes.push(
-    new Recipe(
-      rec.id,
-      rec.name,
-      rec.group,
-      rec.description,
-      rec.ingredients,
-      rec.spices,
-      rec.difficulty,
-      rec.bookmark,
-      rec.image_url
-    )
-  )
-);
+// storage.forEach((ing) =>
+//   state.storage.push(
+//     new Ingredient(
+//       ing.id,
+//       ing.name,
+//       ing.amount,
+//       ing.unit,
+//       ing.group,
+//       ing.bookmark,
+//       ing.created_at,
+//       ing.expiry
+//     )
+//   )
+// );
 
-import { Ingredient } from "./features/Ingredient.js";
-import { Recipe } from "./features/Recipe.js";
+// recipes.forEach((rec) =>
+//   state.recipes.push(
+//     new Recipe(
+//       rec.id,
+//       rec.name,
+//       rec.group,
+//       rec.description,
+//       rec.ingredients,
+//       rec.spices,
+//       rec.difficulty,
+//       rec.bookmark,
+//       rec.image_url
+//     )
+//   )
+// );
+
+export async function loadCatalog() {
+  try {
+    const data = await AJAX(API_URL_STORAGE);
+    data.forEach((ing) => {
+      state.catalog.push(
+        new Product(
+          ing.id,
+          ing.name,
+          ing.amount,
+          ing.unit,
+          ing.group,
+          ing.bookmark,
+          ing.expiry
+        )
+      );
+    });
+  } catch (error) {
+    throw error;
+  }
+}
 
 export async function loadStorage() {
   try {
     const data = await AJAX(API_URL_STORAGE);
     data.forEach((ing) => {
-      // const ingredient = {
-      //   id: ing.id,
-      //   name: ing.name,
-      //   amount: ing.amount,
-      //   unit: ing.unit,
-      //   group: ing.group,
-      //   bookmark: ing.bookmark,
-      //   createdAt: ing.created_at,
-      //   expiry: ing.expiry,
-      //   daysLeft:
-      //     ing.expiry - calcDaysLeft(ing.created_at, new Date().getTime()),
-      // };
-
       state.storage.push(
         new Ingredient(
           ing.id,
@@ -169,17 +321,6 @@ export async function loadRecipes() {
   try {
     const data = await AJAX(API_URL_RECIPES);
     data.forEach((rec) => {
-      // const recipe = {
-      //   id: rec.id,
-      //   title: rec.name,
-      //   group: rec.group,
-      //   description: rec.description,
-      //   ingredients: rec.ingredient,
-      //   spices: rec.spices,
-      //   difficulty: rec.difficulty,
-      //   bookmark: rec.bookmark,
-      //   imageURL: rec.image_url,
-      // };
       state.recipes.push(
         new Recipe(
           rec.id,
@@ -203,6 +344,7 @@ export async function loadState() {
   try {
     await loadStorage();
     await loadRecipes();
+    await loadCatalog();
     console.log(`LOADED STATE FROM API:`);
     console.log(state);
   } catch (error) {

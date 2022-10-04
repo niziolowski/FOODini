@@ -219,7 +219,9 @@ h2 {
   position: absolute;
   left: 0;
   transform: translate(-100%);
-  transition: var(--transition);
+  transition: var(
+    --transition
+  ) !important; /* Used !important because there is a universal .btn class with different transition time */
 }
 
 .shopping-list-content {
@@ -340,26 +342,35 @@ input[type="number"] {
 
 .settings-content {
   position: absolute;
-  width: 90%;
+  width: fit-content;
   height: 90%;
   display: grid;
-  grid-template-columns: 140px 1fr;
+  grid-template-columns: 140px 1fr 60px;
   grid-template-rows: min-content;
   padding: 20px;
   justify-items: stretch;
   background-color: var(--bg-color);
   background-color: #eeeeee;
+  gap: 20px;
 }
 /* Header */
 .settings-header {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  grid-column: 2/4;
+  column-gap: 20px;
 }
+
 .settings-header h1 {
   display: flex;
   justify-content: center;
   flex: 1;
+}
+
+.settings__btn-catalog {
+  justify-self: center;
+  width: fit-content;
 }
 
 /* § THEME EDITOR */
@@ -1100,6 +1111,104 @@ input[type="number"] {
   columns: var(--font-color);
 }
 
+/* § PRODUCT CATALOG */
+.product-catalog {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90%;
+  /* overflow-y: scroll; */
+}
+
+.product-catalog-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  top: 40px;
+  width: 90%;
+  height: fit-content;
+  z-index: 1;
+  background-color: var(--bg-color);
+  padding: 20px;
+  row-gap: 20px;
+}
+
+.product-catalog-header {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.product-catalog-header__btn-close {
+  position: absolute;
+  right: 0;
+}
+
+.product-catalog-table__wrapper {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.product-catalog-table {
+  flex: 1;
+  background-color: white;
+  border-radius: 5px;
+  max-width: 1024px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border-collapse: collapse;
+  border: var(--border);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.product-catalog-table tr:nth-child(odd) {
+  background-color: var(--bg-color);
+}
+
+.product-catalog-table th {
+  width: 10px;
+  font-weight: 400;
+  color: var(--accent-color);
+  background-color: white;
+  text-align: center;
+}
+
+.product-catalog-table th:nth-child(2) {
+  min-width: 250px;
+  width: max-content;
+}
+
+.product-catalog-table th:nth-child(3),
+.product-catalog-table th:nth-child(4),
+.product-catalog-table th:nth-child(5),
+.product-catalog-table th:nth-child(6) {
+  min-width: 10px;
+  width: 100px;
+}
+
+.product-catalog-table td:nth-child(2) {
+  text-align: left;
+}
+
+.product-catalog-table td {
+  font-weight: 300;
+  color: var(--font-color);
+}
+
+.product-catalog-table td,
+.product-catalog-table th {
+  border: var(--border);
+  padding: 5px 10px;
+}
+
 /* § UNIVERSAL STYLES */
 
 /* Btn */
@@ -1112,7 +1221,7 @@ input[type="number"] {
   font-size: 0.8rem;
   font-weight: 400;
   border-radius: 5px;
-  transition: var(--transition);
+  transition: var(--btn-transition);
 }
 
 /* Btn icon */
@@ -1205,7 +1314,7 @@ input[type="number"] {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(5px);
+  /* backdrop-filter: blur(5px); */
 }
 
 .hidden {
