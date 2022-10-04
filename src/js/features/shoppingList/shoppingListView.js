@@ -31,12 +31,14 @@ class shoppingListView {
       case "mouseenter":
         if (this._status === "inactive") {
           this._parentElement.style.transform = "translate(80%)"; // Peek list
+          this._btnToggle.style.transform = "translate(-80%)";
         }
         break;
 
       case "mouseleave":
         if (this._status === "inactive") {
           this._parentElement.style.transform = "translate(101%)"; // Hide
+          this._btnToggle.style.transform = "translate(-100%)";
         }
         break;
 
