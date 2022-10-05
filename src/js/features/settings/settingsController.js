@@ -17,7 +17,7 @@ function handleClick(e) {
 
     // Catalog btn
     if (btn.classList.contains("settings__btn-catalog"))
-      catalogView.show(model.state.catalog);
+      catalogView.show(model.state);
   }
 
   // HANDLE COLOR THEMES

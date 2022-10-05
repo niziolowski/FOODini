@@ -5,45 +5,48 @@ class catalogView {
   addHandlerClick(handler) {
     this._parentElement.addEventListener("click", handler.bind(this));
   }
-  render(catalog) {
-    this._table.innerHTML = this.generateMarkup(catalog);
+  render(state) {
+    this._table.innerHTML = this.generateMarkup(state);
     // replace icon with svg
     feather.replace();
   }
 
-  generateMarkup(catalog) {
+  generateMarkup(state) {
     return `
-    <tr>
-        <th><button class="btn-icon small fill"><i data-feather="star"></i></button></th>
-        <th>Produkt</th>
-        <th>Ilość</th>
-        <th>Jend.</th>
-        <th>Grupa</th>
-        <th>Ważność</th>
-        <th></th>
-        <th></th>
-    </tr>
-    ${catalog
-      .map((item) => {
-        return `
-        <tr>
+      <tr>
+      <th><button class="btn-icon small fill"><i data-feather="star"></i></button></th>
+      <th>Produkt</th>
+      <th>Ilość</th>
+      <th>Jend.</th>
+      <th>Grupa</th>
+      <th>Ważność</th>
+      <th></th>
+      <th></th>
+      </tr>
+      ${state.catalog
+        .map((item) => {
+          // Get tag color
+          const tag = state.tags.storage.indexOf(item.group) + 1;
+
+          return `
+            <tr>
             <td><button class="btn-icon small fill"><i data-feather="star"></i></button></td>
             <td>${item.name}</td>
             <td>${item.amount}</td>
             <td>${item.unit}</td>
-            <td>${item.group}</td>
+            <td><div class="tag" style="background-color: var(--tag-${tag}-color)">${item.group}</div></td>
             <td>${item.expiry} dni</td>
             <td><button class="btn-icon small"><i data-feather="edit"></i></button></td>
             <td><button class="btn-icon small"><i data-feather="trash"></i></button></td>
         </tr>
         `;
-      })
-      .join("")}
+        })
+        .join("")}
     `;
   }
 
-  show(catalog) {
-    this.render(catalog);
+  show(state) {
+    this.render(state);
     this._parentElement.classList.remove("hidden");
   }
 

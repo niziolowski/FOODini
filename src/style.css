@@ -833,8 +833,8 @@ input[type="number"] {
   box-shadow: var(--shadow);
 }
 
-/* § ADD PRODUCT */
-.add-product {
+/* § ADD INGREDIENT */
+.add-ingredient {
   position: absolute;
   top: 0;
   display: flex;
@@ -844,7 +844,7 @@ input[type="number"] {
   height: 100%;
 }
 
-.add-product-content {
+.add-ingredient-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -856,14 +856,14 @@ input[type="number"] {
   margin: 40px;
 }
 
-.add-product-content__header {
+.add-ingredient-content__header {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.add-product-content__form {
+.add-ingredient-content__form {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -876,31 +876,31 @@ input[type="number"] {
   max-width: min-content;
 }
 
-.add-product-content__form .row-1 {
+.add-ingredient-content__form .row-1 {
   display: grid;
   grid-template-columns: minmax(150px, 280px) 120px;
   column-gap: 20px;
   min-width: min-content;
 }
 
-.add-product-content__form .row-2 {
+.add-ingredient-content__form .row-2 {
   display: grid;
   grid-template-columns: 70px 70px 100px 120px;
   column-gap: 20px;
   min-width: min-content;
 }
 
-.add-product-content__form .col {
+.add-ingredient-content__form .col {
   position: relative;
   display: flex;
   flex-direction: column;
   row-gap: 10px;
 }
-.add-product-content__form .col label {
+.add-ingredient-content__form .col label {
   margin: 0 5px;
 }
-.add-product-content__form input,
-.add-product-content__form select {
+.add-ingredient-content__form input,
+.add-ingredient-content__form select {
   height: 40px;
   border: 1px solid var(--grey-color);
   background-color: var(--bg-color);
@@ -910,7 +910,7 @@ input[type="number"] {
 
 /* § Suggestions / autocomplete */
 
-.add-product-content__form ul {
+.add-ingredient-content__form ul {
   position: absolute;
   top: 100%;
   width: 100%;
@@ -924,7 +924,7 @@ input[type="number"] {
   z-index: 1;
 }
 
-.add-product-content__form li {
+.add-ingredient-content__form li {
   display: flex;
   align-items: center;
   height: 40px;
@@ -932,7 +932,7 @@ input[type="number"] {
   border-bottom: var(--border);
 }
 
-.add-product-content__form li:hover {
+.add-ingredient-content__form li:hover {
   background-color: var(--bg-color);
 }
 
@@ -1119,7 +1119,7 @@ input[type="number"] {
   top: 0;
   left: 0;
   width: 100%;
-  height: 90%;
+  height: 100%;
   /* overflow-y: scroll; */
 }
 
@@ -1128,8 +1128,7 @@ input[type="number"] {
   flex-direction: column;
   align-items: center;
   position: relative;
-  top: 40px;
-  width: 90%;
+  width: 100%;
   height: fit-content;
   z-index: 1;
   background-color: var(--bg-color);
@@ -1149,8 +1148,34 @@ input[type="number"] {
   right: 0;
 }
 
+/* options */
+.product-catalog-options {
+  margin-top: 20px;
+  padding: 10px;
+  width: 100%;
+  max-width: 1024px;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.product-catalog-options input {
+  flex: 1;
+}
+
+.product-catalog-options span {
+  font-weight: 300;
+  font-size: 0.8rem;
+}
+
+.product-catalog-options select {
+  padding: 0 10px;
+  height: 30px;
+  border-radius: 15px;
+  border: 1px solid var(--grey-color);
+}
+
 .product-catalog-table__wrapper {
-  margin-top: 40px;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -1198,6 +1223,17 @@ input[type="number"] {
   text-align: left;
 }
 
+.product-catalog-table .tag {
+  position: relative;
+  left: 50%;
+  translate: -50%;
+  font-weight: 400;
+  width: fit-content;
+  height: 20px;
+  border-radius: 10px;
+  padding: 0 10px;
+}
+
 .product-catalog-table td {
   font-weight: 300;
   color: var(--font-color);
@@ -1207,6 +1243,113 @@ input[type="number"] {
 .product-catalog-table th {
   border: var(--border);
   padding: 5px 10px;
+}
+
+/* § ADD TO CATALOG */
+.add-to-catalog {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.add-to-catalog-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 500px;
+  width: fit-content;
+  padding: 20px;
+  background-color: var(--bg-color);
+  box-shadow: var(--shadow);
+  row-gap: 20px;
+  border: var(--border);
+}
+
+.add-to-catalog-content__header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  justify-content: space-between;
+}
+
+.add-to-catalog-content__form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  color: var(--font-color);
+  font-size: 0.8rem;
+  font-weight: 300;
+  column-gap: 20px;
+  row-gap: 15px;
+  max-width: min-content;
+}
+
+.add-to-catalog-content__form .row-1 {
+  display: grid;
+  grid-template-columns: minmax(150px, 280px) 120px;
+  column-gap: 20px;
+  min-width: min-content;
+}
+
+.add-to-catalog-content__form .row-2 {
+  display: grid;
+  grid-template-columns: 120px 120px 120px;
+  column-gap: 20px;
+  min-width: min-content;
+}
+
+.add-to-catalog-content__form .col {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+.add-to-catalog-content__form .col label {
+  margin: 0 5px;
+}
+.add-to-catalog-content__form input,
+.add-to-catalog-content__form select {
+  height: 40px;
+  border: 1px solid var(--grey-color);
+  background-color: var(--bg-color);
+  padding: 0 10px;
+  border-radius: 5px;
+}
+
+/* § Suggestions / autocomplete */
+
+.add-to-catalog-content__form ul {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  list-style: none;
+  border-left: var(--border);
+  border-right: var(--border);
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.add-to-catalog-content__form li {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 10px;
+  border-bottom: var(--border);
+}
+
+.add-to-catalog-content__form li:hover {
+  background-color: var(--bg-color);
 }
 
 /* § UNIVERSAL STYLES */
@@ -1309,6 +1452,28 @@ input[type="number"] {
   box-shadow: inset rgba(0, 0, 0, 0.1) 0 0 5px;
 }
 
+.search-bar {
+  position: relative;
+  flex: 1;
+  height: 30px;
+}
+
+.search-bar input {
+  padding: 0 10px 0 28px;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  border: 1px solid var(--grey-color);
+}
+
+.search-bar svg {
+  position: absolute;
+  height: 18px;
+  top: 6px;
+  left: 4px;
+  color: var(--accent-color);
+}
+
 .overlay {
   position: fixed;
   width: 100%;
@@ -1392,7 +1557,11 @@ input[type="checkbox"]:disabled {
   }
 
   /* Make add product form one row instead of two */
-  .add-product-content__form {
+  .add-ingredient-content__form {
+    max-width: max-content;
+  }
+
+  .add-to-catalog-content__form {
     max-width: max-content;
   }
 

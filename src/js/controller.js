@@ -2,10 +2,11 @@
 import * as sidebarController from "./features/sidebar/sidebarController.js";
 import navController from "./features/nav/navController.js";
 import settingsController from "./features/settings/settingsController.js";
-import addProductController from "./features/addProdduct/addProductController.js";
+import addIngredientController from "./features/addIngredient/addIngredientController.js";
 import shoppingListController from "./features/shoppingList/shoppingListController.js";
 import recipeController from "./features/recipe/recipeController.js";
 import catalogController from "./features/catalog/catalogController.js";
+import addProductController from "./features/addProduct/addProductController.js";
 
 init();
 

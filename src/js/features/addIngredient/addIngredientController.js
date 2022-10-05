@@ -1,32 +1,32 @@
-import addProductView from "./addProductView.js";
-import * as addProductModel from "./addProductModel.js";
+import addIngredientView from "./addIngredientView.js";
+import * as addIngredientModel from "./addIngredientModel.js";
 import * as model from "../../model.js";
 import sidebarView from "../sidebar/sidebarView.js";
 import { Ingredient } from "../Ingredient.js";
 
 function handleClick(e) {
   // Handle overlay click
-  if (e.target.classList.contains("overlay")) addProductView.hide();
+  if (e.target.classList.contains("overlay")) addIngredientView.hide();
 
   // Get button
   const btn = e.target.closest("button");
 
   // Handle btn click
   if (btn) {
-    if (btn.classList.contains("add-product-content__header__btn-close"))
-      addProductView.hide();
+    if (btn.classList.contains("add-ingredient-content__header__btn-close"))
+      addIngredientView.hide();
   }
 }
 
 function handleAC(e) {
   function handleACevents(e) {
     // On "Escape" key (exit autocomplete)
-    if (e.type === "keydown" && e.key === "Escape") addProductView.clearAC();
+    if (e.type === "keydown" && e.key === "Escape") addIngredientView.clearAC();
 
     // On click
     const tagName = e.target.tagName;
 
-    if (tagName !== "LI" && tagName !== "INPUT") addProductView.clearAC();
+    if (tagName !== "LI" && tagName !== "INPUT") addIngredientView.clearAC();
 
     if (tagName === "LI") performAC(e);
 
@@ -35,17 +35,17 @@ function handleAC(e) {
   }
 
   // Listeners for autoComplete feature
-  addProductView.addHandlerACevents(handleACevents);
+  addIngredientView.addHandlerACevents(handleACevents);
 }
 
 function handleACinput(e) {
   const input = e.target;
 
   // Create suggestions list
-  const suggestions = addProductModel.getSuggestions(input, model.state);
+  const suggestions = addIngredientModel.getSuggestions(input, model.state);
 
   // Render suggestions
-  addProductView.renderACsuggestions(suggestions);
+  addIngredientView.renderACsuggestions(suggestions);
 }
 
 function performAC(e) {
@@ -57,16 +57,16 @@ function performAC(e) {
   );
 
   // fill the form with productData
-  addProductView.updateForm(productData);
+  addIngredientView.updateForm(productData);
 
   // exit autocomplete
-  addProductView.clearAC();
+  addIngredientView.clearAC();
 }
 
 async function handleUpload(data) {
   try {
     // Upload new product to API
-    const ingredient = await addProductModel.upload(data);
+    const ingredient = await addIngredientModel.upload(data);
     console.log(ingredient);
 
     // Add new product to storage
@@ -97,14 +97,14 @@ async function handleUpload(data) {
 }
 
 function init() {
-  addProductView.addHandlerClick(handleClick);
-  addProductView.addHandlerAC(handleAC);
-  addProductView.addHandlerUpload(handleUpload);
+  addIngredientView.addHandlerClick(handleClick);
+  addIngredientView.addHandlerAC(handleAC);
+  addIngredientView.addHandlerUpload(handleUpload);
 
-  console.log("IMPORT SUCCESSFUL: addProductController");
+  console.log("IMPORT SUCCESSFUL: addIngredientController");
 
   // testing
-  // addProductView.show();
+  // addIngredientView.show();
 }
 
 init();

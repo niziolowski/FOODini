@@ -91,7 +91,7 @@
       </header>
       <section class="sidebar-options">
         <div class="row">
-          <button class="sidebar__btn-add-product btn-icon small">
+          <button class="sidebar__btn-add-ingredient btn-icon small">
             <i data-feather="plus"></i>
           </button>
           <div class="sidebar__search-bar">
@@ -218,20 +218,20 @@
     </div>
 
     <!-- ADD PRODUCT -->
-    <div class="add-product hidden">
+    <div class="add-ingredient hidden">
       <div class="overlay"></div>
-      <div class="add-product-content">
-          <header class="add-product-content__header">
-            <h1>Nowy produkt</h1>
-            <button class="add-product-content__header__btn-close btn-icon">
+      <div class="add-ingredient-content">
+          <header class="add-ingredient-content__header">
+            <h1>Nowy składnik</h1>
+            <button class="add-ingredient-content__header__btn-close btn-icon">
               <i data-feather="x"></i>
             </button>
           </header>
-          <form id="add-product" class="add-product-content__form">
+          <form id="add-ingredient" class="add-ingredient-content__form">
             <div class="row-1">
               <div class="col">
                 <label>Produkt</label>
-                <input name="name" class="add-product-content__form__product" type="text" autocomplete="off">
+                <input name="name" class="add-ingredient-content__form__product" type="text" autocomplete="off">
 
                 <!-- Autocomplete / suggestions go here -->
                 <ul class="suggestions">
@@ -240,7 +240,7 @@
               </div>
               <div class="col">
                 <label>Grupa</label>
-                <select name="group" class="add-product-content__form__group">
+                <select name="group" class="add-ingredient-content__form__group">
                   <option>świeże</option>
                   <option>suche</option>
                   <option>mrożone</option>
@@ -250,11 +250,11 @@
             <div class="row-2">
               <div class="col">
                 <label>Ilość</label>
-                <input name="amount" class="add-product-content__form__amount" type="number">
+                <input name="amount" class="add-ingredient-content__form__amount" type="number">
               </div>
               <div class="col">
                 <label>Jedn.</label>
-                <select name="unit" class="add-product-content__form__unit">
+                <select name="unit" class="add-ingredient-content__form__unit">
                   <option>szt.</option>
                   <option>kg</option>
                   <option>ml</option>
@@ -264,15 +264,15 @@
             
               <div class="col">
                 <label>Wazność</label>
-                <input name="expiry" class="add-product-content__form__expiry" type="number" placeholder="ilość dni">
+                <input name="expiry" class="add-ingredient-content__form__expiry" type="number" placeholder="ilość dni">
               </div>
               <div class="col">
                 <label>Data zakupu</label>
-                <input name="date" class="add-product-content__form__date" type="date"> 
+                <input name="date" class="add-ingredient-content__form__date" type="date"> 
               </div>
             </div>
           </form>
-          <button type="submit" form="add-product" class="btn btn-outline">Dodaj</button>
+          <button type="submit" form="add-ingredient" class="btn btn-outline">Dodaj</button>
       </div>
     </div>
 
@@ -300,7 +300,6 @@
 
     <!-- PRODUCT CATALOG -->
     <div class="product-catalog hidden">
-      <div class="overlay"></div>
       <div class="product-catalog-content">
         <header class="product-catalog-header">
           <h1>Katalog składników</h1>
@@ -308,9 +307,76 @@
             <i data-feather="x"></i>
           </button>
         </header>
+        <div class="product-catalog-options">
+          <button class="product-catalog-options__btn-add btn-icon small"><i data-feather="plus"></i></button>
+          <div class="search-bar">
+            <input type="search" placeholder="Szukaj">
+            <i data-feather="search"></i>
+          </div>
+          <span>Filtr</span>
+          <select>
+            <option>brak</option>
+            <option>grupa</option>
+          </select>
+        </div>
         <div class="product-catalog-table__wrapper">
           <table class="product-catalog-table"></table>
         </div>
+      </div>
+    </div>
+
+    <!-- ADD TO CATALOG -->
+    <div class="add-to-catalog hidden">
+      <div class="overlay"></div>
+      <div class="add-to-catalog-content">
+          <header class="add-to-catalog-content__header">
+            <h1>Nowy produkt</h1>
+            <button class="add-to-catalog-content__header__btn-close btn-icon">
+              <i data-feather="x"></i>
+            </button>
+          </header>
+          <form id="add-product" class="add-to-catalog-content__form">
+            <div class="row-1">
+              <div class="col">
+                <label>Produkt</label>
+                <input name="name" class="add-to-catalog-content__form__product" type="text" autocomplete="off">
+
+                <!-- Autocomplete / suggestions go here -->
+                <ul class="suggestions">
+                 
+                </ul>
+              </div>
+              <div class="col">
+                <label>Grupa</label>
+                <select name="group" class="add-to-catalog-content__form__group">
+                  <option>świeże</option>
+                  <option>suche</option>
+                  <option>mrożone</option>
+                </select>
+              </div>
+            </div>
+            <div class="row-2">
+              <div class="col">
+                <label>Ilość</label>
+                <input name="amount" class="add-to-catalog-content__form__amount" type="number">
+              </div>
+              <div class="col">
+                <label>Jedn.</label>
+                <select name="unit" class="add-to-catalog-content__form__unit">
+                  <option>szt.</option>
+                  <option>kg</option>
+                  <option>ml</option>
+                  <option>g</option>
+                </select>
+              </div>
+            
+              <div class="col">
+                <label>Wazność</label>
+                <input name="expiry" class="add-to-catalog-content__form__expiry" type="number" placeholder="ilość dni">
+              </div>
+            </div>
+          </form>
+          <button type="submit" form="add-product" class="btn btn-outline">Dodaj</button>
       </div>
     </div>
 

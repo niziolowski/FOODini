@@ -1,11 +1,13 @@
 import { formatDate } from "../../helpers.js";
 
-class addProductView {
-  _parentElement = document.querySelector(".add-product");
-  _form = document.querySelector(".add-product-content__form");
-  _productInput = document.querySelector(".add-product-content__form__product");
+class addIngredientView {
+  _parentElement = document.querySelector(".add-ingredient");
+  _form = document.querySelector(".add-ingredient-content__form");
+  _productInput = document.querySelector(
+    ".add-ingredient-content__form__product"
+  );
   _suggestions = document.querySelector(
-    ".add-product-content__form .suggestions"
+    ".add-ingredient-content__form .suggestions"
   );
 
   addHandlerUpload(handler) {
@@ -30,10 +32,14 @@ class addProductView {
   updateForm(data) {
     // define DOM elements
     let product = this._productInput;
-    let group = document.querySelector(".add-product-content__form__group");
-    let amount = document.querySelector(".add-product-content__form__amount");
-    let unit = document.querySelector(".add-product-content__form__unit");
-    let expiry = document.querySelector(".add-product-content__form__expiry");
+    let group = document.querySelector(".add-ingredient-content__form__group");
+    let amount = document.querySelector(
+      ".add-ingredient-content__form__amount"
+    );
+    let unit = document.querySelector(".add-ingredient-content__form__unit");
+    let expiry = document.querySelector(
+      ".add-ingredient-content__form__expiry"
+    );
 
     // Clear the form
     if (!data) {
@@ -93,7 +99,7 @@ class addProductView {
 
   show() {
     // Set date initial value to NOW
-    let date = document.querySelector(".add-product-content__form__date");
+    let date = document.querySelector(".add-ingredient-content__form__date");
     date.value = formatDate(new Date());
 
     // Show Element
@@ -107,4 +113,4 @@ class addProductView {
     this.updateForm();
   }
 }
-export default new addProductView();
+export default new addIngredientView();

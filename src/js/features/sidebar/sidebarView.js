@@ -196,7 +196,7 @@ class sidebarView {
     if (!this._status.fullPage) {
       return `
         <div class="row">
-          <button class="sidebar__btn-add-product btn-icon small">
+          <button class="sidebar__btn-add-ingredient btn-icon small">
             <i data-feather="plus"></i>
           </button>
           <div class="sidebar__search-bar">

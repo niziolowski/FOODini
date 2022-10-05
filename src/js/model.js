@@ -229,50 +229,50 @@ const recipes = [
   },
 ];
 
-// catalog.forEach((ing) =>
-//   state.catalog.push(
-//     new Product(
-//       ing.id,
-//       ing.name,
-//       ing.amount,
-//       ing.unit,
-//       ing.group,
-//       ing.bookmark,
-//       ing.expiry
-//     )
-//   )
-// );
+catalog.forEach((ing) =>
+  state.catalog.push(
+    new Product(
+      ing.id,
+      ing.name,
+      ing.amount,
+      ing.unit,
+      ing.group,
+      ing.bookmark,
+      ing.expiry
+    )
+  )
+);
 
-// storage.forEach((ing) =>
-//   state.storage.push(
-//     new Ingredient(
-//       ing.id,
-//       ing.name,
-//       ing.amount,
-//       ing.unit,
-//       ing.group,
-//       ing.bookmark,
-//       ing.created_at,
-//       ing.expiry
-//     )
-//   )
-// );
+storage.forEach((ing) =>
+  state.storage.push(
+    new Ingredient(
+      ing.id,
+      ing.name,
+      ing.amount,
+      ing.unit,
+      ing.group,
+      ing.bookmark,
+      ing.created_at,
+      ing.expiry
+    )
+  )
+);
 
-// recipes.forEach((rec) =>
-//   state.recipes.push(
-//     new Recipe(
-//       rec.id,
-//       rec.name,
-//       rec.group,
-//       rec.description,
-//       rec.ingredients,
-//       rec.spices,
-//       rec.difficulty,
-//       rec.bookmark,
-//       rec.image_url
-//     )
-//   )
-// );
+recipes.forEach((rec) =>
+  state.recipes.push(
+    new Recipe(
+      rec.id,
+      rec.name,
+      rec.group,
+      rec.description,
+      rec.ingredients,
+      rec.spices,
+      rec.difficulty,
+      rec.bookmark,
+      rec.image_url
+    )
+  )
+);
 
 export async function loadCatalog() {
   try {
