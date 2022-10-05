@@ -1,4 +1,5 @@
 import catalogView from "./catalogView.js";
+import * as catalogModel from "./catalogModel.js";
 import addProductView from "../addProduct/addProductView.js";
 import * as model from "../../model.js";
 
@@ -17,11 +18,38 @@ function handleClick(e) {
   // Add btn
   if (btn.classList.contains("product-catalog-options__btn-add"))
     addProductView.show();
+
+  // Delete btn
+  if (btn.classList.contains("js-btn-delete")) {
+    // Get element id
+    const element = btn.closest("tr");
+    const id = +element.id.split("-")[1];
+
+    // Delete item
+    catalogModel.deleteItem(id);
+
+    // Update view
+    catalogView.render(model.state);
+
+    // API edit
+  }
+
+  // Bookmark BTN
+  if (btn.classList.contains("js-btn-bookmark")) {
+    // get item ID
+    const id = +btn.closest("tr").id.split("-")[1];
+
+    // get product
+    const product = model.state.catalog.find((item) => item.id === id);
+    product.toggleBookmark();
+    catalogView.render(model.state);
+
+    // API edit
+  }
 }
 
 function init() {
   catalogView.addHandlerClick(handleClick);
-  catalogView.show(model.state);
   console.log("IMPORT SUCCESSFUL: catalogController");
 }
 

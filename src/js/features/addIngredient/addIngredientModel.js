@@ -7,8 +7,9 @@ export function getSuggestions(input, state) {
   const value = input.value.toLowerCase();
   // Create suggestions list
   const suggestions = [];
+
   // Compare products to input, add to suggestions if matches
-  state.storage.forEach((product) => {
+  state.catalog.forEach((product) => {
     const productName = product.name.toLowerCase();
     if (productName.startsWith(value)) suggestions.push(product);
   });
@@ -27,7 +28,7 @@ export async function upload(data) {
       group: data.group,
       bookmark: false,
       expiry: +data.expiry,
-      created_at: new Date(data.date).getTime(),
+      purchase_date: new Date(data.date).getTime(),
     };
     // Upload
     const newData = await AJAX(`${API_URL_STORAGE}`, ingredientFormated);

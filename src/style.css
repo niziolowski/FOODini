@@ -1129,7 +1129,7 @@ input[type="number"] {
   align-items: center;
   position: relative;
   width: 100%;
-  height: fit-content;
+  height: 100%;
   z-index: 1;
   background-color: var(--bg-color);
   padding: 20px;
@@ -1199,7 +1199,7 @@ input[type="number"] {
 }
 
 .product-catalog-table th {
-  width: 10px;
+  width: 56px;
   font-weight: 400;
   color: var(--accent-color);
   background-color: white;

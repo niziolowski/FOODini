@@ -51,8 +51,8 @@ function handleACinput(e) {
 function performAC(e) {
   const productID = +e.target.dataset.productId;
 
-  // Get clicked product object from storage database
-  const productData = model.state.storage.find(
+  // Get clicked product object from catalog database
+  const productData = model.state.catalog.find(
     (product) => product.id === productID
   );
 

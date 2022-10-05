@@ -26,79 +26,7 @@ export const state = {
 // TEST DATA
 const catalog = [
   {
-    id: 2,
-    name: "Mąka",
-    amount: 1,
-    unit: "kg",
-    group: "suche",
-    bookmark: false,
-    expiry: 150,
-  },
-  {
-    id: 2,
-    name: "Mąka",
-    amount: 1,
-    unit: "kg",
-    group: "suche",
-    bookmark: false,
-    expiry: 150,
-  },
-  {
-    id: 2,
-    name: "Mąka",
-    amount: 1,
-    unit: "kg",
-    group: "suche",
-    bookmark: false,
-    expiry: 150,
-  },
-  {
-    id: 2,
-    name: "Mąka",
-    amount: 1,
-    unit: "kg",
-    group: "suche",
-    bookmark: false,
-    expiry: 150,
-  },
-  {
-    id: 2,
-    name: "Mąka",
-    amount: 1,
-    unit: "kg",
-    group: "suche",
-    bookmark: false,
-    expiry: 150,
-  },
-  {
-    id: 2,
-    name: "Mąka",
-    amount: 1,
-    unit: "kg",
-    group: "suche",
-    bookmark: false,
-    expiry: 150,
-  },
-  {
-    id: 2,
-    name: "Mąka",
-    amount: 1,
-    unit: "kg",
-    group: "suche",
-    bookmark: false,
-    expiry: 150,
-  },
-  {
-    id: 2,
-    name: "Mąka",
-    amount: 1,
-    unit: "kg",
-    group: "suche",
-    bookmark: false,
-    expiry: 150,
-  },
-  {
-    id: 2,
+    id: 1,
     name: "Mąka",
     amount: 1,
     unit: "kg",
@@ -117,6 +45,78 @@ const catalog = [
   },
   {
     id: 3,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 4,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 5,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 6,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 7,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 8,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 9,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 10,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 11,
     name: "Halibut",
     amount: 300,
     unit: "g",
@@ -125,7 +125,7 @@ const catalog = [
     expiry: 150,
   },
   {
-    id: 4,
+    id: 12,
     name: "Boczek",
     amount: 400,
     unit: "g",
@@ -134,7 +134,7 @@ const catalog = [
     expiry: 14,
   },
   {
-    id: 5,
+    id: 13,
     name: "Jogurt naturalny",
     amount: 1,
     unit: "szt.",
@@ -143,7 +143,7 @@ const catalog = [
     expiry: 30,
   },
   {
-    id: 1,
+    id: 14,
     name: "Jajka",
     amount: 10,
     unit: "szt.",
@@ -276,7 +276,7 @@ recipes.forEach((rec) =>
 
 export async function loadCatalog() {
   try {
-    const data = await AJAX(API_URL_STORAGE);
+    const data = await AJAX(API_URL_CATALOG);
     data.forEach((ing) => {
       state.catalog.push(
         new Product(
@@ -307,7 +307,7 @@ export async function loadStorage() {
           ing.unit,
           ing.group,
           ing.bookmark,
-          ing.created_at,
+          ing.purchase_date,
           ing.expiry
         )
       );

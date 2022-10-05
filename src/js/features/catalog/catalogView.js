@@ -29,15 +29,19 @@ class catalogView {
           const tag = state.tags.storage.indexOf(item.group) + 1;
 
           return `
-            <tr>
-            <td><button class="btn-icon small fill"><i data-feather="star"></i></button></td>
+            <tr id="c-${item.id}">
+            <td><button class="js-btn-bookmark btn-icon small fill ${
+              item.bookmark ? "active" : ""
+            }"><i data-feather="star"></i></button></td>
             <td>${item.name}</td>
             <td>${item.amount}</td>
             <td>${item.unit}</td>
-            <td><div class="tag" style="background-color: var(--tag-${tag}-color)">${item.group}</div></td>
+            <td><div class="tag" style="background-color: var(--tag-${tag}-color)">${
+            item.group
+          }</div></td>
             <td>${item.expiry} dni</td>
             <td><button class="btn-icon small"><i data-feather="edit"></i></button></td>
-            <td><button class="btn-icon small"><i data-feather="trash"></i></button></td>
+            <td><button class="js-btn-delete btn-icon small"><i data-feather="trash"></i></button></td>
         </tr>
         `;
         })
