@@ -2,6 +2,7 @@ import catalogView from "./catalogView.js";
 import * as catalogModel from "./catalogModel.js";
 import addProductView from "../addProduct/addProductView.js";
 import * as model from "../../model.js";
+import { Product } from "../Product.js";
 
 function handleClick(e) {
   // // Handle overlay click
@@ -24,14 +25,16 @@ function handleClick(e) {
     // Get element id
     const element = btn.closest("tr");
     const id = +element.id.split("-")[1];
+    // API delete
+    const product = model.state.catalog.find((item) => item.id === id);
+
+    product.APIdelete();
 
     // Delete item
     catalogModel.deleteItem(id);
 
     // Update view
     catalogView.render(model.state);
-
-    // API edit
   }
 
   // Bookmark BTN
@@ -45,6 +48,7 @@ function handleClick(e) {
     catalogView.render(model.state);
 
     // API edit
+    product.APIedit();
   }
 }
 

@@ -1,5 +1,6 @@
 import { AJAX } from "../helpers.js";
 import { API_URL_CATALOG } from "../config.js";
+import { timeout } from "../helpers.js";
 
 export class Product {
   constructor(id, name, amount, unit, group, bookmark, expiry) {
@@ -16,7 +17,7 @@ export class Product {
     this.bookmark = !this.bookmark;
   }
 
-  async upload() {
+  async APIedit() {
     try {
       // Format product object for API
 
@@ -37,6 +38,18 @@ export class Product {
       return newData;
     } catch (error) {
       throw error;
+    }
+  }
+
+  async APIdelete() {
+    try {
+      const res = await fetch(`${API_URL_CATALOG}/${this.id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+    } catch (err) {
+      throw err;
     }
   }
 }
