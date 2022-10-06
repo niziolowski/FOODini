@@ -3,6 +3,7 @@ import * as addIngredientModel from "./addIngredientModel.js";
 import * as model from "../../model.js";
 import sidebarView from "../sidebar/sidebarView.js";
 import { Ingredient } from "../Ingredient.js";
+import addProductView from "../addProduct/addProductView.js";
 
 function handleClick(e) {
   // Handle overlay click
@@ -20,18 +21,27 @@ function handleClick(e) {
 
 function handleAC(e) {
   function handleACevents(e) {
+    const li = e.target.closest("li");
+    let input = e.target.closest("input");
+
+    // On input (get suggestions, display suggestion list)
+    if (input && input.value.length > 0) handleACinput(e);
+
+    console.log(e, li, input);
     // On "Escape" key (exit autocomplete)
     if (e.type === "keydown" && e.key === "Escape") addIngredientView.clearAC();
 
-    // On click
-    const tagName = e.target.tagName;
+    // On focusout
+    if (!li && !input) addIngredientView.clearAC();
 
-    if (tagName !== "LI" && tagName !== "INPUT") addIngredientView.clearAC();
-
-    if (tagName === "LI") performAC(e);
-
-    // On input (get suggestions, display suggestion list)
-    if (e.type === "input") handleACinput(e);
+    // Suggestion click
+    if (li) {
+      if (li.classList.contains("suggestions__btn-new")) {
+        addProductView.show();
+      } else {
+        performAC(e);
+      }
+    }
   }
 
   // Listeners for autoComplete feature

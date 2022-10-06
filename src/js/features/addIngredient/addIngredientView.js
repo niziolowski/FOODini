@@ -87,6 +87,10 @@ class addIngredientView {
       )
       .join("")}
     `;
+    this._suggestions.innerHTML +=
+      '<li class="suggestions__btn-new"><i>Stwórz nowy produkt</i><i data-feather="edit"></i></li>';
+
+    feather.replace();
   }
 
   addHandlerAC(handler) {

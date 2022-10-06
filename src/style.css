@@ -921,6 +921,8 @@ input[type="number"] {
   position: absolute;
   top: 100%;
   width: 100%;
+  max-height: 240px;
+  /* padding-bottom: 40px; */
   list-style: none;
   border-left: var(--border);
   border-right: var(--border);
@@ -928,6 +930,7 @@ input[type="number"] {
   border-radius: 5px;
   box-shadow: var(--shadow);
   overflow: hidden;
+  overflow-y: scroll;
   z-index: 1;
 }
 
@@ -937,12 +940,29 @@ input[type="number"] {
   height: 40px;
   padding: 0 10px;
   border-bottom: var(--border);
+  cursor: pointer;
 }
 
 .add-ingredient-content__form li:hover {
   background-color: var(--bg-color);
 }
 
+.suggestions__btn-new {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  border-top: 2px solid var(--grey-color);
+  color: var(--accent-color);
+  background-color: white;
+  font-weight: 400;
+}
+
+.suggestions__btn-new svg {
+  margin-left: auto;
+  width: 20px;
+  height: 20px;
+}
 /* § RECIPE PREVIEW */
 
 .recipe-preview {

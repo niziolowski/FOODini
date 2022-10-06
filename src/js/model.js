@@ -24,255 +24,255 @@ export const state = {
 };
 
 // TEST DATA
-// const catalog = [
-//   {
-//     id: 1,
-//     name: "Mąka",
-//     amount: 1,
-//     unit: "kg",
-//     group: "suche",
-//     bookmark: false,
-//     expiry: 150,
-//   },
-//   {
-//     id: 2,
-//     name: "Mąka",
-//     amount: 1,
-//     unit: "kg",
-//     group: "suche",
-//     bookmark: false,
-//     expiry: 150,
-//   },
-//   {
-//     id: 3,
-//     name: "Mąka",
-//     amount: 1,
-//     unit: "kg",
-//     group: "suche",
-//     bookmark: false,
-//     expiry: 150,
-//   },
-//   {
-//     id: 4,
-//     name: "Mąka",
-//     amount: 1,
-//     unit: "kg",
-//     group: "suche",
-//     bookmark: false,
-//     expiry: 150,
-//   },
-//   {
-//     id: 5,
-//     name: "Mąka",
-//     amount: 1,
-//     unit: "kg",
-//     group: "suche",
-//     bookmark: false,
-//     expiry: 150,
-//   },
-//   {
-//     id: 6,
-//     name: "Mąka",
-//     amount: 1,
-//     unit: "kg",
-//     group: "suche",
-//     bookmark: false,
-//     expiry: 150,
-//   },
-//   {
-//     id: 7,
-//     name: "Mąka",
-//     amount: 1,
-//     unit: "kg",
-//     group: "suche",
-//     bookmark: false,
-//     expiry: 150,
-//   },
-//   {
-//     id: 8,
-//     name: "Mąka",
-//     amount: 1,
-//     unit: "kg",
-//     group: "suche",
-//     bookmark: false,
-//     expiry: 150,
-//   },
-//   {
-//     id: 9,
-//     name: "Mąka",
-//     amount: 1,
-//     unit: "kg",
-//     group: "suche",
-//     bookmark: false,
-//     expiry: 150,
-//   },
-//   {
-//     id: 10,
-//     name: "Mąka",
-//     amount: 1,
-//     unit: "kg",
-//     group: "suche",
-//     bookmark: false,
-//     expiry: 150,
-//   },
-//   {
-//     id: 11,
-//     name: "Halibut",
-//     amount: 300,
-//     unit: "g",
-//     group: "mrożone",
-//     bookmark: false,
-//     expiry: 150,
-//   },
-//   {
-//     id: 12,
-//     name: "Boczek",
-//     amount: 400,
-//     unit: "g",
-//     group: "świeże",
-//     bookmark: false,
-//     expiry: 14,
-//   },
-//   {
-//     id: 13,
-//     name: "Jogurt naturalny",
-//     amount: 1,
-//     unit: "szt.",
-//     group: "świeże",
-//     bookmark: false,
-//     expiry: 30,
-//   },
-//   {
-//     id: 14,
-//     name: "Jajka",
-//     amount: 10,
-//     unit: "szt.",
-//     group: "świeże",
-//     bookmark: true,
-//     expiry: 20,
-//   },
-// ];
+const catalog = [
+  {
+    id: 1,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 2,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 3,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 4,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 5,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 6,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 7,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 8,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 9,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 10,
+    name: "Mąka",
+    amount: 1,
+    unit: "kg",
+    group: "suche",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 11,
+    name: "Halibut",
+    amount: 300,
+    unit: "g",
+    group: "mrożone",
+    bookmark: false,
+    expiry: 150,
+  },
+  {
+    id: 12,
+    name: "Boczek",
+    amount: 400,
+    unit: "g",
+    group: "świeże",
+    bookmark: false,
+    expiry: 14,
+  },
+  {
+    id: 13,
+    name: "Jogurt naturalny",
+    amount: 1,
+    unit: "szt.",
+    group: "świeże",
+    bookmark: false,
+    expiry: 30,
+  },
+  {
+    id: 14,
+    name: "Jajka",
+    amount: 10,
+    unit: "szt.",
+    group: "świeże",
+    bookmark: true,
+    expiry: 20,
+  },
+];
 
-// const storage = [
-//   {
-//     id: 1,
-//     created_at: 1660643417457,
-//     name: "Jajka",
-//     amount: 10,
-//     unit: "szt.",
-//     expiry: 14,
-//     bookmark: true,
-//     group: "świeże",
-//   },
-//   {
-//     id: 30,
-//     created_at: 1664793332235,
-//     name: "Makaron",
-//     amount: 100,
-//     unit: "g",
-//     expiry: 60,
-//     bookmark: false,
-//     group: "suche",
-//   },
-//   {
-//     id: 31,
-//     created_at: 1664793363681,
-//     name: "Pomidor",
-//     amount: 2,
-//     unit: "szt.",
-//     expiry: 7,
-//     bookmark: false,
-//     group: "świeże",
-//   },
-//   {
-//     id: 32,
-//     created_at: 1664793386948,
-//     name: "Parmezan",
-//     amount: 50,
-//     unit: "g",
-//     expiry: 30,
-//     bookmark: false,
-//     group: "świeże",
-//   },
-// ];
+const storage = [
+  {
+    id: 1,
+    created_at: 1660643417457,
+    name: "Jajka",
+    amount: 10,
+    unit: "szt.",
+    expiry: 14,
+    bookmark: true,
+    group: "świeże",
+  },
+  {
+    id: 30,
+    created_at: 1664793332235,
+    name: "Makaron",
+    amount: 100,
+    unit: "g",
+    expiry: 60,
+    bookmark: false,
+    group: "suche",
+  },
+  {
+    id: 31,
+    created_at: 1664793363681,
+    name: "Pomidor",
+    amount: 2,
+    unit: "szt.",
+    expiry: 7,
+    bookmark: false,
+    group: "świeże",
+  },
+  {
+    id: 32,
+    created_at: 1664793386948,
+    name: "Parmezan",
+    amount: 50,
+    unit: "g",
+    expiry: 30,
+    bookmark: false,
+    group: "świeże",
+  },
+];
 
-// const recipes = [
-//   {
-//     id: 1,
-//     created_at: 1661700093430,
-//     name: "Jajecznica",
-//     group: "śniadanie",
-//     difficulty: 1,
-//     ingredients: [{ name: "Jajka", unit: "szt.", amount: 4 }],
-//     spices: ["sól", "pieprz"],
-//     bookmark: false,
-//     image_url:
-//       "https://cdn.galleries.smcloud.net/t/photos/gf-bc5p-Ttbo-1SJC_jajecznica-podstawowy-przepis-na-klasyczna-potrawe-z-rozmaconych-jajek.jpg",
-//     description: "Normalnie, jajka rozbić na patelnii i smażyć aż się zetno.",
-//   },
-//   {
-//     id: 2,
-//     created_at: 1664716054736,
-//     name: "Makaron z sosem pomidorowy i parmezanem",
-//     group: "obiad",
-//     difficulty: 2,
-//     ingredients: [
-//       { name: "Makaron", unit: "g", amount: 50 },
-//       { name: "Pomidor", unit: "szt.", amount: 3 },
-//     ],
-//     spices: ["sól", "pieprz", "bazylia"],
-//     bookmark: true,
-//     image_url:
-//       "https://cdn.galleries.smcloud.net/t/photos/gf-Yz2K-uho6-f6NT_spaghetti-bolognese-przepis-na-wloskie-danie-dla-4-osob.jpg",
-//     description:
-//       "Makaron gotujemy al dente. Obieramy cebulę i kroimy w kosteczkę, ząbki czosnku drobno siekamy. Parmezan ścieramy na drobniutkich oczkach. \n\n\n      Rozgrzewamy oliwę na głębokiej patelni i podsmażamy do zeszklenia cebulę i czosnek. Na patelnię dodajemy pomidory z puszki (z całą zalewą), łyżeczkę koncentratu i przyprawy.\n      \n      Ugotowany makaron wrzucamy na patelnię z sosem, mieszamy i gotujemy około 1-2 minut.\n      Dodajemy pokrojoną na mniejsze kawałki bazylię, 1 łyżkę startego parmezanu i mieszamy.\n      \n      Podajemy na talerzach posypane resztą parmezanu i przyozdobione świeżymi listkami bazylii.",
-//   },
-// ];
+const recipes = [
+  {
+    id: 1,
+    created_at: 1661700093430,
+    name: "Jajecznica",
+    group: "śniadanie",
+    difficulty: 1,
+    ingredients: [{ name: "Jajka", unit: "szt.", amount: 4 }],
+    spices: ["sól", "pieprz"],
+    bookmark: false,
+    image_url:
+      "https://cdn.galleries.smcloud.net/t/photos/gf-bc5p-Ttbo-1SJC_jajecznica-podstawowy-przepis-na-klasyczna-potrawe-z-rozmaconych-jajek.jpg",
+    description: "Normalnie, jajka rozbić na patelnii i smażyć aż się zetno.",
+  },
+  {
+    id: 2,
+    created_at: 1664716054736,
+    name: "Makaron z sosem pomidorowy i parmezanem",
+    group: "obiad",
+    difficulty: 2,
+    ingredients: [
+      { name: "Makaron", unit: "g", amount: 50 },
+      { name: "Pomidor", unit: "szt.", amount: 3 },
+    ],
+    spices: ["sól", "pieprz", "bazylia"],
+    bookmark: true,
+    image_url:
+      "https://cdn.galleries.smcloud.net/t/photos/gf-Yz2K-uho6-f6NT_spaghetti-bolognese-przepis-na-wloskie-danie-dla-4-osob.jpg",
+    description:
+      "Makaron gotujemy al dente. Obieramy cebulę i kroimy w kosteczkę, ząbki czosnku drobno siekamy. Parmezan ścieramy na drobniutkich oczkach. \n\n\n      Rozgrzewamy oliwę na głębokiej patelni i podsmażamy do zeszklenia cebulę i czosnek. Na patelnię dodajemy pomidory z puszki (z całą zalewą), łyżeczkę koncentratu i przyprawy.\n      \n      Ugotowany makaron wrzucamy na patelnię z sosem, mieszamy i gotujemy około 1-2 minut.\n      Dodajemy pokrojoną na mniejsze kawałki bazylię, 1 łyżkę startego parmezanu i mieszamy.\n      \n      Podajemy na talerzach posypane resztą parmezanu i przyozdobione świeżymi listkami bazylii.",
+  },
+];
 
-// catalog.forEach((ing) =>
-//   state.catalog.push(
-//     new Product(
-//       ing.id,
-//       ing.name,
-//       ing.amount,
-//       ing.unit,
-//       ing.group,
-//       ing.bookmark,
-//       ing.expiry
-//     )
-//   )
-// );
+catalog.forEach((ing) =>
+  state.catalog.push(
+    new Product(
+      ing.id,
+      ing.name,
+      ing.amount,
+      ing.unit,
+      ing.group,
+      ing.bookmark,
+      ing.expiry
+    )
+  )
+);
 
-// storage.forEach((ing) =>
-//   state.storage.push(
-//     new Ingredient(
-//       ing.id,
-//       ing.name,
-//       ing.amount,
-//       ing.unit,
-//       ing.group,
-//       ing.bookmark,
-//       ing.created_at,
-//       ing.expiry
-//     )
-//   )
-// );
+storage.forEach((ing) =>
+  state.storage.push(
+    new Ingredient(
+      ing.id,
+      ing.name,
+      ing.amount,
+      ing.unit,
+      ing.group,
+      ing.bookmark,
+      ing.created_at,
+      ing.expiry
+    )
+  )
+);
 
-// recipes.forEach((rec) =>
-//   state.recipes.push(
-//     new Recipe(
-//       rec.id,
-//       rec.name,
-//       rec.group,
-//       rec.description,
-//       rec.ingredients,
-//       rec.spices,
-//       rec.difficulty,
-//       rec.bookmark,
-//       rec.image_url
-//     )
-//   )
-// );
+recipes.forEach((rec) =>
+  state.recipes.push(
+    new Recipe(
+      rec.id,
+      rec.name,
+      rec.group,
+      rec.description,
+      rec.ingredients,
+      rec.spices,
+      rec.difficulty,
+      rec.bookmark,
+      rec.image_url
+    )
+  )
+);
 
 export async function loadCatalog() {
   try {
