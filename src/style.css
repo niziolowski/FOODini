@@ -163,6 +163,7 @@ h2 {
   max-width: 200px;
   border-radius: 10px;
   border: 1px solid var(--accent-color);
+  padding: 5px;
 }
 
 .plan-day__title {
@@ -171,7 +172,39 @@ h2 {
   align-items: center;
   font-weight: 300;
   color: var(--accent-color);
+  margin-bottom: 10px;
+}
+
+/* plan list */
+
+.plan-day-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+}
+
+.plan-day-list__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 300;
+  font-size: 0.7rem;
+  color: var(--font-color);
+  background-color: white;
+  border: var(--border);
+  border-radius: 5px;
+  border-right: 3px solid var(--tag-2-color);
   padding: 5px;
+  transition: var(--transition);
+}
+
+.plan-day-list__item:hover {
+  scale: 1.05;
+  box-shadow: var(--shadow);
+}
+
+.plan-day-list__item__btn-delete {
+  flex: 0 0 auto;
 }
 
 .plan-notes {
