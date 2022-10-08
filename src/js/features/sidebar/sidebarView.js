@@ -12,6 +12,10 @@ class sidebarView {
     view: "columns",
   };
 
+  constructor() {
+    this.addHandlerDragAndDrop(this.handleDragAndDrop);
+  }
+
   init(state) {
     this.render(state);
   }
@@ -444,6 +448,31 @@ class sidebarView {
         </ul></section>
       </div>
     `;
+  }
+
+  addHandlerDragAndDrop(handler) {
+    ["dragstart", "dragend"].forEach((event) =>
+      this._parentElement.addEventListener(event, handler)
+    );
+  }
+
+  handleDragAndDrop(e) {
+    // Get list item element
+    const target = e.target.closest("li");
+
+    if (e.type === "dragstart") {
+      // Add selector for reference
+      target.classList.add("dragging");
+
+      // Get product id
+      const id = target.dataset.id;
+
+      // Transfer id
+      e.dataTransfer.setData("text/plain", id);
+    }
+    if (e.type === "dragend") {
+      target.classList.remove("dragging");
+    }
   }
 }
 export default new sidebarView();

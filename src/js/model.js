@@ -3,6 +3,7 @@ import { API_URL_STORAGE, API_URL_RECIPES, API_URL_CATALOG } from "./config.js";
 import { Ingredient } from "./features/Ingredient.js";
 import { Recipe } from "./features/Recipe.js";
 import { Product } from "./features/Product.js";
+import { Day } from "./features/Day.js";
 // § STATE
 
 export const state = {
@@ -21,8 +22,37 @@ export const state = {
   recipes: [],
   storage: [],
   catalog: [],
+  plan: {
+    currentWeek: {
+      dateRange: [],
+      days: [],
+    },
+    weeks: [
+      {
+        dateRange: [],
+        days: [],
+      },
+    ],
+  },
 };
 
+state.plan.currentWeek.days.push(
+  new Day("monday", [
+    {
+      id: 1,
+      created_at: 1661700093430,
+      name: "Jajecznica",
+      group: "śniadanie",
+      difficulty: 1,
+      ingredients: [{ name: "Jajka", unit: "szt.", amount: 4 }],
+      spices: ["sól", "pieprz"],
+      bookmark: false,
+      image_url:
+        "https://cdn.galleries.smcloud.net/t/photos/gf-bc5p-Ttbo-1SJC_jajecznica-podstawowy-przepis-na-klasyczna-potrawe-z-rozmaconych-jajek.jpg",
+      description: "Normalnie, jajka rozbić na patelnii i smażyć aż się zetno.",
+    },
+  ])
+);
 // TEST DATA
 const catalog = [
   {
@@ -350,4 +380,13 @@ export async function loadState() {
   } catch (error) {
     throw error;
   }
+}
+
+// model helpers
+export function getRecipe(id) {
+  return state.recipes.find((recipe) => recipe.id === id);
+}
+
+export function getIngredient(id) {
+  return state.storage.find((recipe) => recipe.id === id);
 }

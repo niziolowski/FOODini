@@ -53,37 +53,69 @@
         <div id="week-id" class="plan-week">
           <div class="plan-day">
             <div class="plan-day__title">Poniedziałek</div>
-            <ul class="plan-day-list">
+            <ul id="monday" class="plan-day-list">
               <li class="plan-day-list__item" draggable="true">
                 <p class="plan-day-list__item__name">Jajecznica</p>
+                <button class="plan-day-list__item__btn-delete btn-icon small"><i data-feather="trash"></i></button>
+              </li>
+              <li class="plan-day-list__item" draggable="true">
+                <p class="plan-day-list__item__name">Kotlety</p>
                 <button class="plan-day-list__item__btn-delete btn-icon small"><i data-feather="trash"></i></button>
               </li>
               <li class="plan-day-list__item" draggable="true">
                 <p class="plan-day-list__item__name">Makaron z sosem pomidorowym i parmezanem</p>
                 <button class="plan-day-list__item__btn-delete btn-icon small"><i data-feather="trash"></i></button>
               </li>
+              <li class="plan-day-list__item" draggable="true">
+                <p class="plan-day-list__item__name">Chipsy</p>
+                <button class="plan-day-list__item__btn-delete btn-icon small"><i data-feather="trash"></i></button>
+              </li>
             </ul>
           </div>
           <div class="plan-day">
             <div class="plan-day__title">Wtorek</div>
+            <ul id="tuesday" class="plan-day-list">
+              <li class="plan-day-list__item" data-id="r-1" draggable="true">
+                <p class="plan-day-list__item__name">Jajecznica</p>
+                <button class="plan-day-list__item__btn-delete btn-icon small"><i data-feather="trash"></i></button>
+              </li>
+              <li class="plan-day-list__item" data-id="r-2" draggable="true">
+                <p class="plan-day-list__item__name">Makaron z sosem pomidorowym i parmezanem</p>
+                <button class="plan-day-list__item__btn-delete btn-icon small"><i data-feather="trash"></i></button>
+              </li>
+              <li class="plan-day-list__item" data-id="r-3" draggable="true">
+                <p class="plan-day-list__item__name">Makaron z sosem pomidorowym i parmezanem</p>
+                <button class="plan-day-list__item__btn-delete btn-icon small"><i data-feather="trash"></i></button>
+              </li>
+              <li class="plan-day-list__item" data-id="r-4" draggable="true">
+                <p class="plan-day-list__item__name">Makaron z sosem pomidorowym i parmezanem</p>
+                <button class="plan-day-list__item__btn-delete btn-icon small"><i data-feather="trash"></i></button>
+              </li>
+            </ul>
           </div>
           <div class="plan-day">
             <div class="plan-day__title">Środa</div>
+            <ul id="wednesday" class="plan-day-list"></ul>
           </div>
           <div class="plan-day">
             <div class="plan-day__title">Czwartek</div>
+            <ul id="thursday" class="plan-day-list"></ul>
           </div>
           <div class="plan-day">
             <div class="plan-day__title">Piątek</div>
+            <ul id="friday" class="plan-day-list"></ul>
           </div>
           <div class="plan-day">
             <div class="plan-day__title">Sobota</div>
+            <ul id="saturday" class="plan-day-list"></ul>
           </div>
           <div class="plan-day">
             <div class="plan-day__title">Niedziela</div>
+            <ul id="sunday" class="plan-day-list"></ul>
           </div>
           <div class="plan-notes">
             <div class="plan-notes__title">Notes</div>
+            <ul id="notes" class="plan-day-list"></ul>
           </div>
         </div>
       </section>

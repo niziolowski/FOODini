@@ -1,5 +1,6 @@
 // FEATURE BASED MVC STRUCTURE TEST
 import * as sidebarController from "./features/sidebar/sidebarController.js";
+import mainController from "./features/main/mainController.js";
 import navController from "./features/nav/navController.js";
 import settingsController from "./features/settings/settingsController.js";
 import addIngredientController from "./features/addIngredient/addIngredientController.js";
