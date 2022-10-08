@@ -8,8 +8,13 @@ function handleDragAndDrop(e) {
 }
 
 function handleDrop(e) {
-  // If not dropping on the list, do nothing
+  // If not dropping on the list, just clean indicator
   const list = e.target.closest(".plan-day-list");
+
+  // Clear Indication on all days
+  const days = document.querySelectorAll(".plan-day");
+  days.forEach((day) => day.classList.remove("drag-over"));
+
   if (!list) return;
 
   // look for placeholder when dropping a new element
