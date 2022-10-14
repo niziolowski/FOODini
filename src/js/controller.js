@@ -29,12 +29,3 @@ async function init() {
     console.error(error);
   }
 }
-
-// Open sidebar in full-page view
-
-// import sidebarView from "./features/sidebar/sidebarView.js";
-// import mainView from "./features/main/mainView.js";
-
-// mainView.shift();
-// sidebarView.show();
-// sidebarView.toggleFullPage(model.state);

@@ -1,6 +1,7 @@
 class mainView {
   _parentElement = document.querySelector(".main-view");
   _days = document.querySelectorAll(".plan-day-list");
+  _planWeek = this._parentElement.querySelector(".plan-week");
   // Make space for the sidebar
   shift() {
     this._parentElement.classList.toggle("shift");
@@ -33,7 +34,9 @@ class mainView {
 
   _handleDragStart(e) {
     e.target.classList.add("dragging");
-    const id = e.target.closest("li").dataset.id;
+    // Get element index for reference
+    const index = [...e.target.closest("ul").children].indexOf(e.target);
+    console.log(index);
   }
 
   _handleDragEnd(e) {
@@ -146,14 +149,17 @@ class mainView {
         (meal) => (day.innerHTML += this.generateMarkupMeal(meal, state))
       );
     });
+
+    // Set week ID
+    this._planWeek.id = `${week.dateRange.startDate}`;
   }
 
   generateMarkupMeal(meal, state) {
-    // For recipes
-    if (meal.ingredients) {
-      const tag = state.tags.recipes.indexOf(meal.group) + 1;
+    // For ingredients
+    if (!meal.ingredients) {
+      const tag = state.tags.storage.indexOf(meal.group) + 1;
       return `
-        <li class="plan-day-list__item" data-id="r-${meal.id}" draggable="true">
+        <li class="plan-day-list__item" data-id="i-${meal.id}" draggable="true">
           <p class="plan-day-list__item__name">${meal?.title || meal?.name}</p>
           <button class="plan-day-list__item__btn-delete btn-icon small"><i data-feather="trash"></i></button>
           <span class="plan-day-list__item__tag" style="background-color: var(--tag-${tag}-color"></span>
@@ -161,11 +167,11 @@ class mainView {
       `;
     }
 
-    // For ingredients
-    if (!meal.ingredients) {
-      const tag = state.tags.storage.indexOf(meal.group) + 1;
+    // For recipes
+    if (meal.ingredients) {
+      const tag = state.tags.recipes.indexOf(meal.group) + 1;
       return `
-        <li class="plan-day-list__item" data-id="i-${meal.id}" draggable="true">
+        <li class="plan-day-list__item" data-id="r-${meal.id}" draggable="true">
           <p class="plan-day-list__item__name">${meal?.title || meal?.name}</p>
           <button class="plan-day-list__item__btn-delete btn-icon small"><i data-feather="trash"></i></button>
           <span class="plan-day-list__item__tag" style="background-color: var(--tag-${tag}-color"></span>

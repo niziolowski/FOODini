@@ -23,36 +23,30 @@ export const state = {
   storage: [],
   catalog: [],
   plan: {
-    currentWeek: {
-      dateRange: [],
-      days: [],
-    },
-    weeks: [
-      {
-        dateRange: [],
-        days: [],
-      },
-    ],
+    activeWeek: {},
+    currentWeek: {},
+    weeks: [],
   },
 };
 
-state.plan.currentWeek.days.push(
-  new Day("monday", [
-    {
-      id: 1,
-      created_at: 1661700093430,
-      name: "Jajecznica",
-      group: "śniadanie",
-      difficulty: 1,
-      ingredients: [{ name: "Jajka", unit: "szt.", amount: 4 }],
-      spices: ["sól", "pieprz"],
-      bookmark: false,
-      image_url:
-        "https://cdn.galleries.smcloud.net/t/photos/gf-bc5p-Ttbo-1SJC_jajecznica-podstawowy-przepis-na-klasyczna-potrawe-z-rozmaconych-jajek.jpg",
-      description: "Normalnie, jajka rozbić na patelnii i smażyć aż się zetno.",
-    },
-  ])
-);
+// state.plan.currentWeek.days.push(
+//   new Day("monday", [
+//     {
+//       id: 1,
+//       created_at: 1661700093430,
+//       name: "Jajecznica",
+//       group: "śniadanie",
+//       difficulty: 1,
+//       ingredients: [{ name: "Jajka", unit: "szt.", amount: 4 }],
+//       spices: ["sól", "pieprz"],
+//       bookmark: false,
+//       image_url:
+//         "https://cdn.galleries.smcloud.net/t/photos/gf-bc5p-Ttbo-1SJC_jajecznica-podstawowy-przepis-na-klasyczna-potrawe-z-rozmaconych-jajek.jpg",
+//       description: "Normalnie, jajka rozbić na patelnii i smażyć aż się zetno.",
+//     },
+//   ])
+// );
+
 // TEST DATA
 const catalog = [
   {

@@ -1,4 +1,5 @@
 import mainView from "./mainView.js";
+import * as mainModel from "./mainModel.js";
 import * as model from "../../model.js";
 
 //TODO: Refactor this. Move to view what you can. Think through.
@@ -8,6 +9,8 @@ function handleDragAndDrop(e) {
 }
 
 function handleDrop(e) {
+  // § VIEW
+
   // If not dropping on the list, just clean indicator
   const list = e.target.closest(".plan-day-list");
 
@@ -48,15 +51,32 @@ function handleDrop(e) {
   // Insert markup in the place of placeholder
   placeholder.insertAdjacentHTML("beforebegin", newElement);
 
+  // Index of dropped item for reference
+  const targetIndex = [...list.children].indexOf(placeholder) - 1;
+
   // remove placeholder if present
   if (placeholder) placeholder.remove();
 
   // get svg icons
   feather.replace();
+
+  // § MODEL
+
+  // Get target day
+  const targetDay = model.state.plan.currentWeek.days.find(
+    (day) => day.name === list.id
+  );
+  // Get target index
+  targetDay.meals.splice(targetIndex, 0, meal);
 }
 
 function init() {
   mainView.addHandlerDragAndDrop(handleDragAndDrop);
+
+  // Set current week
+  mainModel.setCurrentWeek();
+
+  // Render plan
   mainView.render(model.state.plan.currentWeek, model.state);
 }
 init();
