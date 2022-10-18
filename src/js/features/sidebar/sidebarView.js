@@ -467,8 +467,14 @@ class sidebarView {
       // Get product id
       const id = target.dataset.id;
 
+      // Create dataTransfer object
+      const data = {
+        mode: "add",
+        id,
+      };
+
       // Transfer id
-      e.dataTransfer.setData("text/plain", id);
+      e.dataTransfer.setData("text/plain", JSON.stringify(data));
     }
     if (e.type === "dragend") {
       target.classList.remove("dragging");

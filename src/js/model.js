@@ -374,3 +374,7 @@ export function getRecipe(id) {
 export function getIngredient(id) {
   return state.storage.find((recipe) => recipe.id === id);
 }
+
+export function getDay(id) {
+  return state.plan.activeWeek.days.find((day) => day.name === id);
+}

@@ -25,6 +25,8 @@ async function init() {
     // model.loadRecipes();
     // Init sidebar
     sidebarController.init();
+
+    console.log(JSON.stringify(model.state.plan.activeWeek));
   } catch (error) {
     console.error(error);
   }

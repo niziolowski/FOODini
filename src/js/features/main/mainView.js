@@ -7,6 +7,10 @@ class mainView {
     this._parentElement.classList.toggle("shift");
   }
 
+  addHandlerClick(handler) {
+    this._planWeek.addEventListener("click", handler.bind(this));
+  }
+
   addHandlerDragAndDrop(handler) {
     // Controller handlers
     ["drop"].forEach((event) =>
@@ -33,10 +37,24 @@ class mainView {
   }
 
   _handleDragStart(e) {
-    e.target.classList.add("dragging");
-    // Get element index for reference
+    // Get day ID from which the dragging start
+    const day = e.target.closest("ul").id;
+
+    // Get item index for reference
     const index = [...e.target.closest("ul").children].indexOf(e.target);
-    console.log(index);
+
+    // Get item id
+    const id = e.target.dataset.id;
+
+    // Create dataTransfer object
+    const data = {
+      mode: "move",
+      day,
+      index,
+      id,
+    };
+
+    e.dataTransfer.setData("text/plain", JSON.stringify(data));
   }
 
   _handleDragEnd(e) {
@@ -57,15 +75,11 @@ class mainView {
     e.preventDefault();
 
     // Clear Indication on all days
-    const days = document.querySelectorAll(".plan-day");
-    days.forEach((day) => day.classList.remove("drag-over"));
+    this.clearDaysIndication();
 
     // Indicate dragover on hovered day
     const day = e.target.closest(".plan-day");
     if (day) day.classList.add("drag-over");
-
-    // Get dragging element
-    const draggingEl = document.querySelector(".dragging");
 
     // Get list element
     const list = e.target.closest(".plan-day-list");
@@ -87,28 +101,16 @@ class mainView {
     }
 
     if (!elementBelow) {
-      // If the list is empty or dragging afte, all items, drop at the end
-      if (draggingEl.classList.contains("plan-day-list__item"))
-        list.appendChild(draggingEl);
-
-      // placeholder
-      if (
-        draggingEl.classList.contains("list-item-recipe") ||
-        draggingEl.classList.contains("list-item-storage")
-      )
-        list.appendChild(placeholder);
+      // If the list is empty or dragging after, all items, drop at the end
+      list.appendChild(placeholder);
     } else {
       // If there is an item below, drop before
-      if (draggingEl.classList.contains("plan-day-list__item"))
-        list.insertBefore(draggingEl, elementBelow);
-
-      // placeholder
-      if (
-        draggingEl.classList.contains("list-item-recipe") ||
-        draggingEl.classList.contains("list-item-storage")
-      )
-        list.insertBefore(placeholder, elementBelow);
+      list.insertBefore(placeholder, elementBelow);
     }
+  }
+  clearDaysIndication() {
+    const days = document.querySelectorAll(".plan-day");
+    days.forEach((day) => day.classList.remove("drag-over"));
   }
 
   /**
@@ -152,6 +154,9 @@ class mainView {
 
     // Set week ID
     this._planWeek.id = `${week.dateRange.startDate}`;
+
+    // Get svg icons
+    feather.replace();
   }
 
   generateMarkupMeal(meal, state) {
