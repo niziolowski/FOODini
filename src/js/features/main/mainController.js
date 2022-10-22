@@ -1,7 +1,6 @@
 import mainView from "./mainView.js";
 import * as mainModel from "./mainModel.js";
 import * as model from "../../model.js";
-import { Ingredient } from "../Ingredient.js";
 import sidebarView from "../sidebar/sidebarView.js";
 
 //TODO: Refactor this. Move to view and model what you can. Think through.
@@ -51,7 +50,11 @@ function handleDrop(e) {
   const day = model.getDay(targetDay);
   day.addMeal(meal, targetIndex);
 
+  // Recalculate recipes
+  model.state.recipes.forEach((recipe) => recipe.calcIngredients());
+
   // Update View
+  sidebarView.render(model.state);
   mainView.render(model.state.plan.activeWeek, model.state);
 
   //TODO: UPDATE API
@@ -80,7 +83,10 @@ function handleClick(e) {
     // 2. Delete meal
     mainModel.removeMeal(day.id, index);
 
-    // 3. Update View
+    // 3. Recalculate recipes
+    model.state.recipes.forEach((recipe) => recipe.calcIngredients());
+
+    // 4. Update View
     mainView.render(model.state.plan.activeWeek, model.state);
     sidebarView.render(model.state);
   }
