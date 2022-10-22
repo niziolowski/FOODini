@@ -26,7 +26,7 @@ async function init() {
     // Init sidebar
     sidebarController.init();
 
-    console.log(JSON.stringify(model.state.plan.activeWeek));
+    console.log(JSON.stringify(model.state.storage[0]));
   } catch (error) {
     console.error(error);
   }

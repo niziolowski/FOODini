@@ -126,6 +126,16 @@ const storage = [
     group: "świeże",
   },
   {
+    id: 999,
+    created_at: 1660643517457,
+    name: "Jajka",
+    amount: 1,
+    unit: "szt.",
+    expiry: 14,
+    bookmark: true,
+    group: "świeże",
+  },
+  {
     id: 30,
     created_at: 1664793332235,
     name: "Makaron",
@@ -175,8 +185,28 @@ const recipes = [
     group: "śniadanie",
     difficulty: 1,
     ingredients: [
-      { name: "Jajka", unit: "szt.", amount: 4 },
-      { name: "Boczek", unit: "g", amount: 50 },
+      {
+        id: 1,
+        name: "Jajka",
+        amount: 4,
+        unit: "szt.",
+        group: "świeże",
+        bookmark: true,
+        purchaseDate: 1660643417457,
+        expiry: 14,
+        daysLeft: 0,
+      },
+      {
+        id: 1,
+        name: "Boczek",
+        amount: 50,
+        unit: "g",
+        group: "świeże",
+        bookmark: true,
+        purchaseDate: 1660643417457,
+        expiry: 14,
+        daysLeft: 0,
+      },
     ],
     spices: ["sól", "pieprz"],
     bookmark: false,
@@ -272,21 +302,36 @@ storage.forEach((ing) =>
   )
 );
 
-recipes.forEach((rec) =>
+recipes.forEach((rec) => {
+  // Create ingredient instances
+  const ingredients = rec.ingredients.map(
+    (ing) =>
+      new Ingredient(
+        ing.id,
+        ing.name,
+        ing.amount,
+        ing.unit,
+        ing.group,
+        ing.bookmark,
+        ing.created_at,
+        ing.expiry
+      )
+  );
+
   state.recipes.push(
     new Recipe(
       rec.id,
       rec.name,
       rec.group,
       rec.description,
-      rec.ingredients,
+      ingredients,
       rec.spices,
       rec.difficulty,
       rec.bookmark,
       rec.image_url
     )
-  )
-);
+  );
+});
 
 export async function loadCatalog() {
   try {
@@ -377,4 +422,30 @@ export function getIngredient(id) {
 
 export function getDay(id) {
   return state.plan.activeWeek.days.find((day) => day.name === id);
+}
+
+export function deleteIngredient(ing) {
+  // Get index of item to delete
+  const index = state.storage.indexOf(ing);
+
+  // Delete the item
+  state.storage.splice(index, 1);
+}
+
+export function restoreIngredients(meal) {
+  // Get used Ingredients
+  const ingredients = meal.used;
+
+  ingredients.forEach((ing) => {
+    // Try to find ingredient in storage
+    const item = state.storage.find((item) => item.id === ing.id);
+
+    // Add used amount back to storage
+    if (item) item.amount += ing.amount;
+
+    // If it doesn't exist, just move it to state
+    if (!item) {
+      state.storage.push(ing);
+    }
+  });
 }

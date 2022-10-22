@@ -26,8 +26,6 @@ function handleAC(e) {
 
     // On input (get suggestions, display suggestion list)
     if (input && input.value.length > 0) handleACinput(e);
-
-    console.log(e, li, input);
     // On "Escape" key (exit autocomplete)
     if (e.type === "keydown" && e.key === "Escape") addIngredientView.clearAC();
 

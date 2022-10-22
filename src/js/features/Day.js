@@ -1,3 +1,5 @@
+import { Meal } from "./Meal";
+
 export class Day {
   /**
    *
@@ -10,7 +12,8 @@ export class Day {
   }
 
   addMeal(meal, i) {
-    this.meals.splice(i, 0, meal);
+    const newMeal = new Meal(meal);
+    this.meals.splice(i, 0, newMeal);
   }
 
   removeMeal(i) {

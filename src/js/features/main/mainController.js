@@ -1,6 +1,8 @@
 import mainView from "./mainView.js";
 import * as mainModel from "./mainModel.js";
 import * as model from "../../model.js";
+import { Ingredient } from "../Ingredient.js";
+import sidebarView from "../sidebar/sidebarView.js";
 
 //TODO: Refactor this. Move to view and model what you can. Think through.
 function handleDrop(e) {
@@ -67,11 +69,20 @@ function handleClick(e) {
     const day = btn.closest(".plan-day-list");
     const meal = btn.closest(".plan-day-list__item");
     const index = [...day.children].indexOf(meal);
-    // Update state
+
+    // Get meal object
+    const dayObj = model.getDay(day.id);
+    const mealObj = dayObj.meals[index];
+
+    // 1. Recover storage move to model
+    model.restoreIngredients(mealObj);
+
+    // 2. Delete meal
     mainModel.removeMeal(day.id, index);
 
-    // Update View
+    // 3. Update View
     mainView.render(model.state.plan.activeWeek, model.state);
+    sidebarView.render(model.state);
   }
 }
 
