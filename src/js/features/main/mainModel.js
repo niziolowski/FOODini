@@ -7,11 +7,13 @@ export function setCurrentWeek() {
   const now = formatDate(new Date());
 
   // check if current week exists
-  let currentWeek = model.state.plan.weeks.find((week) =>
-    now >= week.dateRange.startDate && now <= week.dateRange.endDate
-      ? week
-      : null
-  );
+  let currentWeek = model.state.plan.weeks.find((week) => {
+    const nowTimestamp = new Date(now).getTime();
+    const startDate = new Date(week.dateRange.startDate).getTime();
+    const endDate = new Date(week.dateRange.endDate).getTime();
+
+    if (nowTimestamp >= startDate && nowTimestamp <= endDate) return week;
+  });
 
   // Create new week if no current week
   if (!currentWeek) currentWeek = newWeek(now);
@@ -19,7 +21,7 @@ export function setCurrentWeek() {
   // Set current week
   model.state.plan.currentWeek = currentWeek;
   // Add week name for subtitle
-  model.state.plan.currentWeek.name = "BieŻący tydzień";
+  model.state.plan.currentWeek.name = "Bieżący tydzień";
 
   // Set current week as active
   setActiveWeek(currentWeek);
@@ -85,7 +87,8 @@ export function newWeek(dateString) {
   // 1. Get dateRange
   const date = new Date(dateString);
   // Get day of the week (minus one because we want to get to monday)
-  const daysIn = date.getDay() - 1;
+  const daysIn = date.getDay() === 0 ? 6 : 0;
+  console.log(daysIn);
   // Set monday as start date
   let startDate = new Date(date - daysIn * 1000 * 60 * 60 * 24);
   // Set sunday as end date
@@ -101,8 +104,15 @@ export function newWeek(dateString) {
   //   Add to plan
   model.state.plan.weeks.push(newWeekObj);
 
-  // § Update names (for subtitles)
+  // Upload to API
+  newWeekObj.APIupload();
 
+  setWeekNames();
+
+  return newWeekObj;
+}
+
+export function setWeekNames() {
   // get currentWeek index
   const currentWeekIndex = model.state.plan.weeks.indexOf(
     model.state.plan.currentWeek
@@ -118,7 +128,7 @@ export function newWeek(dateString) {
     // ...
 
     const weekNumber = i - currentWeekIndex;
-
+    console.log(currentWeekIndex, weekNumber);
     switch (weekNumber) {
       case -1:
         week.name = "Poprzedni tydzień";
@@ -135,8 +145,6 @@ export function newWeek(dateString) {
         break;
     }
   });
-
-  return newWeekObj;
 }
 
 // Remove meal from plan

@@ -4,7 +4,7 @@ import * as model from "../../model.js";
 import sidebarView from "../sidebar/sidebarView.js";
 
 //TODO: Refactor this. Move to view and model what you can. Think through.
-function handleDrop(e) {
+async function handleDrop(e) {
   // 1. If not dropping on the list, just clean indicator
 
   // Clear Indication on all days
@@ -66,9 +66,19 @@ function handleDrop(e) {
   sidebarView.render(model.state);
   mainView.render(model.state.plan.activeWeek, model.state);
 
-  console.log(model.state.recipes[0].missingIngredients);
   //TODO: UPDATE API
   // 2. Update API
+  try {
+    // Update Ingredients
+    for (const ing of meal.ingredients) {
+      console.log(ing);
+      // const data = await ing.APIedit();
+    }
+  } catch (error) {
+    console.error(error);
+  }
+
+  // Update Plan
 }
 
 function handleClick(e) {
@@ -113,14 +123,14 @@ function handleClick(e) {
   }
 }
 
-function init() {
-  mainView.addHandlerDragAndDrop(handleDrop);
-  mainView.addHandlerClick(handleClick);
-
+export function init() {
   // Set current week
   mainModel.setCurrentWeek();
+  mainModel.setWeekNames();
+
+  mainView.addHandlerDragAndDrop(handleDrop);
+  mainView.addHandlerClick(handleClick);
 
   // Render plan
   mainView.render(model.state.plan.currentWeek, model.state);
 }
-init();
