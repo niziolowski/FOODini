@@ -43,8 +43,17 @@ function handleDrop(e) {
   // § MODEL
 
   // 1. Update state
+
   // Remove source item
-  if (data.mode === "move") mainModel.removeMeal(data.day, data.index);
+  if (data.mode === "move") {
+    // Get meal object
+    const dayObj = model.getDay(data.day);
+    const mealObj = dayObj.meals[data.index];
+
+    // 1. Recover storage move to model
+    model.restoreIngredients(mealObj);
+    mainModel.removeMeal(data.day, data.index);
+  }
 
   // Add new item
   const day = model.getDay(targetDay);
@@ -57,6 +66,7 @@ function handleDrop(e) {
   sidebarView.render(model.state);
   mainView.render(model.state.plan.activeWeek, model.state);
 
+  console.log(model.state.recipes[0].missingIngredients);
   //TODO: UPDATE API
   // 2. Update API
 }
@@ -79,6 +89,17 @@ function handleClick(e) {
 
     // 1. Recover storage move to model
     model.restoreIngredients(mealObj);
+
+    // TEMPORARY SOLUTION FOR MISCALCULATION:
+    // When deleting meal, restore Ingredients for all items and recalculate again;
+    model.state.plan.weeks.forEach((week) =>
+      week.days.forEach((day) =>
+        day.meals.forEach((meal) => {
+          model.restoreIngredients(meal);
+          meal.calcIngredients();
+        })
+      )
+    );
 
     // 2. Delete meal
     mainModel.removeMeal(day.id, index);

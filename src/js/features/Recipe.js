@@ -60,6 +60,7 @@ export class Recipe {
   }
 
   calcIngredients() {
+    this.missingIngredients = [];
     // Sum of all ingredients availibility percentage
     let sumPercentages = [];
 

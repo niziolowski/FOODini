@@ -238,6 +238,7 @@ class sidebarView {
   }
 
   // Generate Markup for an ingredient in column mode
+  // TODO: Add dragging and planning for ingredients, optional functionality
   generateMarkupIngredient(ing, state) {
     // calculate indicator width
     const indicatorWidth = (100 * ing.daysLeft) / ing.expiry;
@@ -246,7 +247,7 @@ class sidebarView {
     const tag = state.tags.storage.indexOf(ing.group) + 1;
 
     return `
-    <li class="list-item-storage" data-id="i-${ing.id}" draggable="true">
+    <li class="list-item-storage" data-id="i-${ing.id}" draggable="false">
       <button class="list-item-storage__btn-bookmark btn-icon small fill ${
         ing.bookmark ? "active" : ""
       }">

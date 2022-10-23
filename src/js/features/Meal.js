@@ -12,6 +12,11 @@ export class Meal {
     this.calcIngredients();
   }
   calcIngredients() {
+    // Reset values
+    this.missing = [];
+    this.used = [];
+
+    // Calculate
     this.ingredients.forEach((ing) => {
       // Get ingredients of the same type
       const inStorage = model.state.storage.filter(
