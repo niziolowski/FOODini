@@ -1,55 +1,66 @@
 import * as model from "../../model.js";
 import { formatDate } from "../../helpers.js";
 import { Week } from "../Week";
+import mainView from "./mainView.js";
 
-export function setCurrentWeek() {
-  // get date now
-  const now = formatDate(new Date());
+export async function setCurrentWeek() {
+  try {
+    // get date now
+    const now = formatDate(new Date());
 
-  // check if current week exists
-  let currentWeek = model.state.plan.weeks.find((week) => {
-    const nowTimestamp = new Date(now).getTime();
-    const startDate = new Date(week.dateRange.startDate).getTime();
-    const endDate = new Date(week.dateRange.endDate).getTime();
+    // check if current week exists
+    let currentWeek = model.state.plan.weeks.find((week) => {
+      const nowTimestamp = new Date(now).getTime();
+      const startDate = new Date(week.dateRange.startDate).getTime();
+      const endDate = new Date(week.dateRange.endDate).getTime();
 
-    if (nowTimestamp >= startDate && nowTimestamp <= endDate) return week;
-  });
+      if (nowTimestamp >= startDate && nowTimestamp <= endDate) return week;
+    });
 
-  // Create new week if no current week
-  if (!currentWeek) currentWeek = newWeek(now);
+    // Create new week if no current week
+    if (!currentWeek) currentWeek = await newWeek(now);
 
-  // Set current week
-  model.state.plan.currentWeek = currentWeek;
-  // Add week name for subtitle
-  model.state.plan.currentWeek.name = "Bieżący tydzień";
+    // Set current week
+    model.state.plan.currentWeek = currentWeek;
+    // Add week name for subtitle
+    model.state.plan.currentWeek.name = "Bieżący tydzień";
 
-  // Set current week as active
-  setActiveWeek(currentWeek);
+    // Set current week as active
+    setActiveWeek(currentWeek);
+  } catch (error) {
+    throw error;
+  }
 }
 
 // Swich the week to the next one and if it doesn't exist, create one
-export function nextWeek() {
-  // Get active week end date
-  const endDate = model.state.plan.activeWeek.dateRange.endDate;
+export async function nextWeek() {
+  try {
+    // Get active week end date
+    const endDate = model.state.plan.activeWeek.dateRange.endDate;
 
-  // Add one day to get starDate of the next week
-  const newDate = new Date(endDate).getTime() + 1 * 1000 * 60 * 60 * 24;
-  // Format the date
-  const nextWeekDate = formatDate(new Date(newDate));
+    // Add one day to get starDate of the next week
+    const newDate = new Date(endDate).getTime() + 1 * 1000 * 60 * 60 * 24;
+    // Format the date
+    const nextWeekDate = formatDate(new Date(newDate));
 
-  // Check if next week exist
-  let nextWeek = model.state.plan.weeks.find((week) =>
-    nextWeekDate >= week.dateRange.startDate &&
-    nextWeekDate <= week.dateRange.endDate
-      ? week
-      : null
-  );
+    // Check if next week exist
+    let nextWeek = model.state.plan.weeks.find((week) =>
+      nextWeekDate >= week.dateRange.startDate &&
+      nextWeekDate <= week.dateRange.endDate
+        ? week
+        : null
+    );
 
-  // If not, create it and add to plan
-  if (!nextWeek) nextWeek = newWeek(nextWeekDate);
-  // Set new week as active
-  setActiveWeek(nextWeek);
-  return nextWeek;
+    // If not, create it and add to plan
+    if (!nextWeek) nextWeek = await newWeek(nextWeekDate);
+
+    // Set new week as active
+    setActiveWeek(nextWeek);
+
+    return nextWeek;
+  } catch (error) {
+    throw error;
+  }
 }
 
 // Swich the week to the previous one and if it doesn't exist, create one
@@ -83,33 +94,39 @@ export function setActiveWeek(week) {
   model.state.plan.activeWeek = week;
 }
 
-export function newWeek(dateString) {
-  // 1. Get dateRange
-  const date = new Date(dateString);
-  // Get day of the week (minus one because we want to get to monday)
-  const daysIn = date.getDay() === 0 ? 6 : 0;
-  console.log(daysIn);
-  // Set monday as start date
-  let startDate = new Date(date - daysIn * 1000 * 60 * 60 * 24);
-  // Set sunday as end date
-  let endDate = new Date(startDate.getTime() + 6 * 1000 * 60 * 60 * 24);
+export async function newWeek(dateString) {
+  try {
+    // 1. Get dateRange
+    const date = new Date(dateString);
+    // Get day of the week (minus one because we want to get to monday)
+    const daysIn = date.getDay() === 0 ? 6 : 0;
+    // Set monday as start date
+    let startDate = new Date(date - daysIn * 1000 * 60 * 60 * 24);
+    // Set sunday as end date
+    let endDate = new Date(startDate.getTime() + 6 * 1000 * 60 * 60 * 24);
 
-  // Format dates
-  startDate = formatDate(startDate);
-  endDate = formatDate(endDate);
+    // Format dates
+    startDate = formatDate(startDate);
+    endDate = formatDate(endDate);
 
-  //   Create week obj
-  const newWeekObj = new Week(startDate, endDate);
+    //   Create week obj
+    const newWeekObj = new Week(startDate, endDate);
 
-  //   Add to plan
-  model.state.plan.weeks.push(newWeekObj);
+    //   Add to plan
+    model.state.plan.weeks.push(newWeekObj);
 
-  // Upload to API
-  newWeekObj.APIupload();
+    // Upload to API
+    const data = await newWeekObj.APIupload();
 
-  setWeekNames();
+    // Set week ID
+    newWeekObj.id = data.id;
 
-  return newWeekObj;
+    setWeekNames();
+
+    return newWeekObj;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export function setWeekNames() {
@@ -128,7 +145,6 @@ export function setWeekNames() {
     // ...
 
     const weekNumber = i - currentWeekIndex;
-    console.log(currentWeekIndex, weekNumber);
     switch (weekNumber) {
       case -1:
         week.name = "Poprzedni tydzień";

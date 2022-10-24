@@ -144,6 +144,7 @@ class mainView {
     this._days.forEach((day, i) => {
       // Get data for a specific day
       const data = week.days[i];
+
       if (!data) return;
 
       // Add HTML for each meal

@@ -3,7 +3,8 @@ import { AJAX } from "../helpers.js";
 import { Day } from "./Day.js";
 
 export class Week {
-  constructor(startDate, endDate, days = undefined) {
+  constructor(startDate, endDate, days = undefined, id) {
+    this.id = id;
     this.dateRange = { startDate, endDate };
     this.days = days || this._generateDays();
   }
@@ -36,6 +37,24 @@ export class Week {
 
       // Upload
       const newData = await AJAX(`${API_URL_PLAN}`, weekFormated);
+      return newData;
+    } catch (error) {
+      throw error;
+    }
+  }
+  async APIedit() {
+    try {
+      // Format week object for API
+
+      console.log(this);
+
+      const weekFormated = {
+        dateRange: this.dateRange,
+        days: this.days,
+      };
+
+      // Upload
+      const newData = await AJAX(`${API_URL_PLAN}/${this.id}`, weekFormated);
       return newData;
     } catch (error) {
       throw error;

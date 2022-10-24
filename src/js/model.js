@@ -10,6 +10,7 @@ import { Recipe } from "./features/Recipe.js";
 import { Product } from "./features/Product.js";
 import { Day } from "./features/Day.js";
 import { Week } from "./features/Week.js";
+import { Meal } from "./features/Meal.js";
 // § STATE
 
 export const state = {
@@ -34,24 +35,6 @@ export const state = {
     weeks: [],
   },
 };
-
-// state.plan.currentWeek.days.push(
-//   new Day("monday", [
-//     {
-//       id: 1,
-//       created_at: 1661700093430,
-//       name: "Jajecznica",
-//       group: "śniadanie",
-//       difficulty: 1,
-//       ingredients: [{ name: "Jajka", unit: "szt.", amount: 4 }],
-//       spices: ["sól", "pieprz"],
-//       bookmark: false,
-//       image_url:
-//         "https://cdn.galleries.smcloud.net/t/photos/gf-bc5p-Ttbo-1SJC_jajecznica-podstawowy-przepis-na-klasyczna-potrawe-z-rozmaconych-jajek.jpg",
-//       description: "Normalnie, jajka rozbić na patelnii i smażyć aż się zetno.",
-//     },
-//   ])
-// );
 
 // TEST DATA
 // const catalog = [
@@ -355,6 +338,7 @@ export async function loadCatalog() {
         )
       );
     });
+    return data;
   } catch (error) {
     throw error;
   }
@@ -377,6 +361,7 @@ export async function loadStorage() {
         )
       );
     });
+    return data;
   } catch (error) {
     throw error;
   }
@@ -386,13 +371,29 @@ export async function loadRecipes() {
   try {
     const data = await AJAX(API_URL_RECIPES);
     data.forEach((rec) => {
+      // Create ingredient instances
+      const ingredients = rec.ingredients.map(
+        (ing) =>
+          new Ingredient(
+            ing.id,
+            ing.name,
+            ing.amount,
+            ing.unit,
+            ing.group,
+            ing.bookmark,
+            ing.purchase_date,
+            ing.expiry
+          )
+      );
+
+      // Create recipe instances
       state.recipes.push(
         new Recipe(
           rec.id,
           rec.name,
           rec.group,
           rec.description,
-          rec.ingredients,
+          ingredients,
           rec.spices,
           rec.difficulty,
           rec.bookmark,
@@ -400,6 +401,7 @@ export async function loadRecipes() {
         )
       );
     });
+    return data;
   } catch (error) {
     throw error;
   }
@@ -408,9 +410,21 @@ export async function loadRecipes() {
 export async function loadPlan() {
   try {
     const data = await AJAX(API_URL_PLAN);
+    if (data.length === 0) return;
     data.forEach((week) => {
+      // Create days for the week
+      const days = week.days.map((day) => {
+        const meals = day.meals.map((meal) => new Meal(meal));
+        return new Day(day.name, meals);
+      });
+
       state.plan.weeks.push(
-        new Week(week.dateRange.startDate, week.dateRange.endDate, week.days)
+        new Week(
+          week.dateRange.startDate,
+          week.dateRange.endDate,
+          days,
+          week.id
+        )
       );
     });
     state.plan.weeks.sort(
@@ -418,6 +432,7 @@ export async function loadPlan() {
         new Date(a.dateRange.startDate).getTime() -
         new Date(b.dateRange.startDate).getTime()
     );
+    return data;
   } catch (error) {
     throw error;
   }
@@ -425,12 +440,13 @@ export async function loadPlan() {
 
 export async function loadState() {
   try {
-    await loadPlan();
+    const plan = await loadPlan();
     await loadStorage();
     await loadRecipes();
     await loadCatalog();
     console.log(`LOADED STATE FROM API:`);
     console.log(state);
+    return plan;
   } catch (error) {
     throw error;
   }
