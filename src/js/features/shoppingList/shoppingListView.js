@@ -61,6 +61,32 @@ class shoppingListView {
     }
   }
 
+  // Render list items
+  render(shoppingList) {
+    const markup = shoppingList
+      .map((item) => {
+        return `
+      <li class="shopping-list-item">
+        <input class="shopping-list-item__checkbox" type="checkbox">
+        <input type="text" class="shopping-list-item__name" contenteditable="true" value="${item.name}">
+        <input type="number" class="shopping-list-item__amount" contenteditable="true" value="2">
+        <select class="shopping-list-item__unit">
+          <option>szt.</option>
+          <option>kg</option>
+          <option>g</option>
+          <option>ml</option>
+        </select>
+        <button class="shopping-list-item__btn-delete btn-icon small">
+          <i data-feather="trash"></i>
+        </button>
+      </li>
+      `;
+      })
+      .join("");
+
+    this._content.insertAdjacentHTML("afterbegin", markup);
+  }
+
   // Render empty row for a new item
   renderNewItem() {
     // The js-new class is a one time use for focusing on newly created list item

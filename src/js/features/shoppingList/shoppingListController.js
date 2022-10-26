@@ -1,4 +1,5 @@
 import shoppingListView from "./shoppingListView.js";
+import * as model from "../../model.js";
 
 function handleClick(e) {
   const btn = e.target.closest("button");
@@ -25,6 +26,8 @@ function handleClick(e) {
 function init() {
   console.log("IMPORT SUCCESFUL: shoppingListController");
   shoppingListView.addHandlerClick(handleClick);
+
+  shoppingListView.render(model.state.shoppingList);
 }
 
 init();

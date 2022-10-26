@@ -34,6 +34,19 @@ export const state = {
     currentWeek: {},
     weeks: [],
   },
+  shoppingList: [
+    {
+      id: 855584,
+      name: "Jajka",
+      amount: 6,
+      unit: "szt.",
+      group: "świeże",
+      bookmark: true,
+      purchaseDate: 1666742400000,
+      expiry: "14",
+      daysLeft: 13,
+    },
+  ],
 };
 
 export async function loadCatalog() {

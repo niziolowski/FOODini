@@ -35,6 +35,17 @@ async function handleClick(e) {
     navView.updateSubtitle(model.state.plan.activeWeek.name);
   }
 
+  // Add to shopping list
+  if (
+    btn.classList.contains("main-view__nav__controlls__btn-add-shopping-list")
+  ) {
+    // clear shopping list
+    //* shoppingListModel ?
+
+    //* -------------------
+    console.log("test");
+  }
+
   // Previous week btn
   if (btn.classList.contains("main-view__nav__controlls__previous")) {
     // Switch to next week
