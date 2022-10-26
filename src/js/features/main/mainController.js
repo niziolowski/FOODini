@@ -69,6 +69,9 @@ async function handleDrop(e) {
 
     // 2. Update API
     await model.uploadPlan();
+    await model.uploadStorage();
+
+    console.log(model.state);
   } catch (error) {
     console.error(error);
   }
@@ -116,7 +119,8 @@ async function handleClick(e) {
     sidebarView.render(model.state);
 
     // 5. Update API
-    await model.state.plan.activeWeek.APIedit();
+    await model.uploadPlan();
+    await model.uploadStorage();
   }
 }
 

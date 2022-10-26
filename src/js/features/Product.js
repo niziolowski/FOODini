@@ -1,6 +1,6 @@
 export class Product {
   constructor(id, name, amount, unit, group, bookmark, expiry) {
-    this.id = id;
+    this.id = id || +(Math.random() * 1000000).toFixed();
     this.name = name;
     this.amount = amount;
     this.unit = unit;

@@ -13,6 +13,7 @@ export class Day {
 
   addMeal(meal, i) {
     const newMeal = new Meal(meal);
+    newMeal.calcIngredients();
     this.meals.splice(i, 0, newMeal);
   }
 

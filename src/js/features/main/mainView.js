@@ -175,12 +175,14 @@ class mainView {
 
     // For recipes
     if (meal.ingredients) {
+      // Get tag number (for color);
       const tag = state.tags.recipes.indexOf(meal.group) + 1;
+
       return `
         <li class="plan-day-list__item" data-id="r-${meal.id}" draggable="true">
           <p class="plan-day-list__item__name">${meal?.title || meal?.name}</p>
           <button class="plan-day-list__item__btn-delete btn-icon small"><i data-feather="trash"></i></button>
-          <span class="plan-day-list__item__tag" style="background-color: var(--tag-${tag}-color"></span>
+          <span class="plan-day-list__item__tag" style="background-color: var(--tag-${tag}-color)"></span>
         </li>
       `;
     }

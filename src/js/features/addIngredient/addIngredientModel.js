@@ -1,6 +1,5 @@
 import { AJAX } from "../../helpers";
 import { API_URL_STORAGE } from "../../config.js";
-import * as model from "../../model.js";
 
 export function getSuggestions(input, state) {
   // Get input value

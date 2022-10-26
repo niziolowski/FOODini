@@ -6,10 +6,9 @@ export class Meal {
     this.id = meal.id;
     this.title = meal?.title || meal?.name;
     this.ingredients = meal.ingredients;
-    this.missing = [];
-    this.used = [];
-
-    this.calcIngredients();
+    this.group = meal.group;
+    this.missing = meal.missing;
+    this.used = meal.used;
   }
   calcIngredients() {
     // Reset values

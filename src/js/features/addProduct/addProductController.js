@@ -19,26 +19,25 @@ function handleClick(e) {
 
 async function handleSubmit(data) {
   try {
-    // Upload new product to API
-    const product = await addProductModel.upload(data);
-
-    // Add new product to storage
+    console.log(data);
+    // Add new product to catalog
     model.state.catalog.push(
       new Product(
-        product.id,
-        product.name,
-        product.amount,
-        product.unit,
-        product.group,
-        product.bookmark,
-        product.expiry
+        null,
+        data.name,
+        data.amount,
+        data.unit,
+        data.group,
+        false,
+        data.expiry
       )
     );
 
+    // Upload to API
+    model.uploadCatalog();
+
     // Update Sidebar View
     catalogView.render(model.state);
-
-    // Display message
 
     // Close the window
     addProductView.hide();

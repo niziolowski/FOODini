@@ -99,7 +99,8 @@ export async function newWeek(dateString) {
     // 1. Get dateRange
     const date = new Date(dateString);
     // Get day of the week (minus one because we want to get to monday)
-    const daysIn = date.getDay() === 0 ? 6 : 1;
+    const dayNum = date.getDay();
+    const daysIn = dayNum === 0 ? -1 : dayNum - 1;
     // Set monday as start date
     let startDate = new Date(date - daysIn * 1000 * 60 * 60 * 24);
     // Set sunday as end date
