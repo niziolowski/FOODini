@@ -70,8 +70,6 @@ async function handleDrop(e) {
     // 2. Update API
     await model.uploadPlan();
     await model.uploadStorage();
-
-    console.log(model.state);
   } catch (error) {
     console.error(error);
   }
@@ -94,7 +92,6 @@ async function handleClick(e) {
     const mealObj = dayObj.meals[index];
 
     // 1. Recover storage move to model
-    console.log(mealObj);
     model.restoreIngredients(mealObj);
 
     // 2. Delete meal
@@ -128,6 +125,7 @@ export async function init() {
   try {
     // Set current week
     await mainModel.setCurrentWeek();
+    // Set names and delete old weeks
     mainModel.setWeekNames();
 
     mainView.addHandlerDragAndDrop(handleDrop);

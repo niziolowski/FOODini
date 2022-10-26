@@ -61,7 +61,6 @@ export async function loadCatalog() {
 export async function loadStorage() {
   try {
     const data = await AJAX(API_URL_STORAGE);
-    console.log(data);
     data.content.forEach((ing) => {
       state.storage.push(
         new Ingredient(
@@ -186,6 +185,13 @@ export function deleteIngredient(ing) {
 
   // Delete the item
   state.storage.splice(index, 1);
+}
+
+export function deleteWeek(target) {
+  // Find week index in plan
+  const index = state.plan.weeks.indexOf(target);
+  // Delete week
+  state.plan.weeks.splice(index, 1);
 }
 
 // Add the ingredients back from planned meal

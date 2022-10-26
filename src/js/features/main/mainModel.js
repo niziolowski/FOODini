@@ -127,13 +127,16 @@ export async function newWeek(dateString) {
 }
 
 export function setWeekNames() {
-  // get currentWeek index
-  const currentWeekIndex = model.state.plan.weeks.indexOf(
-    model.state.plan.currentWeek
-  );
+  // weeks for deletion
+  let oldWeeks = [];
 
   // Set weeknames
   model.state.plan.weeks.forEach((week, i) => {
+    // get currentWeek index
+    const currentWeekIndex = model.state.plan.weeks.indexOf(
+      model.state.plan.currentWeek
+    );
+
     // Subtract currentWeekIndex from every weekIndex for naming system
     // -1 = previous week
     // 0 = current week
@@ -141,15 +144,21 @@ export function setWeekNames() {
     // 2 = 2 week
     // ...
 
+    // Make current week = 0 (older are negative, newer positive);
     const weekNumber = i - currentWeekIndex;
-    switch (weekNumber) {
-      case -1:
+
+    switch (true) {
+      case weekNumber < -1:
+        // Add week to old weeks array (for deletion)
+        oldWeeks.push(week);
+        break;
+      case weekNumber === -1:
         week.name = "Poprzedni tydzień";
         break;
-      case 0:
+      case weekNumber === 0:
         week.name = "Bieżący tydzień";
         break;
-      case 1:
+      case weekNumber === 1:
         week.name = "Następny tydzień";
         break;
 
@@ -158,6 +167,12 @@ export function setWeekNames() {
         break;
     }
   });
+
+  // Delete weeks older than 1
+  oldWeeks.forEach((week) => model.deleteWeek(week));
+
+  // Upload to API
+  model.uploadPlan();
 }
 
 // Remove meal from plan
