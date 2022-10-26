@@ -325,7 +325,7 @@ export const state = {
 export async function loadCatalog() {
   try {
     const data = await AJAX(API_URL_CATALOG);
-    data.forEach((ing) => {
+    data.content.forEach((ing) => {
       state.catalog.push(
         new Product(
           ing.id,
@@ -347,7 +347,8 @@ export async function loadCatalog() {
 export async function loadStorage() {
   try {
     const data = await AJAX(API_URL_STORAGE);
-    data.forEach((ing) => {
+    console.log(data);
+    data.content.forEach((ing) => {
       state.storage.push(
         new Ingredient(
           ing.id,
@@ -356,7 +357,7 @@ export async function loadStorage() {
           ing.unit,
           ing.group,
           ing.bookmark,
-          ing.purchase_date,
+          ing.purchaseDate,
           ing.expiry
         )
       );
@@ -370,7 +371,7 @@ export async function loadStorage() {
 export async function loadRecipes() {
   try {
     const data = await AJAX(API_URL_RECIPES);
-    data.forEach((rec) => {
+    data.content.forEach((rec) => {
       // Create ingredient instances
       const ingredients = rec.ingredients.map(
         (ing) =>
@@ -381,7 +382,7 @@ export async function loadRecipes() {
             ing.unit,
             ing.group,
             ing.bookmark,
-            ing.purchase_date,
+            ing.date,
             ing.expiry
           )
       );
@@ -410,8 +411,9 @@ export async function loadRecipes() {
 export async function loadPlan() {
   try {
     const data = await AJAX(API_URL_PLAN);
-    if (data.length === 0) return;
-    data.forEach((week) => {
+
+    if (data.content.length === 0) return;
+    data.content.forEach((week) => {
       // Create days for the week
       const days = week.days.map((day) => {
         const meals = day.meals.map((meal) => new Meal(meal));
@@ -489,4 +491,44 @@ export function restoreIngredients(meal) {
       state.storage.push(ing);
     }
   });
+}
+
+export async function uploadCatalog() {
+  try {
+    // Create object
+    const data = {
+      name: "catalog",
+      content: state.catalog,
+    };
+
+    const res = await AJAX(API_URL_CATALOG, data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+export async function uploadPlan() {
+  try {
+    // Create object
+    const data = {
+      name: "plan",
+      content: state.plan.weeks,
+    };
+
+    const res = await AJAX(API_URL_PLAN, data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+export async function uploadStorage() {
+  try {
+    // Create object
+    const data = {
+      name: "storage",
+      content: state.storage,
+    };
+
+    const res = await AJAX(API_URL_STORAGE, data);
+  } catch (error) {
+    console.error(error);
+  }
 }

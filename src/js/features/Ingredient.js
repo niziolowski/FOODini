@@ -1,14 +1,11 @@
-import { AJAX } from "../helpers.js";
-import { API_URL_STORAGE } from "../config.js";
-
 export class Ingredient {
   constructor(id, name, amount, unit, group, bookmark, purchaseDate, expiry) {
-    this.id = id;
+    this.id = id || +(Math.random() * 1000000).toFixed();
     this.name = name;
     this.amount = amount;
     this.unit = unit;
     this.group = group;
-    this.bookmark = bookmark;
+    this.bookmark = bookmark || false;
     this.purchaseDate = new Date(purchaseDate).getTime();
     this.expiry = expiry;
     this.daysLeft = this.calcDaysLeft();
@@ -26,30 +23,5 @@ export class Ingredient {
 
   toggleBookmark() {
     this.bookmark = !this.bookmark;
-  }
-
-  async APIedit() {
-    try {
-      // Format ingredient object for API
-
-      const ingredientFormated = {
-        name: this.name,
-        amount: this.amount,
-        unit: this.unit,
-        group: this.group,
-        bookmark: this.bookmark,
-        expiry: this.expiry,
-        purchase_date: this.purchaseDate,
-      };
-
-      // Upload
-      const newData = await AJAX(
-        `${API_URL_STORAGE}/${this.id}`,
-        ingredientFormated
-      );
-      return newData;
-    } catch (error) {
-      throw error;
-    }
   }
 }

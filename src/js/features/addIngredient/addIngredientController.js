@@ -73,23 +73,21 @@ function performAC(e) {
 
 async function handleUpload(data) {
   try {
-    // Upload new product to API
-    const ingredient = await addIngredientModel.upload(data);
-    console.log(ingredient);
-
     // Add new product to storage
-    model.state.storage.push(
-      new Ingredient(
-        ingredient.id,
-        ingredient.name,
-        ingredient.amount,
-        ingredient.unit,
-        ingredient.group,
-        ingredient.bookmark,
-        ingredient.created_at,
-        ingredient.expiry
-      )
+    const ingredient = new Ingredient(
+      null,
+      data.name,
+      data.amount,
+      data.unit,
+      data.group,
+      data.bookmark,
+      data.date,
+      data.expiry
     );
+    model.state.storage.push(ingredient);
+
+    // Upload to API
+    await model.uploadStorage();
 
     // Recalculate recipe ingredients;
 

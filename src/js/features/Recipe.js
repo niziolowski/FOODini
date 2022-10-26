@@ -1,5 +1,3 @@
-import { API_URL_RECIPES } from "../config.js";
-import { AJAX } from "../helpers.js";
 import * as model from "../model.js";
 
 export class Recipe {
@@ -31,32 +29,6 @@ export class Recipe {
 
   toggleBookmark() {
     this.bookmark = !this.bookmark;
-  }
-
-  async upload() {
-    try {
-      // Format ingredient object for API
-
-      const recipeFormated = {
-        name: this.title,
-        group: this.group,
-        description: this.description,
-        ingredients: this.ingredients,
-        spices: this.spices,
-        difficulty: this.difficulty,
-        bookmark: this.bookmark,
-        image_url: this.imageURL,
-      };
-
-      // Upload
-      const newData = await AJAX(
-        `${API_URL_RECIPES}/${this.id}`,
-        recipeFormated
-      );
-      return newData;
-    } catch (error) {
-      throw error;
-    }
   }
 
   calcIngredients() {

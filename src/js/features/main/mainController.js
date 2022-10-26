@@ -68,7 +68,7 @@ async function handleDrop(e) {
     mainView.render(model.state.plan.activeWeek, model.state);
 
     // 2. Update API
-    await model.state.plan.activeWeek.APIedit();
+    await model.uploadPlan();
   } catch (error) {
     console.error(error);
   }

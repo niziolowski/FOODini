@@ -1,5 +1,3 @@
-import { API_URL_PLAN } from "../config.js";
-import { AJAX } from "../helpers.js";
 import { Day } from "./Day.js";
 
 export class Week {
@@ -24,40 +22,5 @@ export class Week {
     // Generate days
     const days = dayNames.map((day) => new Day(day, []));
     return days;
-  }
-
-  async APIupload() {
-    try {
-      // Format week object for API
-
-      const weekFormated = {
-        dateRange: this.dateRange,
-        days: this.days,
-      };
-
-      // Upload
-      const newData = await AJAX(`${API_URL_PLAN}`, weekFormated);
-      return newData;
-    } catch (error) {
-      throw error;
-    }
-  }
-  async APIedit() {
-    try {
-      // Format week object for API
-
-      console.log(this);
-
-      const weekFormated = {
-        dateRange: this.dateRange,
-        days: this.days,
-      };
-
-      // Upload
-      const newData = await AJAX(`${API_URL_PLAN}/${this.id}`, weekFormated);
-      return newData;
-    } catch (error) {
-      throw error;
-    }
   }
 }

@@ -43,9 +43,14 @@ export function handleClick(e) {
 
       // get ingredient
       const ingredient = model.state.storage.find((ing) => ing.id === id);
+
       ingredient.toggleBookmark();
+
+      // Update View
       sidebarView.render(model.state);
-      ingredient.APIedit();
+
+      // Update API
+      model.uploadStorage();
     }
 
     // RECIPES
