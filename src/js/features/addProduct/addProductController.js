@@ -1,5 +1,4 @@
 import addProductView from "./addProductView.js";
-import * as addProductModel from "./addProductModel.js";
 import catalogView from "../catalog/catalogView.js";
 import * as model from "../../model.js";
 import { Product } from "../Product.js";

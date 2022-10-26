@@ -1,7 +1,6 @@
 import * as model from "../../model.js";
 import { formatDate } from "../../helpers.js";
 import { Week } from "../Week";
-import mainView from "./mainView.js";
 
 export async function setCurrentWeek() {
   try {

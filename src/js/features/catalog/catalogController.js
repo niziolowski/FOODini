@@ -2,7 +2,6 @@ import catalogView from "./catalogView.js";
 import * as catalogModel from "./catalogModel.js";
 import addProductView from "../addProduct/addProductView.js";
 import * as model from "../../model.js";
-import { Product } from "../Product.js";
 
 function handleClick(e) {
   // // Handle overlay click
