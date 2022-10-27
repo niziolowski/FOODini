@@ -71,41 +71,32 @@ function performAC(e) {
   addIngredientView.clearAC();
 }
 
-async function handleUpload(data) {
-  try {
-    // Add new product to storage
-    const ingredient = new Ingredient(
-      null,
-      data.name,
-      data.amount,
-      data.unit,
-      data.group,
-      data.bookmark,
-      data.date,
-      data.expiry
-    );
-    model.state.storage.push(ingredient);
+function handleSubmit(data) {
+  // Create new ingredient
+  const ingredient = new Ingredient(
+    null,
+    data.name,
+    data.amount,
+    data.unit,
+    data.group,
+    data.bookmark,
+    data.date,
+    data.expiry
+  );
 
-    // Upload to API
-    await model.uploadStorage();
+  // Add new ingredient to storage
+  model.state.storage.push(ingredient);
 
-    // Recalculate recipe ingredients;
+  // Recalculate recipe ingredients?;
 
-    // Update Sidebar View
-    sidebarView.render(model.state);
-
-    // Update views
-
-    // Display message
-  } catch (error) {
-    console.error(error);
-  }
+  // Update Sidebar View
+  sidebarView.render(model.state);
 }
 
 function init() {
   addIngredientView.addHandlerClick(handleClick);
   addIngredientView.addHandlerAC(handleAC);
-  addIngredientView.addHandlerUpload(handleUpload);
+  addIngredientView.addHandlerSubmit(handleSubmit);
 
   console.log("IMPORT SUCCESSFUL: addIngredientController");
 

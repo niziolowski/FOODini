@@ -5,7 +5,7 @@ import * as mainModel from "../main/mainModel.js";
 import settingsView from "../settings/settingsView.js";
 import * as model from "../../model.js";
 
-async function handleClick(e) {
+function handleClick(e) {
   // Get button
   const btn = e.target.closest("button");
 
@@ -26,7 +26,7 @@ async function handleClick(e) {
   // Next week btn
   if (btn.classList.contains("main-view__nav__controlls__next")) {
     // Switch to next week
-    const week = await mainModel.nextWeek();
+    const week = mainModel.nextWeek();
 
     // Update view
     mainView.render(model.state.plan.activeWeek, model.state);

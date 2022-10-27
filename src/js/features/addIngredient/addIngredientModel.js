@@ -1,6 +1,3 @@
-import { AJAX } from "../../helpers";
-import { API_URL_STORAGE } from "../../config.js";
-
 export function getSuggestions(input, state) {
   // Get input value
   const value = input.value.toLowerCase();
@@ -14,25 +11,4 @@ export function getSuggestions(input, state) {
   });
 
   return suggestions;
-}
-
-export async function upload(data) {
-  try {
-    // Format ingredient object for API
-
-    const ingredientFormated = {
-      name: data.name,
-      amount: +data.amount,
-      unit: data.unit,
-      group: data.group,
-      bookmark: false,
-      expiry: +data.expiry,
-      purchase_date: new Date(data.date).getTime(),
-    };
-    // Upload
-    const newData = await AJAX(`${API_URL_STORAGE}`, ingredientFormated);
-    return newData;
-  } catch (error) {
-    throw error;
-  }
 }

@@ -4,6 +4,7 @@ import {
   API_URL_RECIPES,
   API_URL_CATALOG,
   API_URL_PLAN,
+  API_URL,
 } from "./config.js";
 import { Ingredient } from "./features/Ingredient.js";
 import { Recipe } from "./features/Recipe.js";
@@ -34,19 +35,7 @@ export const state = {
     currentWeek: {},
     weeks: [],
   },
-  shoppingList: [
-    {
-      id: 855584,
-      name: "Jajka",
-      amount: 6,
-      unit: "szt.",
-      group: "świeże",
-      bookmark: true,
-      purchaseDate: 1666742400000,
-      expiry: "14",
-      daysLeft: 13,
-    },
-  ],
+  shoppingList: [],
 };
 
 export async function loadCatalog() {
@@ -264,4 +253,142 @@ export async function uploadStorage() {
   } catch (error) {
     console.error(error);
   }
+}
+
+// § SIMPLIFIED API (upload whole state to bypass requests limit)
+export async function APIupload() {
+  try {
+    // Create object
+    const data = {
+      username: "Basia",
+      data: state,
+    };
+
+    const res = await AJAX(API_URL, data);
+    console.log("State uploaded");
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function APIdownload() {
+  try {
+    const res = await AJAX(API_URL);
+    const data = res.data;
+
+    if (!data) return;
+
+    // Instantiate objects with methods
+    generateCatalog(data.catalog);
+    generateStorage(data.storage);
+    generateRecipes(data.recipes);
+    generatePlan(data.plan.weeks);
+
+    console.log(state);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+function generateCatalog(data) {
+  // Generate product objects
+  const catalog = data.map(
+    (ing) =>
+      new Product(
+        ing.id,
+        ing.name,
+        ing.amount,
+        ing.unit,
+        ing.group,
+        ing.bookmark,
+        ing.expiry
+      )
+  );
+
+  // Overwrite state catalog
+  state.catalog = catalog;
+}
+
+function generateStorage(data) {
+  // Generate ingredient objects
+  const storage = data.map(
+    (ing) =>
+      new Ingredient(
+        ing.id,
+        ing.name,
+        ing.amount,
+        ing.unit,
+        ing.group,
+        ing.bookmark,
+        ing.purchaseDate,
+        ing.expiry
+      )
+  );
+
+  // Overwrite state storage
+  state.storage = storage;
+}
+
+function generateRecipes(data) {
+  const recipes = data.map((rec) => {
+    // Generate recipe instances
+    const ingredients = rec.ingredients.map(
+      (ing) =>
+        new Ingredient(
+          ing.id,
+          ing.name,
+          ing.amount,
+          ing.unit,
+          ing.group,
+          ing.bookmark,
+          ing.date,
+          ing.expiry
+        )
+    );
+
+    // Create recipe instances
+    return new Recipe(
+      rec.id,
+      rec.title,
+      rec.group,
+      rec.description,
+      ingredients,
+      rec.spices,
+      rec.difficulty,
+      rec.bookmark,
+      rec.imageURL
+    );
+  });
+
+  // Overwrite state recipes
+  state.recipes = recipes;
+}
+
+function generatePlan(data) {
+  // guard closure
+  if (data.length === 0) return;
+
+  // generate week instances
+  const weeks = data.map((week) => {
+    // Create days for the week
+    const days = week.days.map((day) => {
+      const meals = day.meals.map((meal) => new Meal(meal));
+      return new Day(day.name, meals);
+    });
+
+    //
+    return new Week(
+      week.dateRange.startDate,
+      week.dateRange.endDate,
+      days,
+      week.id
+    );
+  });
+  state.plan.weeks = weeks;
+  state.plan.weeks.sort(
+    (a, b) =>
+      new Date(a.dateRange.startDate).getTime() -
+      new Date(b.dateRange.startDate).getTime()
+  );
 }

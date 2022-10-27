@@ -10,7 +10,7 @@ class addIngredientView {
     ".add-ingredient-content__form .suggestions"
   );
 
-  addHandlerUpload(handler) {
+  addHandlerSubmit(handler) {
     this._form.addEventListener("submit", function (e) {
       e.preventDefault();
 

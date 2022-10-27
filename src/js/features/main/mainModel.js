@@ -2,33 +2,29 @@ import * as model from "../../model.js";
 import { formatDate } from "../../helpers.js";
 import { Week } from "../Week";
 
-export async function setCurrentWeek() {
-  try {
-    // get date now
-    const now = formatDate(new Date());
+export function setCurrentWeek() {
+  // get date now
+  const now = formatDate(new Date());
 
-    // check if current week exists
-    let currentWeek = model.state.plan.weeks.find((week) => {
-      const nowTimestamp = new Date(now).getTime();
-      const startDate = new Date(week.dateRange.startDate).getTime();
-      const endDate = new Date(week.dateRange.endDate).getTime();
+  // check if current week exists
+  let currentWeek = model.state.plan.weeks.find((week) => {
+    const nowTimestamp = new Date(now).getTime();
+    const startDate = new Date(week.dateRange.startDate).getTime();
+    const endDate = new Date(week.dateRange.endDate).getTime();
 
-      if (nowTimestamp >= startDate && nowTimestamp <= endDate) return week;
-    });
+    if (nowTimestamp >= startDate && nowTimestamp <= endDate) return week;
+  });
 
-    // Create new week if no current week
-    if (!currentWeek) currentWeek = await newWeek(now);
+  // Create new week if no current week
+  if (!currentWeek) currentWeek = newWeek(now);
 
-    // Set current week
-    model.state.plan.currentWeek = currentWeek;
-    // Add week name for subtitle
-    model.state.plan.currentWeek.name = "Bieżący tydzień";
+  // Set current week
+  model.state.plan.currentWeek = currentWeek;
+  // Add week name for subtitle
+  model.state.plan.currentWeek.name = "Bieżący tydzień";
 
-    // Set current week as active
-    setActiveWeek(currentWeek);
-  } catch (error) {
-    throw error;
-  }
+  // Set current week as active
+  setActiveWeek(currentWeek);
 }
 
 // Swich the week to the next one and if it doesn't exist, create one
@@ -93,37 +89,30 @@ export function setActiveWeek(week) {
   model.state.plan.activeWeek = week;
 }
 
-export async function newWeek(dateString) {
-  try {
-    // 1. Get dateRange
-    const date = new Date(dateString);
-    // Get day of the week (minus one because we want to get to monday)
-    const dayNum = date.getDay();
-    const daysIn = dayNum === 0 ? -1 : dayNum - 1;
-    // Set monday as start date
-    let startDate = new Date(date - daysIn * 1000 * 60 * 60 * 24);
-    // Set sunday as end date
-    let endDate = new Date(startDate.getTime() + 6 * 1000 * 60 * 60 * 24);
+export function newWeek(dateString) {
+  // 1. Get dateRange
+  const date = new Date(dateString);
+  // Get day of the week (minus one because we want to get to monday)
+  const dayNum = date.getDay();
+  const daysIn = dayNum === 0 ? -1 : dayNum - 1;
+  // Set monday as start date
+  let startDate = new Date(date - daysIn * 1000 * 60 * 60 * 24);
+  // Set sunday as end date
+  let endDate = new Date(startDate.getTime() + 6 * 1000 * 60 * 60 * 24);
 
-    // Format dates
-    startDate = formatDate(startDate);
-    endDate = formatDate(endDate);
+  // Format dates
+  startDate = formatDate(startDate);
+  endDate = formatDate(endDate);
 
-    //   Create week obj
-    const newWeekObj = new Week(startDate, endDate);
+  //   Create week obj
+  const newWeekObj = new Week(startDate, endDate);
 
-    //   Add to plan
-    model.state.plan.weeks.push(newWeekObj);
+  //   Add to plan
+  model.state.plan.weeks.push(newWeekObj);
 
-    // Upload to API
-    const data = await model.uploadPlan();
+  setWeekNames();
 
-    setWeekNames();
-
-    return newWeekObj;
-  } catch (error) {
-    throw error;
-  }
+  return newWeekObj;
 }
 
 export function setWeekNames() {
@@ -170,9 +159,6 @@ export function setWeekNames() {
 
   // Delete weeks older than 1
   oldWeeks.forEach((week) => model.deleteWeek(week));
-
-  // Upload to API
-  model.uploadPlan();
 }
 
 // Remove meal from plan

@@ -21,13 +21,17 @@ settingsView.updateColorTheme(model.state.colorTheme);
 async function init() {
   try {
     // Load state from API (for now only storage and recipes)
-    await model.loadState();
+    // await model.loadState();
+    await model.APIdownload();
 
     // Init main
     mainController.init();
 
     // Init sidebar
     sidebarController.init();
+
+    // Upload state every 5 seconds
+    setInterval(model.APIupload, 5000);
   } catch (error) {
     console.error(error);
   }

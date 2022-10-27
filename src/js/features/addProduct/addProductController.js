@@ -16,33 +16,25 @@ function handleClick(e) {
     addProductView.hide();
 }
 
-async function handleSubmit(data) {
-  try {
-    console.log(data);
-    // Add new product to catalog
-    model.state.catalog.push(
-      new Product(
-        null,
-        data.name,
-        data.amount,
-        data.unit,
-        data.group,
-        false,
-        data.expiry
-      )
-    );
+function handleSubmit(data) {
+  // Add new product to catalog
+  model.state.catalog.push(
+    new Product(
+      null,
+      data.name,
+      data.amount,
+      data.unit,
+      data.group,
+      false,
+      data.expiry
+    )
+  );
 
-    // Upload to API
-    model.uploadCatalog();
+  // Update catalog View
+  catalogView.render(model.state);
 
-    // Update Sidebar View
-    catalogView.render(model.state);
-
-    // Close the window
-    addProductView.hide();
-  } catch (error) {
-    console.error(error);
-  }
+  // Close the window
+  addProductView.hide();
 }
 
 function init() {

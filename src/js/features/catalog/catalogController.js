@@ -30,9 +30,6 @@ function handleClick(e) {
 
     // Update view
     catalogView.render(model.state);
-
-    // Update API
-    model.uploadCatalog();
   }
 
   // Bookmark BTN
@@ -44,9 +41,6 @@ function handleClick(e) {
     const product = model.state.catalog.find((item) => item.id === id);
     product.toggleBookmark();
     catalogView.render(model.state);
-
-    // Upload to API
-    model.uploadCatalog();
   }
 }
 

@@ -48,9 +48,6 @@ export function handleClick(e) {
 
       // Update View
       sidebarView.render(model.state);
-
-      // Update API
-      model.uploadStorage();
     }
 
     // RECIPES
@@ -63,7 +60,6 @@ export function handleClick(e) {
       const recipe = model.state.recipes.find((rec) => rec.id === id);
       recipe.toggleBookmark();
       sidebarView.render(model.state);
-      recipe.upload();
     }
   }
 }

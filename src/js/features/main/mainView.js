@@ -73,6 +73,8 @@ class mainView {
 
   _handleDragOver(e) {
     e.preventDefault();
+    // Change cursor to regular pointer
+    event.dataTransfer.dropEffect = "move";
 
     // Clear Indication on all days
     this.clearDaysIndication();
