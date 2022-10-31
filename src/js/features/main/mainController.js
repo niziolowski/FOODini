@@ -2,6 +2,7 @@ import mainView from "./mainView.js";
 import * as mainModel from "./mainModel.js";
 import * as model from "../../model.js";
 import sidebarView from "../sidebar/sidebarView.js";
+import shoppingListView from "../shoppingList/shoppingListView.js";
 
 //TODO: Refactor this. Move to view and model what you can. Think through.
 function handleDrop(e) {
@@ -57,7 +58,10 @@ function handleDrop(e) {
 
   // Add new item
   const day = model.getDay(targetDay);
-  day.addMeal(meal, targetIndex);
+  const newMeal = day.addMeal(meal, targetIndex);
+
+  // Add missing ingredients to shopping-list
+  model.addToShoppingList("sync", newMeal.missing);
 
   // Recalculate recipes
   model.state.recipes.forEach((recipe) => recipe.calcIngredients());
@@ -65,6 +69,7 @@ function handleDrop(e) {
   // Update View
   sidebarView.render(model.state);
   mainView.render(model.state.plan.activeWeek, model.state);
+  shoppingListView.render(model.state.shoppingList);
 }
 
 function handleClick(e) {

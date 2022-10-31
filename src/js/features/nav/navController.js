@@ -39,11 +39,17 @@ function handleClick(e) {
   if (
     btn.classList.contains("main-view__nav__controlls__btn-add-shopping-list")
   ) {
-    // clear shopping list
-    //* shoppingListModel ?
+    const week = model.state.plan.activeWeek;
 
-    //* -------------------
-    console.log("test");
+    // turn on week sync
+    mainModel.toggleWeekSync(week);
+
+    // get missing products from active week
+
+    // update View
+    navView.updateBtnSync(week.sync);
+
+    // clear shopping list
   }
 
   // Previous week btn
@@ -71,10 +77,12 @@ function handleClick(e) {
   }
 }
 
-function init() {
+export function init() {
   navView.addHandlerClick(handleClick);
+
+  // Init Week-list sync btn
+
+  navView.updateBtnSync(model.state.plan.activeWeek.sync);
 
   console.log("IMPORT SUCCESSFUL: navController");
 }
-
-init();

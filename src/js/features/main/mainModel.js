@@ -166,3 +166,8 @@ export function removeMeal(dayID, i) {
   const day = model.getDay(dayID);
   day.removeMeal(i);
 }
+
+// Toggle Week-list sync
+export function toggleWeekSync(week) {
+  week.sync = !week.sync;
+}

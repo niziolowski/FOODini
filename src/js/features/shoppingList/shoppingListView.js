@@ -2,7 +2,8 @@ class shoppingListView {
   _parentElement = document.querySelector(".shopping-list");
   _btnToggle = document.querySelector(".shopping-list__btn-toggle");
   _btnAdd = document.querySelector(".shopping-list__btn-add");
-  _content = document.querySelector(".shopping-list-content");
+  _contentSync = document.querySelector("#list-sync");
+  _content = document.querySelector("#list");
   _status = "inactive";
   constructor() {
     this.init();
@@ -63,7 +64,7 @@ class shoppingListView {
 
   // Render list items
   render(shoppingList) {
-    const markup = shoppingList
+    const userMarkup = shoppingList.user
       .map((item) => {
         return `
       <li class="shopping-list-item">
@@ -83,8 +84,36 @@ class shoppingListView {
       `;
       })
       .join("");
+    const syncMarkup = shoppingList.sync
+      .map((item) => {
+        return `
+        <li class="shopping-list-item sync">
+          <input class="shopping-list-item__checkbox" type="checkbox">
+          <input type="text" class="shopping-list-item__name" contenteditable="true" value="${
+            item.name
+          }">
+          <input type="number" class="shopping-list-item__amount" contenteditable="true" value="${
+            item.amount
+          }">
+          <select class="shopping-list-item__unit" value="${item.unit}">
+          ${["szt.", "kg", "g", "ml"].map((unit) => {
+            return `
+            <option ${item.unit === unit ? "selected" : ""}>${unit}</option>
+            `;
+          })}
+          </select>
+          <button class="shopping-list-item__btn-delete btn-icon small">
+            <i data-feather="lock"></i>
+          </button>
+        </li>
+      `;
+      })
+      .join("");
 
-    this._content.insertAdjacentHTML("afterbegin", markup);
+    this._contentSync.innerHTML = syncMarkup;
+    this._content.insertAdjacentHTML("afterbegin", userMarkup);
+
+    feather.replace();
   }
 
   // Render empty row for a new item

@@ -15,6 +15,8 @@ export class Day {
     const newMeal = new Meal(meal);
     newMeal.calcIngredients();
     this.meals.splice(i, 0, newMeal);
+
+    return newMeal;
   }
 
   removeMeal(i) {

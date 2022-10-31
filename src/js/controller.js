@@ -1,7 +1,7 @@
 // FEATURE BASED MVC STRUCTURE TEST
 import * as sidebarController from "./features/sidebar/sidebarController.js";
 import * as mainController from "./features/main/mainController.js";
-import navController from "./features/nav/navController.js";
+import * as navController from "./features/nav/navController.js";
 import settingsController from "./features/settings/settingsController.js";
 import addIngredientController from "./features/addIngredient/addIngredientController.js";
 import shoppingListController from "./features/shoppingList/shoppingListController.js";
@@ -26,6 +26,8 @@ async function init() {
 
     // Init main
     mainController.init();
+
+    navController.init();
 
     // Init sidebar
     sidebarController.init();

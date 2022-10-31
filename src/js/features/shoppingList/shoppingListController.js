@@ -8,6 +8,7 @@ function handleClick(e) {
 
   // Btn "add item"
   if (btn.classList.contains("shopping-list__btn-add")) {
+    e.preventDefault();
     // Render
     shoppingListView.renderNewItem();
 
@@ -15,7 +16,6 @@ function handleClick(e) {
   }
 
   // Btn "delete item"
-
   if (btn.classList.contains("shopping-list-item__btn-delete")) {
     shoppingListView.removeItem(btn);
 

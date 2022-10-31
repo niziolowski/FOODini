@@ -98,7 +98,7 @@ h2 {
   display: flex;
   height: 100px;
   padding: 20px;
-  padding-right: 144px;
+  padding-right: 164px;
   justify-content: space-between;
 }
 
@@ -246,6 +246,12 @@ h2 {
 }
 
 /* § SHOPPING LIST */
+#shopping-list-form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: scroll;
+}
 
 .shopping-list {
   display: flex;
@@ -282,14 +288,43 @@ h2 {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 15px;
+  padding: 0 0 80px 0;
+}
+.shopping-list-content.sync {
+  background-color: #e2e9dc;
+  padding: 0;
+  flex: 0;
 }
 
 .shopping-list-item {
+  position: relative;
   display: flex;
   align-items: center;
   height: 45px;
-  border-bottom: var(--border);
+  padding: 0 15px;
+}
+
+.shopping-list-item:before {
+  position: absolute;
+  left: 50%;
+  translate: -50%;
+  bottom: 0px;
+  content: " ";
+  width: 93%;
+  height: 1px;
+  background-color: var(--grey-color);
+}
+
+/* Disable automatic list input edit */
+.shopping-list-item.sync input,
+.shopping-list-item.sync select {
+  pointer-events: none;
+}
+
+/* Except checkbox */
+.shopping-list-item.sync input[type="checkbox"] {
+  pointer-events: all;
+  background-color: var(--bg-color);
 }
 
 .shopping-list-item input,
@@ -351,7 +386,7 @@ input[type="number"] {
 }
 
 .shopping-list__btn-add {
-  padding: 0;
+  padding: 0 15px;
   margin: 0;
   display: flex;
   justify-content: flex-start;
@@ -376,8 +411,11 @@ input[type="number"] {
 }
 
 .shopping-list__btn-submit {
-  margin-top: auto;
-  width: 100%;
+  position: fixed;
+  bottom: 15px;
+  left: 50%;
+  translate: -50%;
+  width: 90%;
 }
 
 /* § SETTINGS */
@@ -1532,6 +1570,17 @@ input[type="number"] {
   border: 1px solid var(--accent-color);
   color: var(--font-negative-color);
   box-shadow: inset rgba(0, 0, 0, 0.1) 0 0 5px;
+}
+
+#btn-sync.active {
+  border: var(--border);
+  background-color: var(--accent-color);
+  box-shadow: inset rgba(0, 0, 0, 0.1) 0 0 5px;
+}
+
+#btn-sync.active svg {
+  color: var(--font-negative-color);
+  fill: none;
 }
 
 .search-bar {
