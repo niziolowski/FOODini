@@ -4,6 +4,8 @@ import mainView from "../main/mainView.js";
 import * as mainModel from "../main/mainModel.js";
 import settingsView from "../settings/settingsView.js";
 import * as model from "../../model.js";
+import shoppingListView from "../shoppingList/shoppingListView.js";
+import * as shoppingListModel from "../shoppingList/shoppingListModel.js";
 
 function handleClick(e) {
   // Get button
@@ -33,35 +35,52 @@ function handleClick(e) {
 
     // Update subtitle
     navView.updateSubtitle(model.state.plan.activeWeek.name);
+    navView.updateBtnSync(week.sync);
   }
 
-  // Add to shopping list
+  // Shopping list synchronisation
   if (
     btn.classList.contains("main-view__nav__controlls__btn-add-shopping-list")
   ) {
+    // Get active week
     const week = model.state.plan.activeWeek;
 
-    // turn on week sync
+    // Change Week-sync status
     mainModel.toggleWeekSync(week);
-
-    // get missing products from active week
-
     // update View
     navView.updateBtnSync(week.sync);
 
-    // clear shopping list
+    // When turning sync ON
+    if (btn.classList.contains("active")) {
+      // Add missing products from active week to shopping list
+      week.days.forEach((day) =>
+        day.meals.forEach((meal) =>
+          shoppingListModel.addItem("sync", meal.missing)
+        )
+      );
+    }
+
+    // When turning sync OFF
+    if (!btn.classList.contains("active")) {
+      // Remove missing product from shopping list for active week
+    }
+
+    shoppingListView.render(model.state.shoppingList);
   }
 
   // Previous week btn
   if (btn.classList.contains("main-view__nav__controlls__previous")) {
     // Switch to next week
     const week = mainModel.previousWeek();
+    if (!week) return;
 
     // Update view
     mainView.render(model.state.plan.activeWeek, model.state);
 
     // Update subtitle
     navView.updateSubtitle(model.state.plan.activeWeek.name);
+
+    navView.updateBtnSync(week.sync);
   }
 
   // Current week btn
@@ -74,6 +93,7 @@ function handleClick(e) {
 
     // Update subtitle
     navView.updateSubtitle(model.state.plan.activeWeek.name);
+    navView.updateBtnSync(model.state.plan.activeWeek.sync);
   }
 }
 

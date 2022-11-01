@@ -3,6 +3,7 @@ import * as mainModel from "./mainModel.js";
 import * as model from "../../model.js";
 import sidebarView from "../sidebar/sidebarView.js";
 import shoppingListView from "../shoppingList/shoppingListView.js";
+import * as shoppingListModel from "../shoppingList/shoppingListModel.js";
 
 //TODO: Refactor this. Move to view and model what you can. Think through.
 function handleDrop(e) {
@@ -54,14 +55,14 @@ function handleDrop(e) {
     // 1. Recover storage move to model
     model.restoreIngredients(mealObj);
     mainModel.removeMeal(data.day, data.index);
+
+    // 2. delete from list
+    shoppingListModel.deleteItem("sync", mealObj.missing);
   }
 
   // Add new item
   const day = model.getDay(targetDay);
   const newMeal = day.addMeal(meal, targetIndex);
-
-  // Add missing ingredients to shopping-list
-  model.addToShoppingList("sync", newMeal.missing);
 
   // Recalculate recipes
   model.state.recipes.forEach((recipe) => recipe.calcIngredients());
@@ -69,6 +70,13 @@ function handleDrop(e) {
   // Update View
   sidebarView.render(model.state);
   mainView.render(model.state.plan.activeWeek, model.state);
+
+  // § Shopping list synchronisation
+
+  // Add missing ingredients to shopping-list
+  shoppingListModel.addItem("sync", newMeal.missing);
+
+  // Update view
   shoppingListView.render(model.state.shoppingList);
 }
 
@@ -88,8 +96,9 @@ function handleClick(e) {
     const dayObj = model.getDay(day.id);
     const mealObj = dayObj.meals[index];
 
-    // 1. Recover storage move to model
+    // 1. Recover storage
     model.restoreIngredients(mealObj);
+    shoppingListModel.deleteItem("sync", mealObj.missing);
 
     // 2. Delete meal
     mainModel.removeMeal(day.id, index);
@@ -111,6 +120,7 @@ function handleClick(e) {
     // 4. Update View
     mainView.render(model.state.plan.activeWeek, model.state);
     sidebarView.render(model.state);
+    shoppingListView.render(model.state.shoppingList);
   }
 }
 

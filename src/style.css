@@ -1573,13 +1573,13 @@ input[type="number"] {
 }
 
 #btn-sync.active {
-  border: var(--border);
-  background-color: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  background-color: var(--bg-color);
   box-shadow: inset rgba(0, 0, 0, 0.1) 0 0 5px;
 }
 
 #btn-sync.active svg {
-  color: var(--font-negative-color);
+  color: var(--accent-color);
   fill: none;
 }
 

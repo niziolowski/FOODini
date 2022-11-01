@@ -28,7 +28,7 @@ export function setCurrentWeek() {
 }
 
 // Swich the week to the next one and if it doesn't exist, create one
-export async function nextWeek() {
+export function nextWeek() {
   try {
     // Get active week end date
     const endDate = model.state.plan.activeWeek.dateRange.endDate;
@@ -47,7 +47,7 @@ export async function nextWeek() {
     );
 
     // If not, create it and add to plan
-    if (!nextWeek) nextWeek = await newWeek(nextWeekDate);
+    if (!nextWeek) nextWeek = newWeek(nextWeekDate);
 
     // Set new week as active
     setActiveWeek(nextWeek);

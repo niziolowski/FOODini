@@ -1,7 +1,9 @@
 import shoppingListView from "./shoppingListView.js";
+import * as shoppingListModel from "./shoppingListModel.js";
 import * as model from "../../model.js";
 
 function handleClick(e) {
+  e.preventDefault();
   const btn = e.target.closest("button");
 
   if (!btn) return;
@@ -17,17 +19,28 @@ function handleClick(e) {
 
   // Btn "delete item"
   if (btn.classList.contains("shopping-list-item__btn-delete")) {
-    shoppingListView.removeItem(btn);
-
     // Remove from state
+    // Get list mode
+    const mode = btn.closest("ul").id.split("-")[1];
+
+    // Get target name
+    const name = btn.parentElement.querySelector(
+      ".shopping-list-item__name"
+    ).value;
+
+    // Get item object
+    const item = [
+      model.state.shoppingList[mode].find((item) => item.name === name),
+    ];
+
+    shoppingListModel.deleteItem(mode, item);
+    shoppingListView.removeItem(btn);
   }
 }
 
-function init() {
+export function init() {
   console.log("IMPORT SUCCESFUL: shoppingListController");
   shoppingListView.addHandlerClick(handleClick);
 
   shoppingListView.render(model.state.shoppingList);
 }
-
-init();

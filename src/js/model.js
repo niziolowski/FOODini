@@ -287,12 +287,48 @@ export async function APIdownload() {
     generateStorage(data.storage);
     generateRecipes(data.recipes);
     generatePlan(data.plan.weeks);
+    generateShoppingList(data.shoppingList);
 
     console.log(state);
     return data;
   } catch (error) {
     throw error;
   }
+}
+
+function generateShoppingList(data) {
+  // Generate sync ingredients
+  const syncIngs = data.sync.map(
+    (ing) =>
+      new Ingredient(
+        ing.id,
+        ing.name,
+        ing.amount,
+        ing.unit,
+        ing.group,
+        ing.bookmark,
+        ing.purchaseDate,
+        ing.expiry
+      )
+  );
+
+  const userIngs = data.user.map(
+    (ing) =>
+      new Ingredient(
+        ing.id,
+        ing.name,
+        ing.amount,
+        ing.unit,
+        ing.group,
+        ing.bookmark,
+        ing.purchaseDate,
+        ing.expiry
+      )
+  );
+
+  // Overwrite state shopping list
+  state.shoppingList.sync = syncIngs;
+  state.shoppingList.user = userIngs;
 }
 
 function generateCatalog(data) {
@@ -396,25 +432,4 @@ function generatePlan(data) {
       new Date(a.dateRange.startDate).getTime() -
       new Date(b.dateRange.startDate).getTime()
   );
-}
-
-export function addToShoppingList(mode, ingredients) {
-  if (mode === "sync") {
-    // ingredients.forEach((ing) => state.shoppingList.sync.push(ing));
-    // console.log(state.shoppingList);
-    ingredients.forEach((ing) => {
-      // 1. Look for ingredient in sync list
-      const match = state.shoppingList.sync.find(
-        (item) => item.name === ing.name
-      );
-
-      // 2. If no matches, add to list
-      if (!match) state.shoppingList.sync.push(ing);
-
-      // 3. if there is a match, add amount to the position
-      if (match) {
-        match.amount += ing.amount;
-      }
-    });
-  }
 }
