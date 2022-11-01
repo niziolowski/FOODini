@@ -3,7 +3,6 @@ import * as shoppingListModel from "./shoppingListModel.js";
 import * as model from "../../model.js";
 
 function handleClick(e) {
-  e.preventDefault();
   const btn = e.target.closest("button");
 
   if (!btn) return;
