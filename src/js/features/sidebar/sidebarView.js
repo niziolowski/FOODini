@@ -117,9 +117,11 @@ class sidebarView {
     // Render side view
     if (!this._status.fullPage) {
       if (this._status.activeTab === "storage") {
+        this._options.innerHTML = this.generateMarkupOptions(state);
         this._content.innerHTML = this.generateMarkupStorage(state);
       }
       if (this._status.activeTab === "recipes") {
+        this._options.innerHTML = this.generateMarkupOptions(state);
         this._content.innerHTML = this.generateMarkupRecipes(state);
       }
     }
@@ -198,28 +200,54 @@ class sidebarView {
   generateMarkupOptions() {
     // Options for side view
     if (!this._status.fullPage) {
-      return `
-        <div class="row">
-          <button class="sidebar__btn-add-ingredient btn-icon small">
-            <i data-feather="plus"></i>
-          </button>
-          <div class="sidebar__search-bar">
-            <input type="search" placeholder="Szukaj">
-            <i data-feather="search"></i></div>
-          <button class="sidebar__btn-full-page btn-icon small">
-            <i data-feather="maximize-2"></i>
-          </button>
-        </div>
-        <div class="row">
-          <span>Filtr</span>
-          <select>
-            <option>brak</option>
-          </select>
-          <button class="btn-icon small fill">
-            <i data-feather="star"></i>
-          </button>
-        </div>
-    `;
+      if (this._status.activeTab === "storage") {
+        return `
+          <div class="row">
+            <button class="sidebar__btn-add-ingredient btn-icon small">
+              <i data-feather="plus"></i>
+            </button>
+            <div class="sidebar__search-bar">
+              <input type="search" placeholder="Szukaj">
+              <i data-feather="search"></i></div>
+            <button class="sidebar__btn-full-page btn-icon small">
+              <i data-feather="maximize-2"></i>
+            </button>
+          </div>
+          <div class="row">
+            <span>Filtr</span>
+            <select>
+              <option>brak</option>
+            </select>
+            <button class="btn-icon small fill">
+              <i data-feather="star"></i>
+            </button>
+          </div>
+        `;
+      }
+      if (this._status.activeTab === "recipes") {
+        return `
+          <div class="row">
+            <button class="sidebar__btn-add-recipe btn-icon small">
+              <i data-feather="plus"></i>
+            </button>
+            <div class="sidebar__search-bar">
+              <input type="search" placeholder="Szukaj">
+              <i data-feather="search"></i></div>
+            <button class="sidebar__btn-full-page btn-icon small">
+              <i data-feather="maximize-2"></i>
+            </button>
+          </div>
+          <div class="row">
+            <span>Filtr</span>
+            <select>
+              <option>brak</option>
+            </select>
+            <button class="btn-icon small fill">
+              <i data-feather="star"></i>
+            </button>
+          </div>
+        `;
+      }
     }
 
     // Options for full-page view

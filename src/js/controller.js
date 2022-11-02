@@ -8,6 +8,7 @@ import * as shoppingListController from "./features/shoppingList/shoppingListCon
 import recipeController from "./features/recipe/recipeController.js";
 import catalogController from "./features/catalog/catalogController.js";
 import addProductController from "./features/addProduct/addProductController.js";
+import addRecipeController from "./features/addRecipe/addRecipeController.js";
 
 init();
 

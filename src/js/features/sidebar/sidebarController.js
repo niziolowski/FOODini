@@ -1,5 +1,6 @@
 import sidebarView from "./sidebarView.js";
 import addIngredientView from "../addIngredient/addIngredientView.js";
+import addRecipeView from "../addRecipe/addRecipeView.js";
 import mainView from "../main/mainView.js";
 import * as model from "../../model.js";
 
@@ -15,6 +16,11 @@ export function handleClick(e) {
     // Add product
     if (btn.classList.contains("sidebar__btn-add-ingredient")) {
       addIngredientView.show();
+    }
+
+    // Add recipe
+    if (btn.classList.contains("sidebar__btn-add-recipe")) {
+      addRecipeView.show();
     }
 
     // Tabs
