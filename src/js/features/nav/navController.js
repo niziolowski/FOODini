@@ -50,20 +50,27 @@ function handleClick(e) {
     // update View
     navView.updateBtnSync(week.sync);
 
-    // When turning sync ON
-    if (btn.classList.contains("active")) {
-      // Add missing products from active week to shopping list
-      week.days.forEach((day) =>
-        day.meals.forEach((meal) =>
-          shoppingListModel.addItem("sync", meal.missing)
-        )
-      );
-    }
+    // // When turning sync ON
+    // if (btn.classList.contains("active")) {
+    //   // Add missing products from active week to shopping list
+    //   week.days.forEach((day) =>
+    //     day.meals.forEach((meal) =>
+    //       shoppingListModel.addItem("sync", meal.missing)
+    //     )
+    //   );
+    // }
 
-    // When turning sync OFF
-    if (!btn.classList.contains("active")) {
-      // Remove missing product from shopping list for active week
-    }
+    // // When turning sync OFF
+    // if (!btn.classList.contains("active")) {
+    //   // Remove missing product from shopping list for active week
+    //   week.days.forEach((day) =>
+    //     day.meals.forEach((meal) =>
+    //       shoppingListModel.deleteItem("sync", meal.missing)
+    //     )
+    //   );
+    // }
+
+    shoppingListModel.recalcShoppingList();
 
     shoppingListView.render(model.state.shoppingList);
   }

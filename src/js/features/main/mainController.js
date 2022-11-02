@@ -56,8 +56,10 @@ function handleDrop(e) {
     model.restoreIngredients(mealObj);
     mainModel.removeMeal(data.day, data.index);
 
-    // 2. delete from list
-    shoppingListModel.deleteItem("sync", mealObj.missing);
+    if (model.state.plan.activeWeek.sync) {
+      // 2. delete from list
+      shoppingListModel.recalcShoppingList();
+    }
   }
 
   // Add new item
@@ -72,12 +74,12 @@ function handleDrop(e) {
   mainView.render(model.state.plan.activeWeek, model.state);
 
   // § Shopping list synchronisation
+  if (model.state.plan.activeWeek.sync) {
+    shoppingListModel.recalcShoppingList();
 
-  // Add missing ingredients to shopping-list
-  shoppingListModel.addItem("sync", newMeal.missing);
-
-  // Update view
-  shoppingListView.render(model.state.shoppingList);
+    // Update view
+    shoppingListView.render(model.state.shoppingList);
+  }
 }
 
 function handleClick(e) {
@@ -98,11 +100,14 @@ function handleClick(e) {
 
     // 1. Recover storage
     model.restoreIngredients(mealObj);
-    shoppingListModel.deleteItem("sync", mealObj.missing);
 
     // 2. Delete meal
     mainModel.removeMeal(day.id, index);
 
+    // If shopping list sync is on, recalculate shopping list
+    if (model.state.plan.activeWeek.sync) {
+      shoppingListModel.recalcShoppingList();
+    }
     // TEMPORARY SOLUTION FOR MISCALCULATION:
     // When deleting meal, restore Ingredients for all items and recalculate again;
     model.state.plan.weeks.forEach((week) =>

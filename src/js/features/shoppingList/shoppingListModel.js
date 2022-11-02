@@ -1,4 +1,5 @@
 import * as model from "../../model.js";
+import { Ingredient } from "../Ingredient.js";
 
 export function addItem(mode, ingredients) {
   if (mode === "sync") {
@@ -9,7 +10,19 @@ export function addItem(mode, ingredients) {
       );
 
       // 2. If no matches, add to list
-      if (!match) model.state.shoppingList.sync.push(ing);
+      if (!match)
+        model.state.shoppingList.sync.push(
+          new Ingredient(
+            ing.id,
+            ing.name,
+            ing.amount,
+            ing.unit,
+            ing.group,
+            ing.bookmark,
+            ing.purchaseDate,
+            ing.expiry
+          )
+        );
 
       // 3. if there is a match, add amount to the position
       if (match) {
@@ -38,4 +51,17 @@ export function deleteItem(mode, ingredients) {
       if (item.amount === 0) model.state.shoppingList.sync.splice(index, 1);
     });
   }
+}
+
+export function recalcShoppingList() {
+  // Clear shopping list
+  model.state.shoppingList.sync = [];
+
+  model.state.plan.weeks.forEach((week) => {
+    // If week sync is ON, add missing items to the list
+    if (week.sync)
+      week.days.forEach((day) =>
+        day.meals.forEach((meal) => addItem("sync", meal.missing))
+      );
+  });
 }
