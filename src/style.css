@@ -1039,7 +1039,7 @@ input[type="number"] {
   background-color: var(--bg-color);
 }
 
-.suggestions__btn-new {
+.add-ingredient-content .suggestions__btn-new {
   position: sticky;
   bottom: 0;
   display: flex;
@@ -1050,7 +1050,7 @@ input[type="number"] {
   font-weight: 400;
 }
 
-.suggestions__btn-new svg {
+.add-ingredient-content .suggestions__btn-new svg {
   margin-left: auto;
   width: 20px;
   height: 20px;
@@ -1234,21 +1234,24 @@ input[type="number"] {
 .add-recipe {
   position: absolute;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
+  overflow: scroll;
 }
 
 .add-recipe-content {
-  position: absolute;
-  padding: 20px;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 5%;
+  padding: 20px;
   z-index: 1;
+  flex: 1;
   background-color: var(--bg-color);
 }
 
@@ -1265,6 +1268,7 @@ input[type="number"] {
 }
 
 .add-recipe-content form {
+  position: relative;
   display: grid;
   max-width: 1200px;
   margin: 20px;
@@ -1314,6 +1318,7 @@ input[type="number"] {
   padding: 10px;
   border-radius: 5px;
   resize: vertical;
+  height: 150px;
 }
 
 .add-recipe-content__ingredients {
@@ -1325,21 +1330,39 @@ input[type="number"] {
 }
 
 .add-recipe__ingredient {
+  position: relative;
   display: flex;
   flex-direction: row;
   column-gap: 10px;
 }
 
-.add-recipe__ingredient input:nth-child(1) {
+.add-recipe__ingredient div:nth-child(1) {
+  position: relative;
   flex: 1;
 }
 .add-recipe__ingredient input:nth-child(2) {
   width: 50px;
 }
+
+.add-recipe__ingredient__name {
+  width: 100%;
+}
+
 .add-recipe-content__spices {
   display: grid;
   grid-column: 2/3;
   row-gap: 10px;
+  max-width: 220px;
+}
+
+.add-recipe__spice {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+}
+
+.add-recipe .divider {
+  margin-top: auto;
 }
 
 /* § PRODUCT CATALOG */
@@ -1584,6 +1607,56 @@ input[type="number"] {
   background-color: var(--bg-color);
 }
 
+/* § AUTO COMPLETE */
+
+.suggestions {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  max-height: 240px;
+  list-style: none;
+  border-left: var(--border);
+  border-right: var(--border);
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  overflow-y: scroll;
+  z-index: 1;
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--font-color);
+}
+
+.suggestions li {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 10px;
+  border-bottom: var(--border);
+  cursor: pointer;
+}
+
+.suggestions li:hover {
+  background-color: var(--bg-color);
+}
+.suggestions__btn-new {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  border-top: 2px solid var(--grey-color);
+  color: var(--accent-color);
+  background-color: white;
+  font-weight: 400;
+}
+
+.suggestions__btn-new svg {
+  margin-left: auto;
+  width: 20px;
+  height: 20px;
+}
+
 /* § UNIVERSAL STYLES */
 
 /* Btn */
@@ -1717,6 +1790,13 @@ input[type="number"] {
   color: var(--accent-color);
 }
 
+.divider {
+  margin: 15px;
+  width: 100%;
+  height: 1px;
+  background-color: var(--grey-color);
+}
+
 .overlay {
   position: fixed;
   width: 100%;
@@ -1727,6 +1807,10 @@ input[type="number"] {
 
 .hidden {
   display: none;
+}
+
+.non-editable {
+  pointer-events: none;
 }
 
 /* § CHECKBOX CUSTOM STYLE */
