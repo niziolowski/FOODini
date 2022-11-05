@@ -43,7 +43,7 @@ export function autoComplete(event) {
   }
 
   //   On Enter pick first suggestion
-  if (key === "Enter" && input.value.length > 0) {
+  if (key === "Enter" && input?.value.length > 0) {
     // get first suggestion from the list
     const firstSuggestion = getFirstSuggestionEl(event);
 
@@ -52,6 +52,9 @@ export function autoComplete(event) {
 
     // get product data
     const productData = autoCompleteModel.getProduct(firstSuggestion);
+
+    // exit autocomplete
+    autoCompleteView.clear();
 
     // return data
     return productData;

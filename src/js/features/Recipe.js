@@ -12,7 +12,7 @@ export class Recipe {
     bookmark,
     imageURL
   ) {
-    this.id = id;
+    this.id = id || +(Math.random() * 1000000).toFixed();
     this.title = title;
     this.group = group;
     this.description = description;

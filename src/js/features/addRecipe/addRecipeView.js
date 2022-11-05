@@ -1,5 +1,3 @@
-import { deleteIngredient } from "../../model";
-
 class addRecipeView {
   _parentElement = document.querySelector(".add-recipe");
   _content = document.querySelector(".add-recipe-content");
@@ -9,6 +7,7 @@ class addRecipeView {
   _btnAddSpice = this._parentElement.querySelector(
     ".add-recipe__btn-add-spice"
   );
+  _form = this._parentElement.querySelector("#add-recipe");
 
   addHandlerClick(handler) {
     this._parentElement.addEventListener("click", handler.bind(this));
@@ -23,6 +22,19 @@ class addRecipeView {
       this._parentElement.addEventListener(event, this._listeners)
     );
   }
+
+  addHandlerSubmit(handler) {
+    this._form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const dataArr = [...new FormData(this)];
+      const data = Object.fromEntries(dataArr);
+
+      handler(data);
+    });
+  }
+
+  clearForm() {}
 
   updateForm(target, data) {
     // Update name
@@ -42,20 +54,20 @@ class addRecipeView {
 
   // § INGREDIENTS
 
-  generateMarkupIngredient() {
+  generateMarkupIngredient(index) {
     return `
     <li class="add-recipe__ingredient">
       <div class="add-recipe__ingredient__name__wrapper">
-        <input class="add-recipe__ingredient__name js-ac-input" placeholder="Nazwa">
-        <ul class="suggestions"></ul>
-      </div>
-      <input class="add-recipe__ingredient__amount" type="number" value="1">
-      <select>
-        <option>szt.</option>
-        <option>g</option>
-        <option>ml</option>
-        <option>kg</option>
-      </select>
+      <input name="ingredient-${index}-name" class="add-recipe__ingredient__name js-ac-input" placeholder="Nazwa" autocomplete="off">
+      <ul class="suggestions"></ul>
+    </div>
+    <input name="ingredient-${index}-amount" class="add-recipe__ingredient__amount" type="number" value="1">
+    <select name="ingredient-${index}-unit" class="non-editable">
+      <option>szt.</option>
+      <option>g</option>
+      <option>ml</option>
+      <option>kg</option>
+    </select>
       <button class="add-recipe__btn-delete-ingredient btn-icon small">
         <i data-feather="trash"></i>
       </button>
@@ -64,8 +76,12 @@ class addRecipeView {
   }
 
   addIngredient() {
+    // Get btn index for ingredient name
+    const index = [...this._btnAddIngredient.parentElement.children].indexOf(
+      this._btnAddIngredient
+    );
     // Generate markup
-    const markup = this.generateMarkupIngredient();
+    const markup = this.generateMarkupIngredient(index);
 
     // Insert merkup as the last list item
     this._btnAddIngredient.insertAdjacentHTML("beforebegin", markup);
@@ -84,10 +100,10 @@ class addRecipeView {
 
   // § SPICES
 
-  generateMarkupSpice() {
+  generateMarkupSpice(index) {
     return `
     <li class="add-recipe__spice">
-      <input type="text" placeholder="Nazwa">
+      <input name="spice-${index}" type="text" placeholder="Nazwa">
       <button class="add-recipe__btn-delete-spice btn-icon small">
         <i data-feather="trash"></i>
       </button>
@@ -96,8 +112,13 @@ class addRecipeView {
   }
 
   addSpice() {
+    // Get btn index for ingredient name
+    const index = [...this._btnAddSpice.parentElement.children].indexOf(
+      this._btnAddSpice
+    );
+
     // Generate spice markup
-    const markup = this.generateMarkupSpice();
+    const markup = this.generateMarkupSpice(index);
 
     // Insert markup as the last list item
     this._btnAddSpice.insertAdjacentHTML("beforebegin", markup);

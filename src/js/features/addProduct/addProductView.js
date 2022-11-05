@@ -13,7 +13,7 @@ class addProductView {
       const dataArr = [...new FormData(this)];
       const data = Object.fromEntries(dataArr);
 
-      this.formData = handler(data);
+      handler(data);
     });
   }
 

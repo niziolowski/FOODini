@@ -340,45 +340,42 @@
       <div class="add-recipe-content">
           <header class="add-recipe-content__header">
             <h1>Stwórz nowy przepis</h1>
-            <button class="add-recipe-content__header__btn-close btn-icon">
+            <button type="button" class="add-recipe-content__header__btn-close btn-icon">
               <i data-feather="x"></i>
             </button>
           </header>
-          <form>
+          <form id="add-recipe">
+            
             <div class="add-recipe-content__info">
-              <label>Tytuł</label>
-              <input type="text" placeholder="Wpisz nazwę przepisu">
-              <label>Grupa</label>
-              <select>
-                <option>śniadanie</option>
-                <option>obiad</option>
-                <option>przekąska</option>
-              </select>
-              <label>Trudność</label>
-              <select>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
-              <label>Zdjęcie</label>
-              <input type="file">
-            </div>
-            <div class="add-recipe-content__instructions">
-              <h2>SPOSÓB PRZYGOTOWANIA</h2>
-              <textarea placeholder="Opisz sposób przygotowania posiłku."></textarea>
+                <label>Tytuł</label>
+                <input name="title" type="text" placeholder="Wpisz nazwę przepisu">
+                <label>Grupa</label>
+                <select name="group">
+                  <option>śniadanie</option>
+                  <option>obiad</option>
+                  <option>przekąska</option>
+                </select>
+                <label>Trudność</label>
+                <select name="difficulty">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+                <label>Zdjęcie</label>
+                <input name="imageURL" type="text">
             </div>
             <ul class="add-recipe-content__ingredients">
               <h2>SKŁADNIKI</h2>
               
               <li class="add-recipe__ingredient">
                 <div class="add-recipe__ingredient__name__wrapper">
-                  <input class="add-recipe__ingredient__name js-ac-input" placeholder="Nazwa">
+                  <input name="ingredient-1-name" class="add-recipe__ingredient__name js-ac-input" placeholder="Nazwa" autocomplete="off">
                   <ul class="suggestions"></ul>
                 </div>
-                <input class="add-recipe__ingredient__amount" type="number" value="1">
-                <select class="non-editable">
+                <input name="ingredient-1-amount" class="add-recipe__ingredient__amount" type="number" value="1">
+                <select name="ingredient-1-unit" class="non-editable">
                   <option>szt.</option>
                   <option>g</option>
                   <option>ml</option>
@@ -389,18 +386,22 @@
                 </button>
               </li>
             
-              <button class="add-recipe__btn-add-ingredient btn btn-outline js-ac-new">dodaj składnik</button>
+              <button type="button" class="add-recipe__btn-add-ingredient btn btn-outline js-ac-new">dodaj składnik</button>
             </ul>
             <ul class="add-recipe-content__spices">
               <h2>PRZYPRAWY</h2>
               <li class="add-recipe__spice">
-                <input type="text" placeholder="Nazwa">
+                <input name="spice-1" type="text" placeholder="Nazwa">
                 <button class="add-recipe__btn-delete-spice btn-icon small">
                   <i data-feather="trash"></i>
                 </button>
               </li>
-              <button class="add-recipe__btn-add-spice btn btn-outline">dodaj przyprawę</button>
+              <button type="button" class="add-recipe__btn-add-spice btn btn-outline">dodaj przyprawę</button>
             </ul>
+            <div class="add-recipe-content__instructions">
+              <h2>SPOSÓB PRZYGOTOWANIA</h2>
+              <textarea name="description" placeholder="Opisz sposób przygotowania posiłku."></textarea>
+            </div>
           </form>
           <span class="divider"></span>
           <button type="submit" form="add-recipe" class="btn btn-outline">Zapisz w bazie przepisów</button>
