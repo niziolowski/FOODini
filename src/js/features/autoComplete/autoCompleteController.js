@@ -24,6 +24,9 @@ export function autoComplete(event) {
 
   //   On suggestion click perform AC
   if (suggestion) {
+    // If suggestion is BTN NEW
+    if (suggestion.classList.contains("js-ac-new")) return "new";
+
     // Get product data
     const productData = autoCompleteModel.getProduct(event.target);
 

@@ -1,7 +1,13 @@
+import { deleteIngredient } from "../../model";
+
 class addRecipeView {
   _parentElement = document.querySelector(".add-recipe");
+  _content = document.querySelector(".add-recipe-content");
   _btnAddIngredient = this._parentElement.querySelector(
     ".add-recipe__btn-add-ingredient"
+  );
+  _btnAddSpice = this._parentElement.querySelector(
+    ".add-recipe__btn-add-spice"
   );
 
   addHandlerClick(handler) {
@@ -34,11 +40,7 @@ class addRecipeView {
     );
   }
 
-  addIngredient() {
-    const markup = this.generateMarkupIngredient();
-    this._btnAddIngredient.insertAdjacentHTML("beforebegin", markup);
-    feather.replace();
-  }
+  // § INGREDIENTS
 
   generateMarkupIngredient() {
     return `
@@ -54,17 +56,61 @@ class addRecipeView {
         <option>ml</option>
         <option>kg</option>
       </select>
-      <button class="btn-icon small">
+      <button class="add-recipe__btn-delete-ingredient btn-icon small">
         <i data-feather="trash"></i>
       </button>
     </li>
     `;
   }
 
+  addIngredient() {
+    // Generate markup
+    const markup = this.generateMarkupIngredient();
+
+    // Insert merkup as the last list item
+    this._btnAddIngredient.insertAdjacentHTML("beforebegin", markup);
+
+    // Get svg icons
+    feather.replace();
+  }
+
+  deleteListItem(btn) {
+    // Get list item element
+    const target = btn.closest("li");
+
+    // remove
+    target.remove();
+  }
+
+  // § SPICES
+
+  generateMarkupSpice() {
+    return `
+    <li class="add-recipe__spice">
+      <input type="text" placeholder="Nazwa">
+      <button class="add-recipe__btn-delete-spice btn-icon small">
+        <i data-feather="trash"></i>
+      </button>
+    </li>
+    `;
+  }
+
+  addSpice() {
+    // Generate spice markup
+    const markup = this.generateMarkupSpice();
+
+    // Insert markup as the last list item
+    this._btnAddSpice.insertAdjacentHTML("beforebegin", markup);
+
+    // Get svg icons
+    feather.replace();
+  }
+
   show() {
     // Show Element
     this._parentElement.classList.remove("hidden");
   }
+
   hide() {
     // Show Element
     this._parentElement.classList.add("hidden");

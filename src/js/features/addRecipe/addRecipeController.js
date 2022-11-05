@@ -1,5 +1,8 @@
-import addRecipeView from "./addRecipeView";
+import addRecipeView from "./addRecipeView.js";
+import * as addProductController from "../addProduct/addProductController.js";
+import addProductView from "../addProduct/addProductView.js";
 import * as autoCompleteController from "../autoComplete/autoCompleteController.js";
+import addProductView from "../addProduct/addProductView.js";
 
 function handleClick(e) {
   e.preventDefault();
@@ -14,9 +17,28 @@ function handleClick(e) {
   if (btn.classList.contains("add-recipe-content__header__btn-close"))
     addRecipeView.hide();
 
+  // § INGREDIENTS
+
   // BTN add ingredient
   if (btn.classList.contains("add-recipe__btn-add-ingredient")) {
     addRecipeView.addIngredient();
+  }
+
+  // BTN delete ingredient
+  if (btn.classList.contains("add-recipe__btn-delete-ingredient")) {
+    addRecipeView.deleteListItem(btn);
+  }
+
+  // § SPICES
+
+  // BTN add ingredient
+  if (btn.classList.contains("add-recipe__btn-add-spice")) {
+    addRecipeView.addSpice();
+  }
+
+  // BTN delete ingredient
+  if (btn.classList.contains("add-recipe__btn-delete-spice")) {
+    addRecipeView.deleteListItem(btn);
   }
 }
 
@@ -24,13 +46,16 @@ function handleClick(e) {
 function handleAC(e) {
   // Get clicked suggestion
   const target = e.target.closest(".add-recipe__ingredient");
-  const data = autoCompleteController.autoComplete(e);
+  let data = autoCompleteController.autoComplete(e);
+
   if (!data) return;
 
   // Open "add to catalog" window
   if (data === "new") {
-    console.log("ADD NEW PRODUCT TO CATALOG");
+    addProductController.addNewProduct();
   }
+
+  // Get data from the add to catalog form
 
   addRecipeView.updateForm(target, data);
 }

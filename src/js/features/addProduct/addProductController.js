@@ -29,17 +29,21 @@ function handleSubmit(data) {
       data.expiry
     )
   );
-
   // Update catalog View
   catalogView.render(model.state);
 
   // Close the window
   addProductView.hide();
+
+  // return data for forms if needed
+  return data;
 }
 
-function init() {
+export function addNewProduct() {
+  addProductView.show();
+}
+
+export function init() {
   addProductView.addHandlerClick(handleClick);
   addProductView.addHandlerSubmit(handleSubmit);
 }
-
-init();

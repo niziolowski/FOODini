@@ -7,7 +7,7 @@ import addIngredientController from "./features/addIngredient/addIngredientContr
 import * as shoppingListController from "./features/shoppingList/shoppingListController.js";
 import recipeController from "./features/recipe/recipeController.js";
 import catalogController from "./features/catalog/catalogController.js";
-import addProductController from "./features/addProduct/addProductController.js";
+import * as addProductController from "./features/addProduct/addProductController.js";
 import addRecipeController from "./features/addRecipe/addRecipeController.js";
 
 init();
@@ -30,6 +30,7 @@ async function init() {
     navController.init();
     sidebarController.init();
     shoppingListController.init();
+    addProductController.init();
 
     // Upload state every 5 seconds
     setInterval(model.APIupload, 5000);
