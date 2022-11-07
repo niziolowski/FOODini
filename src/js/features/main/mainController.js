@@ -65,6 +65,7 @@ function handleDrop(e) {
   // Add new item
   const day = model.getDay(targetDay);
   const newMeal = day.addMeal(meal, targetIndex);
+  console.log(newMeal);
 
   // Recalculate recipes
   model.state.recipes.forEach((recipe) => recipe.calcIngredients());

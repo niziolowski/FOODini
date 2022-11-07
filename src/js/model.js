@@ -323,7 +323,8 @@ function generateShoppingList(data) {
         ing.group,
         ing.bookmark,
         ing.purchaseDate,
-        ing.expiry
+        ing.expiry,
+        ing.checkbox
       )
   );
 

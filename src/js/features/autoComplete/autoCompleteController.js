@@ -9,8 +9,8 @@ export function autoComplete(event) {
   //   Clear suggestions (for focusout or switching inputs)
   autoCompleteView.clear();
 
+  //    On input
   if (input) {
-    //    On input
     // Get suggestions
     const suggestions = autoCompleteModel.getSuggestions(input.value);
     const suggestionsElement =
@@ -37,7 +37,7 @@ export function autoComplete(event) {
     return productData;
   }
 
-  // On TAB and ESC
+  // On TAB
   if (key === "Tab" || key === "Escape") {
     autoCompleteView.clear();
   }

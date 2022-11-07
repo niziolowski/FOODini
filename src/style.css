@@ -267,6 +267,11 @@ h2 {
   transition: var(--transition);
 }
 
+.shopping-list .suggestions {
+  left: 5%;
+  width: 90%;
+}
+
 .shopping-list-header {
   margin: 20px 20px 0 0;
   position: relative;
@@ -1613,6 +1618,7 @@ input[type="number"] {
 
 .suggestions {
   position: absolute;
+  left: 0;
   top: 100%;
   width: 100%;
   max-height: 240px;
