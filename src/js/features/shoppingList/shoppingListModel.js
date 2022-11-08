@@ -46,7 +46,7 @@ export function addItem(mode, ingredients) {
           new Ingredient(
             ing.id,
             ing.name,
-            ing.amount,
+            +ing.amount,
             ing.unit,
             ing.group,
             ing.bookmark,
@@ -76,7 +76,7 @@ export function addItem(mode, ingredients) {
           new Ingredient(
             ing.id,
             ing.name,
-            ing.amount,
+            +ing.amount,
             ing.unit,
             ing.group,
             ing.bookmark,
@@ -87,7 +87,7 @@ export function addItem(mode, ingredients) {
 
       // 3. if there is a match, add amount to the position
       if (match) {
-        match.amount += ing.amount;
+        match.amount += +ing.amount;
       }
     });
   }

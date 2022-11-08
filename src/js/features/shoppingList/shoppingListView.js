@@ -13,6 +13,18 @@ class shoppingListView {
     this._addHandlerBtnToggle(); // Handle hover and click events on toggle button
   }
 
+  clear() {
+    // Sync items
+    this._contentSync.innerHTML = "";
+
+    // User items
+    // Get user item elements
+    const userElItems = this._content.querySelectorAll(".shopping-list-item");
+    if (userElItems.length === 0) return;
+    // Remove
+    userElItems.forEach((item) => item.remove());
+  }
+
   // Listeners for auto complete
   addHandlerAC(handler) {
     // Save listeners as variable for removal
@@ -106,9 +118,10 @@ class shoppingListView {
 
   // Render list items
   render(shoppingList) {
+    this.clear();
+
     const userMarkup = shoppingList.user
       .map((item, i) => {
-        console.log(item);
         return `
       <li class="shopping-list-item">
         <input name="user-item-${i}-checkbox" class="shopping-list-item__checkbox" type="checkbox" ${
@@ -134,6 +147,7 @@ class shoppingListView {
       `;
       })
       .join("");
+
     const syncMarkup = shoppingList.sync
       .map((item) => {
         return `
