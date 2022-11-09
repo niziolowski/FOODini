@@ -67,7 +67,7 @@ function handleDrop(e) {
   const newMeal = day.addMeal(meal, targetIndex);
 
   // Recalculate recipes
-  model.state.recipes.forEach((recipe) => recipe.calcIngredients());
+  model.recalculateRecipes();
 
   // Update View
   sidebarView.render(model.state);

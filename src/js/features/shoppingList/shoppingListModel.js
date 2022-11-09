@@ -1,8 +1,11 @@
 import * as model from "../../model.js";
 import { Ingredient } from "../Ingredient.js";
+import shoppingListModel from "../shoppingList/shoppingListModel.js";
 
 export function getItemDataFromInput(e) {
   const itemEl = e.target.parentElement;
+  // Get mode
+  const mode = e.target.name.split("-")[0];
   const checkbox = itemEl.querySelector(
     ".shopping-list-item__checkbox"
   ).checked;
@@ -13,21 +16,22 @@ export function getItemDataFromInput(e) {
   return {
     checkbox,
     name,
-    amount,
+    amount: +amount,
     unit,
+    mode,
   };
 }
 
 export function updateItem(data) {
   // get item
-  const item = model.state.shoppingList.user.find(
+  const item = model.state.shoppingList[data.mode].find(
     (item) => item.name === data.name
   );
 
   // update data
   item.checkbox = data.checkbox;
   item.name = data.name;
-  item.amount = data.amount;
+  item.amount = +data.amount;
   item.unit = data.unit;
 }
 
@@ -44,7 +48,7 @@ export function addItem(mode, ingredients) {
       if (!match)
         model.state.shoppingList.sync.push(
           new Ingredient(
-            ing.id,
+            null,
             ing.name,
             +ing.amount,
             ing.unit,
@@ -144,4 +148,89 @@ export function recalcShoppingList() {
         day.meals.forEach((meal) => addItem("sync", meal.missing))
       );
   });
+}
+
+export function deleteItemByID(id) {
+  // Find item in the lists
+  const sync = model.state.shoppingList.sync.find((item) => item.id === id);
+  const user = model.state.shoppingList.user.find((item) => item.id === id);
+
+  if (sync) {
+    // get target index
+    const index = model.state.shoppingList.sync.indexOf(sync);
+    // delete item
+    model.state.shoppingList.sync.splice(index, 1);
+  }
+
+  if (user) {
+    // get target index
+    const index = model.state.shoppingList.user.indexOf(user);
+    // delete item
+    model.state.shoppingList.user.splice(index, 1);
+  }
+}
+
+export function submit() {
+  // Get all shopping list items
+  const data = [
+    ...model.state.shoppingList.sync,
+    ...model.state.shoppingList.user,
+  ];
+
+  // Filter out unchecked items
+  const ingredients = data.filter((item) => item.checkbox);
+
+  // Add same ingredients together
+  const uniqueIngs = ingredients.map((ing) => ing.name);
+  const ingSet = new Set(uniqueIngs);
+
+  const sameIngs = [...ingSet].map((name) =>
+    ingredients.filter((ing) => ing.name === name)
+  );
+
+  const groupedIngs = sameIngs.map((arr) => {
+    // if only one ingredient in a group, just return it
+    if (arr.length === 1) return arr[0];
+
+    // Get the sum of the same ingredients
+    let sumAmount = arr.reduce((acc, cur) => acc.amount + cur.amount);
+
+    // Return ingredient with summed up amount
+    arr[0].amount = sumAmount;
+    return arr[0];
+  });
+
+  // Delete checked items from shopping-list
+  ingredients.forEach((ing) => deleteItemByID(ing.id));
+
+  // Add to storage
+  groupedIngs.forEach((ing) =>
+    model.addToStorage(
+      new Ingredient(
+        null,
+        ing.name,
+        +ing.amount,
+        ing.unit,
+        ing.group,
+        ing.bookmark,
+        null,
+        ing.expiry
+      )
+    )
+  );
+
+  model.recalculateRecipes();
+
+  // TEMPORARY SOLUTION FOR MISCALCULATION:
+  // When deleting meal, restore Ingredients for all items and recalculate again;
+  model.state.plan.weeks.forEach((week) =>
+    week.days.forEach((day) =>
+      day.meals.forEach((meal) => {
+        model.restoreIngredients(meal);
+        meal.calcIngredients();
+      })
+    )
+  );
+
+  recalcShoppingList();
 }

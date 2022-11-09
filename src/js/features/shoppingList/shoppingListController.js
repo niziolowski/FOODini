@@ -3,6 +3,7 @@ import * as shoppingListModel from "./shoppingListModel.js";
 import * as model from "../../model.js";
 import * as autoCompleteController from "../autoComplete/autoCompleteController.js";
 import * as addProductController from "../addProduct/addProductController.js";
+import sidebarView from "../sidebar/sidebarView.js";
 
 function handleClick(e) {
   const btn = e.target.closest("button");
@@ -42,6 +43,16 @@ function handleClick(e) {
       shoppingListView.removeItem(btn);
     }
   }
+
+  // Btn "submit"
+  if (btn.classList.contains("shopping-list__btn-submit")) {
+    e.preventDefault();
+
+    shoppingListModel.submit();
+
+    sidebarView.render(model.state);
+    shoppingListView.render(model.state.shoppingList);
+  }
 }
 
 // Handler for AutoCompletion
@@ -68,18 +79,14 @@ function handleAC(e) {
   shoppingListModel.addItem("user", [data]);
 }
 
-function handleSubmit(data) {
-  console.log(data);
-}
-
 // On input get item, structure the data and change state
 function handleInput(e) {
   // Get item data
   const data = shoppingListModel.getItemDataFromInput(e);
 
+  console.log(data);
   // Change state
   shoppingListModel.updateItem(data);
-  console.log(model.state);
 }
 
 export function init() {
@@ -88,5 +95,4 @@ export function init() {
   shoppingListView.addHandlerAC(handleAC);
   shoppingListView.addHandlerInput(handleInput);
   shoppingListView.render(model.state.shoppingList);
-  shoppingListView.addHandlerSubmit(handleSubmit);
 }

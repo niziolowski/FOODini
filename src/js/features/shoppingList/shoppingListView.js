@@ -54,17 +54,6 @@ class shoppingListView {
     );
   }
 
-  addHandlerSubmit(handler) {
-    this._form.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const dataArr = [...new FormData(this)];
-      const data = Object.fromEntries(dataArr);
-
-      handler(data);
-    });
-  }
-
   updateForm(target, data) {
     // Update name
     target.querySelector(".shopping-list-item__name").value = data.name;
@@ -121,20 +110,28 @@ class shoppingListView {
     this.clear();
 
     const userMarkup = shoppingList.user
-      .map((item, i) => {
+      .map((item) => {
         return `
       <li class="shopping-list-item">
-        <input name="user-item-${i}-checkbox" class="shopping-list-item__checkbox" type="checkbox" ${
+        <input name="user-${
+          item.id
+        }-checkbox" class="shopping-list-item__checkbox" type="checkbox" ${
           item.checkbox ? "checked" : ""
         }>
-        <input name="user-item-${i}-name" type="text" class="shopping-list-item__name js-ac-input" contenteditable="true" value="${
+        <input name="user-${
+          item.id
+        }-name" type="text" class="shopping-list-item__name js-ac-input" contenteditable="true" value="${
           item.name
         }">
         <ul class="suggestions"></ul>
-        <input name="user-item-${i}-amount" type="number" class="shopping-list-item__amount" contenteditable="true" value="${
+        <input name="user-${
+          item.id
+        }-amount" type="number" class="shopping-list-item__amount" contenteditable="true" value="${
           item.amount
         }">
-        <select name="user-item-${i}-unit" class="shopping-list-item__unit non-editable">
+        <select name="user-${
+          item.id
+        }-unit" class="shopping-list-item__unit non-editable">
           <option ${item.unit === "szt." ? "selected" : ""}>szt.</option>
           <option ${item.unit === "kg" ? "selected" : ""}>kg</option>
           <option ${item.unit === "g" ? "selected" : ""}>g</option>
@@ -152,14 +149,24 @@ class shoppingListView {
       .map((item) => {
         return `
         <li class="shopping-list-item sync">
-          <input class="shopping-list-item__checkbox" type="checkbox">
-          <input type="text" class="shopping-list-item__name" contenteditable="true" value="${
-            item.name
-          }">
-          <input type="number" class="shopping-list-item__amount" contenteditable="true" value="${
-            item.amount
-          }">
-          <select class="shopping-list-item__unit" value="${item.unit}">
+          <input name="sync-${
+            item.id
+          }-checkbox" class="shopping-list-item__checkbox" type="checkbox" ${
+          item.checkbox ? "checked" : ""
+        }>
+          <input name="sync-${
+            item.id
+          }-name" type="text" class="shopping-list-item__name" contenteditable="true" value="${
+          item.name
+        }">
+          <input name="sync-${
+            item.id
+          }-amount" type="number" class="shopping-list-item__amount" contenteditable="true" value="${
+          item.amount
+        }">
+          <select name="sync-${
+            item.id
+          }-unit" class="shopping-list-item__unit" value="${item.unit}">
           ${["szt.", "kg", "g", "ml"].map((unit) => {
             return `
             <option ${item.unit === unit ? "selected" : ""}>${unit}</option>

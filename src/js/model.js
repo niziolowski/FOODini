@@ -309,7 +309,8 @@ function generateShoppingList(data) {
         ing.group,
         ing.bookmark,
         ing.purchaseDate,
-        ing.expiry
+        ing.expiry,
+        ing.checkbox
       )
   );
 
@@ -434,4 +435,18 @@ function generatePlan(data) {
       new Date(a.dateRange.startDate).getTime() -
       new Date(b.dateRange.startDate).getTime()
   );
+}
+
+// Recalculate recipe ingredients
+export function recalculateRecipes() {
+  state.recipes.forEach((recipe) => recipe.calcIngredients());
+}
+
+// Add new ingredient to storage
+export function addToStorage(ingredient) {
+  state.storage.push(ingredient);
+}
+
+export function clearStorage() {
+  state.storage = [];
 }
