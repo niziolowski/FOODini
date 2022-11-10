@@ -1,8 +1,10 @@
 export const TIMEOUT_SEC = 5;
 
-// General API URL ( 1 = for basia account)
+// General API URL
+// 1 = Basia
+// 2 = Empty (use as template)
 export const API_URL =
-  "https://x8ki-letl-twmt.n7.xano.io/api:P_BSkInF/user_data/1";
+  "https://x8ki-letl-twmt.n7.xano.io/api:P_BSkInF/foodini_user_data/1";
 
 // Specific API URL
 export const API_URL_STORAGE =
