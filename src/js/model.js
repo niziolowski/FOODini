@@ -35,179 +35,6 @@ export const state = {
   },
 };
 
-export async function loadCatalog() {
-  try {
-    const data = await AJAX(API_URL_CATALOG);
-    data.content.forEach((ing) => {
-      state.catalog.push(
-        new Product(
-          ing.id,
-          ing.name,
-          ing.amount,
-          ing.unit,
-          ing.group,
-          ing.bookmark,
-          ing.expiry
-        )
-      );
-    });
-    return data;
-  } catch (error) {
-    throw error;
-  }
-}
-
-export async function loadStorage() {
-  try {
-    const data = await AJAX(API_URL_STORAGE);
-    data.content.forEach((ing) => {
-      state.storage.push(
-        new Ingredient(
-          ing.id,
-          ing.name,
-          ing.amount,
-          ing.unit,
-          ing.group,
-          ing.bookmark,
-          ing.purchaseDate,
-          ing.expiry
-        )
-      );
-    });
-    return data;
-  } catch (error) {
-    throw error;
-  }
-}
-
-export async function loadRecipes() {
-  try {
-    const data = await AJAX(API_URL_RECIPES);
-    data.content.forEach((rec) => {
-      // Create ingredient instances
-      const ingredients = rec.ingredients.map(
-        (ing) =>
-          new Ingredient(
-            ing.id,
-            ing.name,
-            ing.amount,
-            ing.unit,
-            ing.group,
-            ing.bookmark,
-            ing.date,
-            ing.expiry
-          )
-      );
-
-      // Create recipe instances
-      state.recipes.push(
-        new Recipe(
-          rec.id,
-          rec.name,
-          rec.group,
-          rec.description,
-          ingredients,
-          rec.spices,
-          rec.difficulty,
-          rec.bookmark,
-          rec.image_url
-        )
-      );
-    });
-    return data;
-  } catch (error) {
-    throw error;
-  }
-}
-
-// LEGACY API CALLS
-// export async function loadPlan() {
-//   try {
-//     const data = await AJAX(API_URL_PLAN);
-
-//     if (data.content.length === 0) return;
-//     data.content.forEach((week) => {
-//       // Create days for the week
-//       const days = week.days.map((day) => {
-//         const meals = day.meals.map((meal) => new Meal(meal));
-//         return new Day(day.name, meals);
-//       });
-
-//       state.plan.weeks.push(
-//         new Week(
-//           week.dateRange.startDate,
-//           week.dateRange.endDate,
-//           days,
-//           week.id,
-//           week.sync
-//         )
-//       );
-//     });
-//     state.plan.weeks.sort(
-//       (a, b) =>
-//         new Date(a.dateRange.startDate).getTime() -
-//         new Date(b.dateRange.startDate).getTime()
-//     );
-//     return data;
-//   } catch (error) {
-//     throw error;
-//   }
-// }
-
-// export async function loadState() {
-//   try {
-//     const plan = await loadPlan();
-//     await loadStorage();
-//     await loadRecipes();
-//     await loadCatalog();
-//     console.log(`LOADED STATE FROM API:`);
-//     console.log(state);
-//     return plan;
-//   } catch (error) {
-//     throw error;
-//   }
-// }
-
-// export async function uploadCatalog() {
-//   try {
-//     // Create object
-//     const data = {
-//       name: "catalog",
-//       content: state.catalog,
-//     };
-
-//     const res = await AJAX(API_URL_CATALOG, data);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-// export async function uploadPlan() {
-//   try {
-//     // Create object
-//     const data = {
-//       name: "plan",
-//       content: state.plan.weeks,
-//     };
-
-//     const res = await AJAX(API_URL_PLAN, data);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-// export async function uploadStorage() {
-//   try {
-//     // Create object
-//     const data = {
-//       name: "storage",
-//       content: state.storage,
-//     };
-
-//     const res = await AJAX(API_URL_STORAGE, data);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-
 export function getRecipe(id) {
   return state.recipes.find((recipe) => recipe.id === id);
 }
@@ -235,7 +62,7 @@ export function deleteWeek(target) {
   state.plan.weeks.splice(index, 1);
 }
 
-// Add the ingredients back from planned meal
+// Add the ingredients back from plan meal
 export function restoreIngredients(meal) {
   // Get used Ingredients
   const ingredients = meal.used;
@@ -441,6 +268,7 @@ export function addToStorage(ingredient) {
   state.storage.push(ingredient);
 }
 
+// Use with caution
 export function clearStorage() {
   state.storage = [];
 }
