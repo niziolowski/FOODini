@@ -110,6 +110,7 @@ export async function APIdownload() {
     generateRecipes(data.recipes);
     generatePlan(data.plan.weeks);
     generateShoppingList(data.shoppingList);
+    loadColorTheme(data.colorTheme);
 
     console.log(state);
     return data;
@@ -256,6 +257,10 @@ function generatePlan(data) {
       new Date(a.dateRange.startDate).getTime() -
       new Date(b.dateRange.startDate).getTime()
   );
+}
+
+function loadColorTheme(colorTheme) {
+  state.colorTheme = colorTheme;
 }
 
 // Recalculate recipe ingredients

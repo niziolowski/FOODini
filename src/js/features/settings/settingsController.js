@@ -39,6 +39,7 @@ function handleClick(e) {
 
 function init() {
   settingsView.addHandlerClick(handleClick);
+  settingsView.updateThemeEditor(model.state.colorTheme);
   // settingsView.show();
   console.log("IMPORT SUCCESSFUL: settingsController");
 }
