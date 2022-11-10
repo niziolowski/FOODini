@@ -196,7 +196,7 @@ class shoppingListView {
     const markup = `
     <li class="shopping-list-item js-new">
       <input name="user-item-${i}-checkbox" class="shopping-list-item__checkbox" type="checkbox">
-      <input name="user-item-${i}-name" class="shopping-list-item__name js-ac-input" contenteditable="true" placeholder="Produkt">
+      <input name="user-item-${i}-name" class="shopping-list-item__name js-ac-input" contenteditable="true" placeholder="Produkt" autocomplete="off">
       <ul class="suggestions"></ul>
       <input name="user-item-${i}-amount" type="number" class="shopping-list-item__amount" contenteditable="true" placeholder="1">
       <select name="user-item-${i}-unit" class="shopping-list-item__unit non-editable">
