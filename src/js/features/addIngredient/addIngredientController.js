@@ -4,7 +4,8 @@ import * as model from "../../model.js";
 import sidebarView from "../sidebar/sidebarView.js";
 import { Ingredient } from "../Ingredient.js";
 import addProductView from "../addProduct/addProductView.js";
-
+import * as shoppingListModel from "../shoppingList/shoppingListModel.js";
+import shoppingListView from "../shoppingList/shoppingListView.js";
 function handleClick(e) {
   // Handle overlay click
   if (e.target.classList.contains("overlay")) addIngredientView.hide();
@@ -87,10 +88,25 @@ function handleSubmit(data) {
   // Add new ingredient to storage
   model.state.storage.push(ingredient);
 
-  // Recalculate recipe ingredients?;
+  // Recalculate recipe ingredients
+  model.recalculateRecipes();
+
+  // TEMPORARY SOLUTION FOR MISCALCULATION:
+  // When deleting meal, restore Ingredients for all items and recalculate again;
+  model.state.plan.weeks.forEach((week) =>
+    week.days.forEach((day) =>
+      day.meals.forEach((meal) => {
+        model.restoreIngredients(meal);
+        meal.calcIngredients();
+      })
+    )
+  );
+
+  shoppingListModel.recalcShoppingList();
 
   // Update Sidebar View
   sidebarView.render(model.state);
+  shoppingListView.render(model.state.shoppingList);
 }
 
 function init() {

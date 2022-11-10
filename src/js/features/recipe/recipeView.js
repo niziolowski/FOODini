@@ -130,12 +130,14 @@ class recipeView {
         <p>Przyprawy</p>
     </div>
     <ul class="recipe-summary__spices-list">
-        <li class="recipe-summary__list-item">
-        <p class="recipe-summary__list-item__name">・ Sól</p>
-        </li>
-        <li class="recipe-summary__list-item">
-        <p class="recipe-summary__list-item__name">・Pieprz</p>
-        </li>
+        ${recipe.spices
+          .map(
+            (spice) => `<li class="recipe-summary__list-item">
+         <p class="recipe-summary__list-item__name">・ ${spice}</p>
+        </li>`
+          )
+          .join("")}
+        
     </ul>
     </div>
     `;

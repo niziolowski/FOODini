@@ -1,11 +1,5 @@
 import { AJAX } from "./helpers.js";
-import {
-  API_URL_STORAGE,
-  API_URL_RECIPES,
-  API_URL_CATALOG,
-  API_URL_PLAN,
-  API_URL,
-} from "./config.js";
+import { API_URL } from "./config.js";
 import { Ingredient } from "./features/Ingredient.js";
 import { Recipe } from "./features/Recipe.js";
 import { Product } from "./features/Product.js";
@@ -309,7 +303,8 @@ function generateShoppingList(data) {
         ing.group,
         ing.bookmark,
         ing.purchaseDate,
-        ing.expiry
+        ing.expiry,
+        ing.checkbox
       )
   );
 
@@ -323,7 +318,8 @@ function generateShoppingList(data) {
         ing.group,
         ing.bookmark,
         ing.purchaseDate,
-        ing.expiry
+        ing.expiry,
+        ing.checkbox
       )
   );
 
@@ -433,4 +429,18 @@ function generatePlan(data) {
       new Date(a.dateRange.startDate).getTime() -
       new Date(b.dateRange.startDate).getTime()
   );
+}
+
+// Recalculate recipe ingredients
+export function recalculateRecipes() {
+  state.recipes.forEach((recipe) => recipe.calcIngredients());
+}
+
+// Add new ingredient to storage
+export function addToStorage(ingredient) {
+  state.storage.push(ingredient);
+}
+
+export function clearStorage() {
+  state.storage = [];
 }

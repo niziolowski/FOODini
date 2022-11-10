@@ -67,7 +67,7 @@ function handleDrop(e) {
   const newMeal = day.addMeal(meal, targetIndex);
 
   // Recalculate recipes
-  model.state.recipes.forEach((recipe) => recipe.calcIngredients());
+  model.recalculateRecipes();
 
   // Update View
   sidebarView.render(model.state);
@@ -104,10 +104,6 @@ function handleClick(e) {
     // 2. Delete meal
     mainModel.removeMeal(day.id, index);
 
-    // If shopping list sync is on, recalculate shopping list
-    if (model.state.plan.activeWeek.sync) {
-      shoppingListModel.recalcShoppingList();
-    }
     // TEMPORARY SOLUTION FOR MISCALCULATION:
     // When deleting meal, restore Ingredients for all items and recalculate again;
     model.state.plan.weeks.forEach((week) =>
@@ -118,6 +114,11 @@ function handleClick(e) {
         })
       )
     );
+
+    // If shopping list sync is on, recalculate shopping list
+    if (model.state.plan.activeWeek.sync) {
+      shoppingListModel.recalcShoppingList();
+    }
 
     // 3. Recalculate recipes
     model.state.recipes.forEach((recipe) => recipe.calcIngredients());
