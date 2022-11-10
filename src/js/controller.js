@@ -31,7 +31,7 @@ async function init() {
     sidebarController.init();
     shoppingListController.init();
     addProductController.init();
-    // model.clearStorage();
+    model.clearStorage();
     // Upload state every 5 seconds
     setInterval(model.APIupload, 5000);
   } catch (error) {

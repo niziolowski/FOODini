@@ -1,11 +1,5 @@
 import { AJAX } from "./helpers.js";
-import {
-  API_URL_STORAGE,
-  API_URL_RECIPES,
-  API_URL_CATALOG,
-  API_URL_PLAN,
-  API_URL,
-} from "./config.js";
+import { API_URL } from "./config.js";
 import { Ingredient } from "./features/Ingredient.js";
 import { Recipe } from "./features/Recipe.js";
 import { Product } from "./features/Product.js";
