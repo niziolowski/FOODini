@@ -119,6 +119,7 @@ export async function APIdownload() {
   }
 }
 
+// § Convert API data to class instances
 function generateShoppingList(data) {
   // Generate sync ingredients
   const syncIngs = data.sync.map(

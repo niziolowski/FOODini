@@ -19,13 +19,14 @@ async function init() {
     // Load state from API
     await model.APIdownload();
 
-    // Init modules
+    // Initialize modules
     mainController.init();
     navController.init();
     sidebarController.init();
     shoppingListController.init();
     addProductController.init();
 
+    // Load color theme
     settingsView.updateColorTheme(model.state.colorTheme);
 
     // Upload state every 5 seconds
