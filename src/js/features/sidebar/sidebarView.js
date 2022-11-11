@@ -290,8 +290,8 @@ class sidebarView {
           <div class="expiry-indicator__bar" style="width: ${indicatorWidth}%; background: var(--accent-color)"></div>
         </div>
       </div>
-      <button class="btn-icon small">
-        <i data-feather="shopping-bag"></i>
+      <button class="btn-icon small list-item-storage__btn-delete">
+        <i data-feather="trash"></i>
       </button>
       <div class="list-item-storage__tag" style="background-color: var(--tag-${tag}-color)"></div>
 
@@ -366,8 +366,8 @@ class sidebarView {
               }">
               <i data-feather="star"></i>
               </button>
-              <button class="btn-icon small">
-                <i data-feather="shopping-bag"></i>
+              <button class="btn-icon small list-item-recipe__btn-delete">
+                <i data-feather="trash"></i>
               </button>
             </div>
           </li>
@@ -392,7 +392,7 @@ class sidebarView {
         <section class="col">
           <header class="col-header">
             <div class="title">ŚWIEŻE</div>
-            <button class="btn-icon small"><i data-feather="plus"></i></button>
+            <button class="btn-icon small sidebar__btn-add-ingredient"><i data-feather="plus"></i></button>
           </header>
           <ul class="sidebar-content__grid__storage-list">
             ${tag1Ingredients
@@ -403,7 +403,7 @@ class sidebarView {
         <section class="col">
           <header class="col-header">
             <div class="title">SUCHE</div>
-            <button class="btn-icon small"><i data-feather="plus"></i></button>
+            <button class="btn-icon small sidebar__btn-add-ingredient"><i data-feather="plus"></i></button>
           </header>
           <ul class="sidebar-content__grid__storage-list">
           ${tag2Ingredients
@@ -413,7 +413,7 @@ class sidebarView {
         </section>
         <section class="col"><header class="col-header">
           <div class="title">MROŻONE</div>
-          <button class="btn-icon small"><i data-feather="plus"></i></button>
+          <button class="btn-icon small sidebar__btn-add-ingredient"><i data-feather="plus"></i></button>
         </header>
         <ul class="sidebar-content__grid__storage-list">
         ${tag3Ingredients
@@ -445,7 +445,7 @@ class sidebarView {
         <section class="col">
           <header class="col-header">
             <div class="title">ŚNIADANIE</div>
-            <button class="btn-icon small">
+            <button class="btn-icon small sidebar__btn-add-recipe">
               <i data-feather="plus"></i>
             </button>
           </header>
@@ -458,7 +458,9 @@ class sidebarView {
         <section class="col">
           <header class="col-header">
             <div class="title">OBIAD</div>
-            <button class="btn-icon small"><i data-feather="plus"></i></button>
+            <button class="btn-icon small sidebar__btn-add-recipe">
+              <i data-feather="plus"></i>
+            </button>
           </header>
           <ul class="sidebar-content__grid__storage-list">
           ${tag2Recipes
@@ -468,7 +470,9 @@ class sidebarView {
         </section>
         <section class="col"><header class="col-header">
           <div class="title">PRZEKĄSKA</div>
-          <button class="btn-icon small"><i data-feather="plus"></i></button>
+          <button class="btn-icon small sidebar__btn-add-recipe">
+            <i data-feather="plus"></i>
+          </button>
         </header>
         <ul class="sidebar-content__grid__storage-list">
         ${tag3Recipes

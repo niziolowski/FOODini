@@ -2,6 +2,8 @@ import sidebarView from "./sidebarView.js";
 import addIngredientView from "../addIngredient/addIngredientView.js";
 import addRecipeView from "../addRecipe/addRecipeView.js";
 import mainView from "../main/mainView.js";
+import * as shoppingListModel from "../shoppingList/shoppingListModel.js";
+import shoppingListView from "../shoppingList/shoppingListView.js";
 import * as model from "../../model.js";
 
 /**
@@ -21,6 +23,53 @@ export function handleClick(e) {
     // Add recipe
     if (btn.classList.contains("sidebar__btn-add-recipe")) {
       addRecipeView.show();
+    }
+
+    // Delete product
+    if (btn.classList.contains("list-item-storage__btn-delete")) {
+      // get item ID
+      const id = +btn.closest("li").dataset.id.split("-")[1];
+
+      // get ingredient
+      const ingredient = model.state.storage.find((ing) => ing.id === id);
+
+      // delete from state
+      model.deleteIngredient(ingredient);
+
+      // Recalculate recipe ingredients
+      model.recalculateRecipes();
+
+      // TEMPORARY SOLUTION FOR MISCALCULATION:
+      // When deleting meal, restore Ingredients for all items and recalculate again;
+      model.state.plan.weeks.forEach((week) =>
+        week.days.forEach((day) =>
+          day.meals.forEach((meal) => {
+            model.restoreIngredients(meal);
+            meal.calcIngredients();
+          })
+        )
+      );
+
+      shoppingListModel.recalcShoppingList();
+
+      // Update Sidebar View
+      sidebarView.render(model.state);
+      shoppingListView.render(model.state.shoppingList);
+    }
+
+    // Delete recipe
+    if (btn.classList.contains("list-item-recipe__btn-delete")) {
+      // Get recipe id
+      const id = +btn.closest("li").dataset.id.split("-")[1];
+
+      // Get recipe object
+      const recipe = model.getRecipe(id);
+
+      // Delete from state
+      model.deleteRecipe(recipe);
+
+      // Update Sidebar View
+      sidebarView.render(model.state);
     }
 
     // Tabs
