@@ -701,7 +701,7 @@ input[type="number"] {
   flex-direction: column;
   align-items: center;
   row-gap: 3px;
-  width: 50px;
+  width: 55px;
 }
 
 .expiry-indicator {

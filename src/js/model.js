@@ -55,6 +55,14 @@ export function deleteIngredient(ing) {
   state.storage.splice(index, 1);
 }
 
+export function deleteRecipe(recipe) {
+  // Get index of item to delete
+  const index = state.recipes.indexOf(recipe);
+
+  // Delete the item
+  state.recipes.splice(index, 1);
+}
+
 export function deleteWeek(target) {
   // Find week index in plan
   const index = state.plan.weeks.indexOf(target);
