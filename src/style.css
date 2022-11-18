@@ -1090,6 +1090,7 @@ input[type="number"] {
   height: 100%;
   display: grid;
   grid-template-columns: 275px 1fr;
+  gap: 20px;
 }
 
 .recipe-preview__summary {
@@ -1211,13 +1212,9 @@ input[type="number"] {
 }
 
 .recipe-preview__header {
+  width: 100%;
   display: flex;
-}
-
-.recipe-preview__btn-close {
-  position: absolute;
-  right: 0;
-  flex: 0 0 auto;
+  justify-content: space-between;
 }
 
 .recipe-preview__title {
