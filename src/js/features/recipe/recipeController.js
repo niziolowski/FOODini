@@ -10,7 +10,7 @@ function controlHashChange(e) {
   // Get recipe data
   const recipe = recipeModel.getRecipe(hash);
 
-  if (!recipe) return;
+  if (!recipe || hash.length === 0) return;
 
   // Render recipe
   recipeView.render(recipe, model.state);
@@ -20,13 +20,27 @@ function controlHashChange(e) {
 
 function controlClick(e) {
   // Handle overlay click
-  if (e.target.classList.contains("overlay")) recipeView.hide();
+  if (e.target.classList.contains("overlay")) {
+    recipeView.hide();
+
+    //   clear hash after closing modal
+    window.location.hash = "";
+  }
 
   const btn = e.target.closest("button");
 
   if (btn) {
-    if (btn.classList.contains("recipe-preview__btn-close")) recipeView.hide();
+    if (btn.classList.contains("recipe-preview__btn-close")) {
+      recipeView.hide();
+      //   clear hash after closing modal
+      window.location.hash = "";
+    }
 
+    // Edit BTN
+    if (btn.classList.contains("recipe-preview__btn-edit")) {
+      e.preventDefault();
+      console.log("edit");
+    }
     // Bookmark BTN
     if (btn.classList.contains("recipe-preview__btn-bookmark")) {
       // get item ID
@@ -44,9 +58,6 @@ function controlClick(e) {
       recipeView.render(recipe, model.state);
     }
   }
-
-  //   clear hash after closing modal
-  window.location.hash = "";
 }
 
 function init() {
