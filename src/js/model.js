@@ -19,7 +19,7 @@ export const state = {
   ],
   tags: {
     storage: ["świeże", "suche", "mrożone"],
-    recipes: ["śniadanie", "obiad", "kolacja"],
+    recipes: ["śniadanie", "obiad", "przekąska"],
   },
   recipes: [],
   storage: [],
