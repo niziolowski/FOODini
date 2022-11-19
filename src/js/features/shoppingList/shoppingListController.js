@@ -74,7 +74,6 @@ function handleAC(e) {
   // Update view
   shoppingListView.updateForm(target, data);
 
-  console.log(data);
   // Add to state
   shoppingListModel.addItem("user", [data]);
 }

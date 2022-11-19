@@ -99,6 +99,7 @@ class addIngredientView {
 
   addHandlerClick(handler) {
     this._parentElement.addEventListener("click", handler.bind(this));
+    this._parentElement.addEventListener("keydown", handler.bind(this));
   }
 
   show() {
@@ -108,6 +109,7 @@ class addIngredientView {
 
     // Show Element
     this._parentElement.classList.remove("hidden");
+    this._productInput.focus();
   }
 
   hide() {

@@ -11,6 +11,7 @@ class addRecipeView {
 
   addHandlerClick(handler) {
     this._parentElement.addEventListener("click", handler.bind(this));
+    this._parentElement.addEventListener("keydown", handler.bind(this));
   }
 
   setRecipeID(id) {
@@ -198,6 +199,8 @@ class addRecipeView {
     this.setRecipeID(id);
     // Show Element
     this._parentElement.classList.remove("hidden");
+    // Focus on title input
+    this._parentElement.querySelector('input[name="title"]').focus();
   }
 
   hide() {
