@@ -105,6 +105,7 @@ function handleSubmit(data) {
   shoppingListModel.recalcShoppingList();
 
   // Update Sidebar View
+  addIngredientView.hide();
   sidebarView.render(model.state);
   shoppingListView.render(model.state.shoppingList);
 }
