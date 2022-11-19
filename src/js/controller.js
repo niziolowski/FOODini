@@ -11,6 +11,7 @@ import * as addProductController from "./features/addProduct/addProductControlle
 import addRecipeController from "./features/addRecipe/addRecipeController.js";
 import settingsView from "./features/settings/settingsView.js";
 import * as model from "./model.js";
+import addRecipeView from "./features/addRecipe/addRecipeView.js";
 
 init();
 

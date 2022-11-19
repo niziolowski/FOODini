@@ -2,6 +2,7 @@ import recipeView from "./recipeView.js";
 import sidebarView from "../sidebar/sidebarView.js";
 import * as recipeModel from "./recipeModel.js";
 import * as model from "../../model.js";
+import addRecipeView from "../addRecipe/addRecipeView.js";
 
 function controlHashChange(e) {
   // Get hash value
@@ -39,7 +40,23 @@ function controlClick(e) {
     // Edit BTN
     if (btn.classList.contains("recipe-preview__btn-edit")) {
       e.preventDefault();
-      console.log("edit");
+
+      // get item ID
+      const id = +btn
+        .closest(".recipe-preview__description")
+        .dataset.id.split("-")[1];
+
+      // get ingredient
+      const recipe = model.state.recipes.find((rec) => rec.id === id);
+
+      // Hide recipe view
+      recipeView.hide();
+      //   clear hash after closing modal
+      window.location.hash = "";
+
+      // Show edit form
+      addRecipeView.updateForm(null, recipe, "edit");
+      addRecipeView.show(id);
     }
     // Bookmark BTN
     if (btn.classList.contains("recipe-preview__btn-bookmark")) {
@@ -51,7 +68,6 @@ function controlClick(e) {
       // get ingredient
       const recipe = model.state.recipes.find((rec) => rec.id === id);
       recipe.toggleBookmark();
-      recipe.upload();
 
       // update views
       sidebarView.render(model.state);
