@@ -32,20 +32,28 @@ function handleClick(e) {
 
   // § SPICES
 
-  // BTN add ingredient
+  // BTN add spice
   if (btn.classList.contains("add-recipe__btn-add-spice")) {
     addRecipeView.addSpice();
   }
 
-  // BTN delete ingredient
+  // BTN delete spice
   if (btn.classList.contains("add-recipe__btn-delete-spice")) {
     addRecipeView.deleteListItem(btn);
   }
 }
 
-function handleSubmit(data) {
-  // Add new recipe
-  addRecipeModel.addRecipe(data);
+function handleSubmit(data, id = null) {
+  console.log(data, id);
+  if (!id) {
+    // Add new recipe
+    addRecipeModel.addRecipe(data);
+  }
+
+  if (id) {
+    addRecipeModel.updateRecipe(id, data);
+  }
+
   // Hide the add recipe window
   addRecipeView.hide();
   //TODO: Clear the form

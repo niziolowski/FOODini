@@ -5,6 +5,7 @@ class recipeView {
   _recipeSummary = document.querySelector(".recipe-preview__summary");
   _recipeTitle = document.querySelector(".recipe-preview__title");
   _recipeInstructions = document.querySelector(".recipe-preview__instructions");
+  _recipeDescription = document.querySelector(".recipe-preview__description");
 
   show() {
     this._parentElement.classList.remove("hidden");
@@ -24,7 +25,9 @@ class recipeView {
       recipe,
       state
     );
+
     // Add id to summary element for reference
+    this._recipeDescription.dataset.id = `r-${recipe.id}`;
     this._recipeSummary.dataset.id = `r-${recipe.id}`;
 
     // Render recipe Title

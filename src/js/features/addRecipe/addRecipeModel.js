@@ -22,6 +22,30 @@ export function addRecipe(data) {
   );
 }
 
+export function updateRecipe(id, data) {
+  const newRecipe = formatRecipeData(data);
+
+  // Get index of the old recipe
+  let oldRecipeIndex = model.state.recipes.indexOf(model.getRecipe(id));
+
+  // Replace it with new recipe
+  model.state.recipes.splice(
+    oldRecipeIndex,
+    1,
+    new Recipe(
+      newRecipe.id,
+      newRecipe.title,
+      newRecipe.group,
+      newRecipe.description,
+      newRecipe.ingredients,
+      newRecipe.spices,
+      newRecipe.difficulty,
+      newRecipe.bookmark,
+      newRecipe.imageURL
+    )
+  );
+}
+
 // Process form data and format it for recipe instance generation
 export function formatRecipeData(data) {
   // structure ingredients data for ingredient instance generation

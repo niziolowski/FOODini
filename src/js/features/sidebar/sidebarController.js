@@ -1,6 +1,7 @@
 import sidebarView from "./sidebarView.js";
 import addIngredientView from "../addIngredient/addIngredientView.js";
 import addRecipeView from "../addRecipe/addRecipeView.js";
+import addRecipeController from "../addRecipe/addRecipeController.js";
 import mainView from "../main/mainView.js";
 import * as shoppingListModel from "../shoppingList/shoppingListModel.js";
 import shoppingListView from "../shoppingList/shoppingListView.js";
@@ -22,6 +23,7 @@ export function handleClick(e) {
 
     // Add recipe
     if (btn.classList.contains("sidebar__btn-add-recipe")) {
+      addRecipeController.mode = "add";
       addRecipeView.show();
     }
 
