@@ -90,6 +90,13 @@ export function handleClick(e) {
       sidebarView.toggleFullPage(model.state);
     }
 
+    // OPTIONS
+    // Bookmark BTN - SHOW FAVORITES ONLY
+    if (btn.classList.contains("sidebar-options__btn-bookmark")) {
+      btn.classList.toggle("active");
+      sidebarView.renderStorage(model.state);
+    }
+
     // STORAGE
     // Bookmark BTN
     if (btn.classList.contains("list-item-storage__btn-bookmark")) {

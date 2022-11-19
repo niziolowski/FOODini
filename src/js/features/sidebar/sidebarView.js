@@ -1,4 +1,5 @@
 import icons from "../../../img/icons.svg";
+import * as model from "../../model.js";
 
 class sidebarView {
   _parentElement = document.querySelector(".sidebar");
@@ -34,6 +35,14 @@ class sidebarView {
     this._parentElement.classList.remove("active");
   }
 
+  handleOptions(e) {
+    this.renderStorage(model.state);
+  }
+
+  renderStorage() {
+    this._content.innerHTML = this.generateMarkupStorage(model.state);
+    feather.replace();
+  }
   maximize(state) {
     this._status.fullPage = true;
     this._parentElement.classList.add("full-page");
@@ -142,6 +151,10 @@ class sidebarView {
           this.generateMarkupFullPageRecipesColumns(state);
     }
 
+    // Add options handler
+
+    this._options.addEventListener("change", this.handleOptions.bind(this));
+
     // replace icon with svg
     feather.replace();
   }
@@ -215,10 +228,11 @@ class sidebarView {
           </div>
           <div class="row">
             <span>Filtr</span>
-            <select>
-              <option>brak</option>
+            <select class="sidebar-options__filter">
+              <option>ważność</option>
+              <option>nazwa</option>
             </select>
-            <button class="btn-icon small fill">
+            <button class="sidebar-options__btn-bookmark btn-icon small fill">
               <i data-feather="star"></i>
             </button>
           </div>
@@ -258,8 +272,34 @@ class sidebarView {
 
   // Generate Markup for storage in side view
   generateMarkupStorage(state) {
+    const filterValue = this._options.querySelector(
+      ".sidebar-options__filter"
+    ).value;
+    const favorites = this._options
+      .querySelector(".sidebar-options__btn-bookmark")
+      .classList.contains("active");
+
+    let storageFiltered;
+    if (filterValue === "ważność") {
+      storageFiltered = [
+        ...state.storage.sort((a, b) => a.daysLeft - b.daysLeft),
+      ];
+    }
+
+    if (filterValue === "nazwa") {
+      storageFiltered = [
+        ...state.storage.sort((a, b) => a.name.localeCompare(b.name)),
+      ];
+    }
+
+    if (filterValue === "brak") storageFiltered = state.storage;
+
+    //
+    if (favorites) {
+      storageFiltered = storageFiltered.filter((item) => item.bookmark);
+    }
     return `
-        ${state.storage
+        ${storageFiltered
           .map((ing) => this.generateMarkupIngredient(ing, state))
           .join("")}
       `;
