@@ -229,7 +229,6 @@ class sidebarView {
           <div class="row">
             <span>Filtr</span>
             <select class="sidebar-options__filter">
-              <option>brak</option>
               <option>ważność</option>
               <option>nazwa</option>
             </select>
