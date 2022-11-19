@@ -18,6 +18,12 @@ function handleClick(e) {
     if (btn.classList.contains("add-ingredient-content__header__btn-close"))
       addIngredientView.hide();
   }
+
+  // Handle 'Escape' key
+
+  if (e.type === "keydown" && e.key === "Escape") {
+    addIngredientView.hide();
+  }
 }
 
 function handleAC(e) {

@@ -12,35 +12,36 @@ function handleClick(e) {
 
   const btn = e.target.closest("button");
 
-  if (!btn) return;
+  if (btn) {
+    // BTN close
+    if (btn.classList.contains("add-recipe-content__header__btn-close"))
+      addRecipeView.hide();
 
-  // BTN close
-  if (btn.classList.contains("add-recipe-content__header__btn-close"))
-    addRecipeView.hide();
+    // § INGREDIENTS
 
-  // § INGREDIENTS
+    // BTN add ingredient
+    if (btn.classList.contains("add-recipe__btn-add-ingredient")) {
+      addRecipeView.addIngredient();
+    }
 
-  // BTN add ingredient
-  if (btn.classList.contains("add-recipe__btn-add-ingredient")) {
-    addRecipeView.addIngredient();
+    // BTN delete ingredient
+    if (btn.classList.contains("add-recipe__btn-delete-ingredient")) {
+      addRecipeView.deleteListItem(btn);
+    }
+
+    // § SPICES
+
+    // BTN add spice
+    if (btn.classList.contains("add-recipe__btn-add-spice")) {
+      addRecipeView.addSpice();
+    }
+
+    // BTN delete spice
+    if (btn.classList.contains("add-recipe__btn-delete-spice")) {
+      addRecipeView.deleteListItem(btn);
+    }
   }
-
-  // BTN delete ingredient
-  if (btn.classList.contains("add-recipe__btn-delete-ingredient")) {
-    addRecipeView.deleteListItem(btn);
-  }
-
-  // § SPICES
-
-  // BTN add spice
-  if (btn.classList.contains("add-recipe__btn-add-spice")) {
-    addRecipeView.addSpice();
-  }
-
-  // BTN delete spice
-  if (btn.classList.contains("add-recipe__btn-delete-spice")) {
-    addRecipeView.deleteListItem(btn);
-  }
+  if (e.type === "keydown" && e.key === "Escape") addRecipeView.hide();
 }
 
 function handleSubmit(data, id = null) {
