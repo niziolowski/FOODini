@@ -35,10 +35,6 @@ class sidebarView {
     this._parentElement.classList.remove("active");
   }
 
-  handleOptions(e) {
-    this.renderStorage(model.state);
-  }
-
   renderStorage() {
     this._content.innerHTML = this.generateMarkupStorage(model.state);
     feather.replace();
@@ -152,8 +148,7 @@ class sidebarView {
     }
 
     // Add options handler
-
-    this._options.addEventListener("change", this.handleOptions.bind(this));
+    this._options.addEventListener("input", this.renderStorage.bind(this));
 
     // replace icon with svg
     feather.replace();
@@ -275,6 +270,10 @@ class sidebarView {
     const filterValue = this._options.querySelector(
       ".sidebar-options__filter"
     ).value;
+    const searchValue = this._options.querySelector(
+      "input[type='search'"
+    ).value;
+
     const favorites = this._options
       .querySelector(".sidebar-options__btn-bookmark")
       .classList.contains("active");
@@ -297,6 +296,12 @@ class sidebarView {
     //
     if (favorites) {
       storageFiltered = storageFiltered.filter((item) => item.bookmark);
+    }
+
+    if (searchValue.length > 0) {
+      storageFiltered = storageFiltered.filter((item) =>
+        item.name.toLowerCase().startsWith(searchValue.toLowerCase().trim())
+      );
     }
     return `
         ${storageFiltered
